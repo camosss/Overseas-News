@@ -63,6 +63,6 @@ extension TrendingViewController: UICollectionViewDataSource, UICollectionViewDe
 
 extension TrendingViewController: CHTCollectionViewDelegateWaterfallLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.size.width/2, height: CGFloat.random(in: 200...300))
+        return CGSize(width: view.frame.size.width/2, height: CGFloat.random(in: 150...250))
     }
 }

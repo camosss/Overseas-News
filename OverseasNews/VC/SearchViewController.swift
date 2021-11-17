@@ -54,6 +54,13 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         cell.postImageView.layer.cornerRadius = 10
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let sb = UIStoryboard(name: "ArticleBody", bundle: Bundle.main)
+        let vc = sb.instantiateViewController(withIdentifier: "ArticleBodyViewController") as! ArticleBodyViewController
+        navigationController?.pushViewController(vc, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
 
 // MARK: - UISearchResultsUpdating
