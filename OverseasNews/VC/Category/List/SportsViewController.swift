@@ -1,40 +1,60 @@
 //
-//  ScrapViewController.swift
+//  SportsViewController.swift
 //  OverseasNews
 //
-//  Created by 강호성 on 2021/11/17.
+//  Created by 강호성 on 2021/11/18.
 //
 
 import UIKit
 
-class ScrapViewController: UIViewController {
+class SportsViewController: UIViewController {
     
     // MARK: - Properties
     
+    // 축구, NBA(농구), MLB(야구), NFL(내셔널 풋볼리그), 골프, 테니스, NHL(하키)
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureLeftTitle(title: "Scrap")
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.rowHeight = 100
-        tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 50, right: 0)
+        tableView.rowHeight = 80
     }
-    
 }
 
 // MARK: - UITableViewDataSource, UITableViewDelegate
 
-extension ScrapViewController: UITableViewDataSource, UITableViewDelegate {
+extension SportsViewController: UITableViewDataSource, UITableViewDelegate {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 7
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "Soccer"
+        } else if section == 1 {
+            return "NBA"
+        } else if section == 2 {
+            return "MLB"
+        } else if section == 3 {
+            return "NFL"
+        } else if section == 4 {
+            return "Golf"
+        } else if section == 5 {
+            return "Tennis"
+        } else {
+            return "NHL"
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ScrapTableViewCell.identifier, for: indexPath) as! ScrapTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: SportsTableViewCell.identifier, for: indexPath) as! SportsTableViewCell
         cell.titleLabel.text = "기사 제목"
         cell.providerLabel.text = "제공자"
         cell.postImageView.backgroundColor = .lightGray
@@ -49,14 +69,5 @@ extension ScrapViewController: UITableViewDataSource, UITableViewDelegate {
         navigationController?.pushViewController(vc, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
-    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
-        let fix = UIContextualAction(style: .normal, title: "") { (action, view, nil) in
-            self.tableView.reloadData()
-        }
-        fix.image = UIImage(systemName: "pin.slash.fill")
-        fix.backgroundColor = .systemOrange
-        return UISwipeActionsConfiguration(actions: [fix])
-    }
 }
+

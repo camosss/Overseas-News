@@ -1,40 +1,54 @@
 //
-//  ScrapViewController.swift
+//  NewsViewController.swift
 //  OverseasNews
 //
-//  Created by 강호성 on 2021/11/17.
+//  Created by 강호성 on 2021/11/18.
 //
 
 import UIKit
 
-class ScrapViewController: UIViewController {
+class NewsViewController: UIViewController {
     
     // MARK: - Properties
     
+    // 비즈니스, 정치, products, 건강
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureLeftTitle(title: "Scrap")
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.rowHeight = 100
-        tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 50, right: 0)
+        tableView.rowHeight = 80
     }
-    
 }
 
 // MARK: - UITableViewDataSource, UITableViewDelegate
 
-extension ScrapViewController: UITableViewDataSource, UITableViewDelegate {
+extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 4
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "Business"
+        } else if section == 1 {
+            return "Politics"
+        } else if section == 2 {
+            return "Products"
+        } else {
+            return "Health"
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ScrapTableViewCell.identifier, for: indexPath) as! ScrapTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: NewsTableViewCell.identifier, for: indexPath) as! NewsTableViewCell
         cell.titleLabel.text = "기사 제목"
         cell.providerLabel.text = "제공자"
         cell.postImageView.backgroundColor = .lightGray
@@ -50,13 +64,4 @@ extension ScrapViewController: UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
-        let fix = UIContextualAction(style: .normal, title: "") { (action, view, nil) in
-            self.tableView.reloadData()
-        }
-        fix.image = UIImage(systemName: "pin.slash.fill")
-        fix.backgroundColor = .systemOrange
-        return UISwipeActionsConfiguration(actions: [fix])
-    }
 }

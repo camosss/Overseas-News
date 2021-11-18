@@ -15,6 +15,7 @@ class SearchTableViewCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var postImageView: UIImageView!
+    @IBOutlet weak var providerLabel: UILabel!
     
     // MARK: - Lifecycle
 

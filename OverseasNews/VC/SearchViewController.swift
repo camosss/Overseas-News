@@ -14,12 +14,11 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     private let searchController = UISearchController(searchResultsController: nil)
 
-    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.rowHeight = 100
+        tableView.rowHeight = 80
         tableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 50, right: 0)
 
         configureLeftTitle(title: "Search")
@@ -51,6 +50,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.identifier, for: indexPath) as! SearchTableViewCell
         cell.titleLabel.text = "기사 제목"
+        cell.providerLabel.text = "제공자"
         cell.postImageView.backgroundColor = .lightGray
         cell.postImageView.clipsToBounds = true
         cell.postImageView.layer.cornerRadius = 10

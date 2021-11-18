@@ -1,40 +1,56 @@
 //
-//  ScrapViewController.swift
+//  WorldViewController.swift
 //  OverseasNews
 //
-//  Created by 강호성 on 2021/11/17.
+//  Created by 강호성 on 2021/11/18.
 //
 
 import UIKit
 
-class ScrapViewController: UIViewController {
+class WorldViewController: UIViewController {
     
     // MARK: - Properties
     
+    // 아메리카, 유럽, 아시아, 아프리카, 중동
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureLeftTitle(title: "Scrap")
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.rowHeight = 100
-        tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 50, right: 0)
+        tableView.rowHeight = 80
     }
-    
 }
 
 // MARK: - UITableViewDataSource, UITableViewDelegate
 
-extension ScrapViewController: UITableViewDataSource, UITableViewDelegate {
+extension WorldViewController: UITableViewDataSource, UITableViewDelegate {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 5
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "Americas"
+        } else if section == 1 {
+            return "Europe"
+        } else if section == 2 {
+            return "Asia"
+        } else if section == 3 {
+            return "Africa"
+        } else {
+            return "MiddleEast"
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ScrapTableViewCell.identifier, for: indexPath) as! ScrapTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: WorldTableViewCell.identifier, for: indexPath) as! WorldTableViewCell
         cell.titleLabel.text = "기사 제목"
         cell.providerLabel.text = "제공자"
         cell.postImageView.backgroundColor = .lightGray
@@ -48,15 +64,5 @@ extension ScrapViewController: UITableViewDataSource, UITableViewDelegate {
         let vc = sb.instantiateViewController(withIdentifier: "ArticleBodyViewController") as! ArticleBodyViewController
         navigationController?.pushViewController(vc, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
-    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
-        let fix = UIContextualAction(style: .normal, title: "") { (action, view, nil) in
-            self.tableView.reloadData()
-        }
-        fix.image = UIImage(systemName: "pin.slash.fill")
-        fix.backgroundColor = .systemOrange
-        return UISwipeActionsConfiguration(actions: [fix])
     }
 }
