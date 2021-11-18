@@ -7,6 +7,8 @@
 
 import UIKit
 import SnapKit
+import Alamofire
+import SwiftyJSON
 import CHTCollectionViewWaterfallLayout
 
 class TrendingViewController: UIViewController {
@@ -86,6 +88,7 @@ class TrendingViewController: UIViewController {
         
         configureLeftTitle(title: "Trending Topic")
         configureSlideView()
+        fetchTrendingTopicData()
         
         view.addSubview(collectionView)
         collectionView.contentInset.top = 20
@@ -128,6 +131,11 @@ class TrendingViewController: UIViewController {
             make.width.equalTo(view.frame.width-100)
             make.centerX.equalToSuperview()
         }
+    }
+    
+    func fetchTrendingTopicData() {
+        let url = "https://bing-news-search1.p.rapidapi.com/news/trendingtopics?cc=US&textFormat=Raw&safeSearch=Off"
+        let apikey = Bundle.main.bingApiKey
     }
     
     // MARK: - Action
