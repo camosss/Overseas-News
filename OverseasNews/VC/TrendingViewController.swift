@@ -17,7 +17,11 @@ class TrendingViewController: UIViewController {
     
     var containerView = UIView()
     var slideUpView = UIView()
-    let slideUpViewHeight: CGFloat = 500
+    let slideUpViewHeight: CGFloat = 350
+    
+    private var trendingTopic = [TrendingTopic]() {
+        didSet { collectionView.reloadData() }
+    }
     
     private let collectionView: UICollectionView = {
         let layout = CHTCollectionViewWaterfallLayout()
@@ -29,38 +33,27 @@ class TrendingViewController: UIViewController {
         return collectionView
     }()
     
-    private lazy var postImageView: UIImageView = {
-        let iv = UIImageView()
-        iv.contentMode = .scaleAspectFill
-        iv.clipsToBounds = true
-        iv.isUserInteractionEnabled = true
-        iv.layer.cornerRadius = 10
-        iv.layer.maskedCorners = CACornerMask(arrayLiteral: .layerMinXMinYCorner, .layerMaxXMinYCorner)
-        iv.backgroundColor = .systemTeal
-        return iv
-    }()
-    
     private var mainLabel: UILabel = {
         let label = UILabel()
-        label.text = "메인 토픽"
-        label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 20)
+        label.textColor = .label
+        label.numberOfLines = 0
+        label.font = UIFont.boldSystemFont(ofSize: 20)
         return label
     }()
-
-    private var subLabel: UILabel = {
+    
+    private var providerLabel: UILabel = {
         let label = UILabel()
-        label.text = "서브 토픽"
-        label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = .lightGray
+        label.numberOfLines = 0
+        label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
     
     private lazy var webSearchButton: UIButton = {
         let button = UIButton()
         button.setTitle("키워드 검색", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .black
+        button.setTitleColor(.label, for: .normal)
+        button.backgroundColor = .systemGroupedBackground
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         button.layer.cornerRadius = 10
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
@@ -71,8 +64,8 @@ class TrendingViewController: UIViewController {
     private lazy var newsSearchButton: UIButton = {
         let button = UIButton()
         button.setTitle("관련 기사 검색", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .black
+        button.setTitleColor(.label, for: .normal)
+        button.backgroundColor = .systemGroupedBackground
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         button.layer.cornerRadius = 10
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
@@ -85,9 +78,9 @@ class TrendingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configureLeftTitle(title: "Trending Topic")
         configureSlideView()
+        handleRefresh()
         fetchTrendingTopicData()
         
         view.addSubview(collectionView)
@@ -103,20 +96,20 @@ class TrendingViewController: UIViewController {
     
     // MARK: - Helper
     
+    func handleRefresh() {
+        let refresher = UIRefreshControl()
+        refresher.addTarget(self, action: #selector(handleRefreshEvent), for: .valueChanged)
+        collectionView.refreshControl = refresher
+    }
+    
     func configureSlideView() {
-        slideUpView.addSubview(postImageView)
-        postImageView.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview()
-            make.height.equalTo(200)
-        }
-        
-        let labelStack = UIStackView(arrangedSubviews: [mainLabel, subLabel])
+        let labelStack = UIStackView(arrangedSubviews: [mainLabel, providerLabel])
         labelStack.axis = .vertical
-        labelStack.spacing = 5
+        labelStack.spacing = 10
         
         slideUpView.addSubview(labelStack)
         labelStack.snp.makeConstraints { make in
-            make.top.equalTo(postImageView.snp.bottom).offset(20)
+            make.top.equalTo(20)
             make.leading.equalTo(20)
             make.trailing.equalTo(-20)
         }
@@ -127,18 +120,47 @@ class TrendingViewController: UIViewController {
         
         slideUpView.addSubview(buttonStack)
         buttonStack.snp.makeConstraints { make in
-            make.top.equalTo(labelStack.snp.bottom).offset(40)
-            make.width.equalTo(view.frame.width-100)
-            make.centerX.equalToSuperview()
+            make.top.equalTo(labelStack.snp.bottom).offset(20)
+            make.leading.trailing.equalTo(labelStack)
         }
     }
     
     func fetchTrendingTopicData() {
         let url = "https://bing-news-search1.p.rapidapi.com/news/trendingtopics?cc=US&textFormat=Raw&safeSearch=Off"
-        let apikey = Bundle.main.bingApiKey
+        let headers: HTTPHeaders = ["x-rapidapi-host": "bing-news-search1.p.rapidapi.com",
+                       "x-rapidapi-key": Bundle.main.bingApiKey]
+        
+        AF.request(url, method: .get, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                
+                let json = JSON(value)
+                
+                for idx in 0..<json["value"].count {
+                    let title = "\(json["value"][idx]["query"]["text"])"
+                    let postImage = "\(json["value"][idx]["image"]["url"])"
+                    let newsSearchUrl = "\(json["value"][idx]["newsSearchUrl"])"
+                    let webSearchUrl = "\(json["value"][idx]["webSearchUrl"])"
+                    let provider = "\(json["value"][idx]["image"]["provider"][0]["name"])"
+                    
+                    self.trendingTopic.append(TrendingTopic(title: title, postImage: postImage, newsSearchUrl: newsSearchUrl, webSearchUrl: webSearchUrl, provider: provider))
+                }
+
+            case .failure(let error):
+                print(error)
+            }
+        }
+
+
     }
     
     // MARK: - Action
+    
+    @objc func handleRefreshEvent() {
+        trendingTopic.removeAll()
+        fetchTrendingTopicData()
+        collectionView.refreshControl?.endRefreshing()
+    }
     
     @objc func goWebSearch() {
         print("WebSearch")
@@ -178,12 +200,16 @@ class TrendingViewController: UIViewController {
 
 extension TrendingViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return trendingTopic.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TrendingCollectionViewCell.identifier, for: indexPath) as! TrendingCollectionViewCell
-        cell.configure(image: nil)
+  
+        let trendingTopic = trendingTopic[indexPath.row]
+        cell.imageView.setImage(imageUrl: trendingTopic.postImage)
+        cell.titleLabel.text = trendingTopic.title
+        cell.titleLabel.numberOfLines = 0
         return cell
     }
     
@@ -199,13 +225,14 @@ extension TrendingViewController: UICollectionViewDataSource, UICollectionViewDe
 
         let screenSize = UIScreen.main.bounds.size
         view.addSubview(slideUpView)
-        slideUpView.backgroundColor = .white
+        slideUpView.backgroundColor = .systemBackground
         slideUpView.layer.cornerRadius = 15
         slideUpView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         slideUpView.frame = CGRect(x: 0, y: screenSize.height,
                                    width: screenSize.width, height: slideUpViewHeight)
 
-        // 슬라이드 뷰 올리기
+        let trendingTopic = trendingTopic[indexPath.row]
+
         UIView.animate(withDuration: 0.5,
                        delay: 0, usingSpringWithDamping: 1.0,
                        initialSpringVelocity: 1.0,
@@ -217,6 +244,10 @@ extension TrendingViewController: UICollectionViewDataSource, UICollectionViewDe
                                             y: screenSize.height - self.slideUpViewHeight,
                                             width: screenSize.width,
                                             height: self.slideUpViewHeight)
+            
+            self.mainLabel.text = trendingTopic.title
+            self.providerLabel.text = trendingTopic.provider
+            
         }, completion: nil)
         
     }
@@ -226,7 +257,6 @@ extension TrendingViewController: UICollectionViewDataSource, UICollectionViewDe
 
 extension TrendingViewController: CHTCollectionViewDelegateWaterfallLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        // height -> postImage height 만큼
-        return CGSize(width: view.frame.size.width/2, height: CGFloat.random(in: 150...300))
+        return CGSize(width: view.frame.size.width/2, height: CGFloat.random(in: 150...250))
     }
 }

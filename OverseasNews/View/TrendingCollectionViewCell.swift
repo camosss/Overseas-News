@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class TrendingCollectionViewCell: UICollectionViewCell {
     
@@ -13,11 +14,23 @@ class TrendingCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "TrendingCollectionViewCell"
 
-    private let imageView: UIImageView = {
+    let imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
-        imageView.backgroundColor = .systemOrange
+        imageView.contentMode = .scaleToFill
         return imageView
+    }()
+    
+    let backgroundImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.backgroundColor = .black.withAlphaComponent(0.2)
+        return imageView
+    }()
+    
+    let titleLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        return label
     }()
     
     // MARK: - Lifecycle
@@ -26,6 +39,19 @@ class TrendingCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         contentView.addSubview(imageView)
         contentView.clipsToBounds = true
+        
+        contentView.addSubview(backgroundImageView)
+        backgroundImageView.snp.makeConstraints { make in
+            make.top.leading.trailing.bottom.equalToSuperview()
+        }
+        
+        contentView.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints { make in
+            make.centerX.bottom.equalToSuperview()
+            make.leading.equalTo(10)
+            make.trailing.equalTo(-10)
+            make.height.equalTo(100)
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -40,12 +66,6 @@ class TrendingCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         imageView.image = nil
-    }
-    
-    // MARK: - Helper
-    
-    func configure(image: UIImage?) {
-        imageView.image = image
     }
     
 }
