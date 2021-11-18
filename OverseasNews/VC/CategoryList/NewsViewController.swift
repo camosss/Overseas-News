@@ -11,8 +11,9 @@ class NewsViewController: UIViewController {
     
     // MARK: - Properties
     
-    // 비즈니스, 정치, products, 건강
     @IBOutlet weak var tableView: UITableView!
+    
+    let sectionName = ["Business", "Politics", "Products", "Health"]
     
     // MARK: - Lifecycle
     
@@ -21,6 +22,17 @@ class NewsViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = 80
+        tableView.contentInset = UIEdgeInsets(top: 30, left: 0, bottom: 50, right: 0)
+    }
+    
+    // MARK: - Action
+    
+    @objc func handleSeeMore(button: UIButton) {
+        print("더보기", button.tag)
+        let sb = UIStoryboard(name: "SeeMorePage", bundle: Bundle.main)
+        let vc = sb.instantiateViewController(withIdentifier: "SeeMorePageViewController") as! SeeMorePageViewController
+        vc.sectionTitle = sectionName[button.tag]
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -32,15 +44,21 @@ extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            return "Business"
-        } else if section == 1 {
-            return "Politics"
-        } else if section == 2 {
-            return "Products"
-        } else {
-            return "Health"
-        }
+        return sectionName[section]
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let button = UIButton(type: .system)
+        button.setTitle("see more", for: .normal)
+        button.setTitleColor(.lightGray, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        button.addTarget(self, action: #selector(handleSeeMore(button:)), for: .touchUpInside)
+        button.tag = section
+        return button
+    }
+
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 36
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
