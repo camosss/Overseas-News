@@ -29,6 +29,7 @@
 		B4B0968B27453DA500240D76 /* Trending.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4B0968A27453DA500240D76 /* Trending.storyboard */; };
 		B4B0968F27454C5E00240D76 /* ArticleBodyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B0968E27454C5E00240D76 /* ArticleBodyViewController.swift */; };
 		B4B0969127454C8A00240D76 /* ArticleBody.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4B0969027454C8A00240D76 /* ArticleBody.storyboard */; };
+		B4B09694274560E300240D76 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = B4B09693274560E300240D76 /* SnapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +64,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B4B0966727452CE600240D76 /* CHTCollectionViewWaterfallLayout in Frameworks */,
+				B4B09694274560E300240D76 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,6 +182,7 @@
 			name = OverseasNews;
 			packageProductDependencies = (
 				B4B0966627452CE600240D76 /* CHTCollectionViewWaterfallLayout */,
+				B4B09693274560E300240D76 /* SnapKit */,
 			);
 			productName = OverseasNews;
 			productReference = B40CCD032743DE67004C83C4 /* OverseasNews.app */;
@@ -211,6 +214,7 @@
 			mainGroup = B40CCCFA2743DE67004C83C4;
 			packageReferences = (
 				B4B0966527452CE600240D76 /* XCRemoteSwiftPackageReference "CHTCollectionViewWaterfallLayout" */,
+				B4B09692274560E300240D76 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = B40CCD042743DE67004C83C4 /* Products */;
 			projectDirPath = "";
@@ -486,6 +490,14 @@
 				minimumVersion = 0.9.8;
 			};
 		};
+		B4B09692274560E300240D76 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -493,6 +505,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B4B0966527452CE600240D76 /* XCRemoteSwiftPackageReference "CHTCollectionViewWaterfallLayout" */;
 			productName = CHTCollectionViewWaterfallLayout;
+		};
+		B4B09693274560E300240D76 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B4B09692274560E300240D76 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

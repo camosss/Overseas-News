@@ -78,10 +78,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="url" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="654-9b-ibq">
-                                                <rect key="frame" x="10" y="690" width="394" height="20"/>
+                                                <rect key="frame" x="10" y="690" width="394" height="30"/>
                                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="20" id="Cub-rt-RCh"/>
+                                                    <constraint firstAttribute="height" constant="30" id="Cub-rt-RCh"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>

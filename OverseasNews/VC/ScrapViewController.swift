@@ -21,6 +21,7 @@ class ScrapViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = 100
+        tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 50, right: 0)
     }
     
 }

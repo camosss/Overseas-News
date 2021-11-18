@@ -20,6 +20,8 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = 100
+        tableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 50, right: 0)
+
         configureLeftTitle(title: "Search")
         configureSearchController()
     }
