@@ -22,11 +22,6 @@
 
 
 
-**Trending**
-
-![Trending](https://user-images.githubusercontent.com/93528918/142337119-cb4cd120-e30b-4ecf-9344-bd6ddc6305fa.png)
-
-
 **Category**
 
 - **뉴스**(비즈니스, 정치, products, 건강)
