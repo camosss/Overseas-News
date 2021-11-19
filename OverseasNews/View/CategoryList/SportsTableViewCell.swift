@@ -11,6 +11,10 @@ class SportsTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
+    var category: Category? {
+        didSet { configure() }
+    }
+    
     static let identifier = "SportsTableViewCell"
     
     @IBOutlet weak var postImageView: UIImageView!
@@ -28,4 +32,16 @@ class SportsTableViewCell: UITableViewCell {
 
     }
 
+    // MARK: - Helper
+    
+    func configure() {
+        guard let category = category else { return }
+        
+        titleLabel.text = category.title
+        providerLabel.text = category.providerName
+        
+        postImageView.setImage(imageUrl: category.postImage)
+        postImageView.clipsToBounds = true
+        postImageView.layer.cornerRadius = 10
+    }
 }

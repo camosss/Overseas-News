@@ -6,19 +6,33 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class SearchViewController: UIViewController {
     
     // MARK: - Properties
     
     @IBOutlet weak var tableView: UITableView!
+    
     private let searchController = UISearchController(searchResultsController: nil)
-
+    private var inSearchMode: Bool {
+        return searchController.isActive && !searchController.searchBar.text!.isEmpty
+    }
+    
+    private var search = [Search]() {
+        didSet { tableView.reloadData() }
+    }
+    
+    private var filterSearch = [Search]() {
+        didSet { tableView.reloadData() }
+    }
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.rowHeight = 80
+        tableView.rowHeight = 100
         tableView.contentInset.bottom = 50
         
         configureLeftTitle(title: "Search")
@@ -44,16 +58,12 @@ class SearchViewController: UIViewController {
 
 extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return search.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.identifier, for: indexPath) as! SearchTableViewCell
-        cell.titleLabel.text = "기사 제목"
-        cell.providerLabel.text = "제공자"
-        cell.postImageView.backgroundColor = .lightGray
-        cell.postImageView.clipsToBounds = true
-        cell.postImageView.layer.cornerRadius = 10
+        cell.search = search[indexPath.row]
         return cell
     }
     
@@ -69,7 +79,44 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension SearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-//        let searchText = searchController.searchBar.text?.lowercased() ?? ""
+        guard let searchText = searchController.searchBar.text?.lowercased() else { return }
         
+        let url = "https://bing-news-search1.p.rapidapi.com/news/search?q=\(searchText)&cc=US&freshness=Day&textFormat=Raw&safeSearch=Off"
+        
+        var tmp = [Search]()
+        
+        if searchText.isEmpty {
+            search = []
+        } else {
+            AF.request(url, method: .get, headers: Bundle.headers).validate().responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    
+                    let json = JSON(value)
+                    
+                    for idx in 0..<json["value"].count {
+                        let title = "\(json["value"][idx]["name"])"
+                        let description = "\(json["value"][idx]["description"])"
+                        let postImage = "\(json["value"][idx]["image"]["thumbnail"]["contentUrl"])"
+                        let url = "\(json["value"][idx]["url"])"
+                        let datePublished = "\(json["value"][idx]["datePublished"])"
+                        let providerName = "\(json["value"][idx]["provider"][0]["name"])"
+                        let providerImage = "\(json["value"][idx]["provider"][0]["image"]["thumbnail"]["contentUrl"])"
+                        let category = "\(json["value"][idx]["category"])"
+                        
+                        tmp.append(Search(title: title, description: description, postImage: postImage, url: url, datePublished: datePublished, providerName: providerName, providerImage: providerImage, category: category))
+                        
+                        DispatchQueue.main.async {
+                            self.search = tmp
+                        }
+                    }
+
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+        
+       
     }
 }

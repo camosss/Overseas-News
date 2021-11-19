@@ -11,10 +11,15 @@ class SearchTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
+    var search: Search? {
+        didSet { configure() }
+    }
+    
     static let identifier = "SearchTableViewCell"
     
-    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var postImageView: UIImageView!
+    @IBOutlet weak var categoryLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var providerLabel: UILabel!
     
     // MARK: - Lifecycle
@@ -26,6 +31,18 @@ class SearchTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
+    }
+    
+    func configure() {
+        guard let search = search else { return }
+        
+        titleLabel.text = search.title
+        providerLabel.text = search.providerName
+        categoryLabel.text = search.category == "null" ? "" : search.category
+        
+        postImageView.setImage(imageUrl: search.postImage)
+        postImageView.clipsToBounds = true
+        postImageView.layer.cornerRadius = 10
     }
 
 }

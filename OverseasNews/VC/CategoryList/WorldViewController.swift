@@ -13,8 +13,9 @@ class WorldViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    let sectionName = ["Americas", "Europe", "Asia", "Africa", "MiddleEast"]
-    
+    let sectionName = ["World", "Americas", "Europe", "Asia", "Africa", "MiddleEast"]
+    let urlStrings = ["World", "World_Americas", "World_Europe", "World_Asia", "World_Africa", "World_MiddleEast"]
+
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -40,7 +41,7 @@ class WorldViewController: UIViewController {
 
 extension WorldViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        return sectionName.count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

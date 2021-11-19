@@ -13,8 +13,9 @@ class ScienceTechnologyViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    let sectionName = ["Technology", "Science"]
-    
+    let sectionName = ["Science/Tech", "Science", "Technology"]
+    let urlStrings = ["ScienceAndTechnology", "Science", "Technology"]
+
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -40,7 +41,7 @@ class ScienceTechnologyViewController: UIViewController {
 
 extension ScienceTechnologyViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return sectionName.count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

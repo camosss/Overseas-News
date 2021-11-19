@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class SportsViewController: UIViewController {
     
@@ -13,7 +15,36 @@ class SportsViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    let sectionName = ["Soccer", "NBA", "MLB", "NFL", "Golf", "Tennis", "NHL"]
+    let sectionName = ["Sports", "Soccer", "NBA", "MLB", "NFL", "Golf", "Tennis", "NHL"]
+    let urlStrings = ["Sports", "Sports_Soccer", "Sports_NBA", "Sports_MLB", "Sports_NFL", "Sports_Tennis", "Sports_NHL"]
+
+    private var categorySports = [Category]() {
+        didSet { tableView.reloadData() }
+    }
+    
+    private var categorySoccer = [Category]() {
+        didSet { tableView.reloadData() }
+    }
+    
+    private var categoryNBA = [Category]() {
+        didSet { tableView.reloadData() }
+    }
+    
+    private var categoryMLB = [Category]() {
+        didSet { tableView.reloadData() }
+    }
+    
+    private var categoryNFL = [Category]() {
+        didSet { tableView.reloadData() }
+    }
+    
+    private var categoryTennis = [Category]() {
+        didSet { tableView.reloadData() }
+    }
+    
+    private var categoryNHL = [Category]() {
+        didSet { tableView.reloadData() }
+    }
     
     // MARK: - Lifecycle
     
@@ -40,7 +71,7 @@ class SportsViewController: UIViewController {
 
 extension SportsViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 7
+        return sectionName.count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

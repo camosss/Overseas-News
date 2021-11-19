@@ -34,18 +34,16 @@ class NewsViewController: UIViewController {
         tableView.rowHeight = 80
         tableView.contentInset = UIEdgeInsets(top: 30, left: 0, bottom: 50, right: 0)
         
-        fetchNewsDate(urlString: "Business")
-        fetchNewsDate(urlString: "Politics")
+        fetchDate(urlString: sectionName[0])
+        fetchDate(urlString: sectionName[1])
     }
     
     // MARK: - Helper
     
-    func fetchNewsDate(urlString: String) {
+    func fetchDate(urlString: String) {
         let url = "https://bing-news-search1.p.rapidapi.com/news?category=\(urlString)&cc=US&safeSearch=Off&textFormat=Raw"
-        let headers: HTTPHeaders = ["x-rapidapi-host": "bing-news-search1.p.rapidapi.com",
-                       "x-rapidapi-key": Bundle.main.bingApiKey]
         
-        AF.request(url, method: .get, headers: headers).validate().responseJSON { response in
+        AF.request(url, method: .get, headers: Bundle.headers).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
                 

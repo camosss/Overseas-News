@@ -127,10 +127,8 @@ class TrendingViewController: UIViewController {
     
     func fetchTrendingTopicData() {
         let url = "https://bing-news-search1.p.rapidapi.com/news/trendingtopics?cc=US&textFormat=Raw&safeSearch=Off"
-        let headers: HTTPHeaders = ["x-rapidapi-host": "bing-news-search1.p.rapidapi.com",
-                       "x-rapidapi-key": Bundle.main.bingApiKey]
         
-        AF.request(url, method: .get, headers: headers).validate().responseJSON { response in
+        AF.request(url, method: .get, headers: Bundle.headers).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
                 

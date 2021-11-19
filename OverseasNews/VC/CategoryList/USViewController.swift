@@ -13,8 +13,9 @@ class USViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    let sectionName = ["Northeast", "South", "Midwest", "West"]
-    
+    let sectionName = ["US", "Northeast", "South", "Midwest", "West"]
+    let urlStrings = ["US", "US_Northeast", "US_South", "US_Midwest", "US_West"]
+
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -40,7 +41,7 @@ class USViewController: UIViewController {
 
 extension USViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return sectionName.count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

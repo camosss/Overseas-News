@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 extension Bundle {
     var bingApiKey: String {
@@ -17,4 +18,7 @@ extension Bundle {
             return value
         }
     }
+    
+    static let headers: HTTPHeaders = ["x-rapidapi-host": "bing-news-search1.p.rapidapi.com",
+                                       "x-rapidapi-key": Bundle.main.bingApiKey]
 }
