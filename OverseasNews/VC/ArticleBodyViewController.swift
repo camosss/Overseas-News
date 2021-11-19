@@ -26,10 +26,10 @@ class ArticleBodyViewController: UIViewController {
     // MARK: - Action
     
     @IBAction func scrapButton(_ sender: UIBarButtonItem) {
-        
+        print("스크랩")
     }
     
     @IBAction func shareButton(_ sender: UIBarButtonItem) {
-        
+        print("공유")
     }
 }

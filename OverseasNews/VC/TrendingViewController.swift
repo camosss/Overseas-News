@@ -150,8 +150,6 @@ class TrendingViewController: UIViewController {
                 print(error)
             }
         }
-
-
     }
     
     // MARK: - Action
