@@ -34,15 +34,14 @@ class NewsViewController: UIViewController {
         tableView.rowHeight = 80
         tableView.contentInset = UIEdgeInsets(top: 30, left: 0, bottom: 50, right: 0)
         
-        fetchNewsDate(categorySection: "Business", category: categoryBusiness)
-        fetchNewsDate(categorySection: "Politics", category: categoryPolitics)
+        fetchNewsDate(urlString: "Business")
+        fetchNewsDate(urlString: "Politics")
     }
     
     // MARK: - Helper
     
-    func fetchNewsDate(categorySection: String, category: [Category]) {
-        var category = category
-        let url = "https://bing-news-search1.p.rapidapi.com/news?category=\(categorySection)&cc=US&safeSearch=Off&textFormat=Raw"
+    func fetchNewsDate(urlString: String) {
+        let url = "https://bing-news-search1.p.rapidapi.com/news?category=\(urlString)&cc=US&safeSearch=Off&textFormat=Raw"
         let headers: HTTPHeaders = ["x-rapidapi-host": "bing-news-search1.p.rapidapi.com",
                        "x-rapidapi-key": Bundle.main.bingApiKey]
         
@@ -52,7 +51,7 @@ class NewsViewController: UIViewController {
                 
                 let json = JSON(value)
                 
-                for idx in 0..<2 {
+                for idx in 0..<3 {
                     let title = "\(json["value"][idx]["name"])"
                     let description = "\(json["value"][idx]["description"])"
                     let postImage = "\(json["value"][idx]["image"]["thumbnail"]["contentUrl"])"
@@ -61,7 +60,11 @@ class NewsViewController: UIViewController {
                     let providerName = "\(json["value"][idx]["provider"][0]["name"])"
                     let providerImage = "\(json["value"][idx]["provider"][0]["image"]["thumbnail"]["contentUrl"])"
                     
-                    category.append(Category(title: title, description: description, postImage: postImage, url: url, datePublished: datePublished, providerName: providerName, providerImage: providerImage))
+                    if urlString == self.sectionName[0] {
+                        self.categoryBusiness.append(Category(title: title, description: description, postImage: postImage, url: url, datePublished: datePublished, providerName: providerName, providerImage: providerImage))
+                    } else {
+                        self.categoryPolitics.append(Category(title: title, description: description, postImage: postImage, url: url, datePublished: datePublished, providerName: providerName, providerImage: providerImage))
+                    }
                 }
 
             case .failure(let error):
@@ -85,7 +88,7 @@ class NewsViewController: UIViewController {
 
 extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return sectionName.count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -107,23 +110,13 @@ extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return section == 0 ? categoryBusiness.count : categoryPolitics.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: NewsTableViewCell.identifier, for: indexPath) as! NewsTableViewCell
-        
-        if indexPath.section == 0 {
-//            let categoryBusiness = categoryBusiness[indexPath.row]
-
-            
-        }
-        
-        cell.titleLabel.text = "기사 제목"
-        cell.providerLabel.text = "제공자"
-        cell.postImageView.backgroundColor = .lightGray
-        cell.postImageView.clipsToBounds = true
-        cell.postImageView.layer.cornerRadius = 10
+        let row = indexPath.section == 0 ? categoryBusiness[indexPath.row] : categoryPolitics[indexPath.row]
+        cell.category = row
         return cell
     }
     

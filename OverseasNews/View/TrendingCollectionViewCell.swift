@@ -12,6 +12,10 @@ class TrendingCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Properties
     
+    var trendingTopic: TrendingTopic? {
+        didSet { configure() }
+    }
+    
     static let identifier = "TrendingCollectionViewCell"
 
     let imageView: UIImageView = {
@@ -68,4 +72,13 @@ class TrendingCollectionViewCell: UICollectionViewCell {
         imageView.image = nil
     }
     
+    // MARK: - Helper
+    
+    func configure() {
+        guard let trendingTopic = trendingTopic else { return }
+
+        imageView.setImage(imageUrl: trendingTopic.postImage)
+        titleLabel.text = trendingTopic.title
+        titleLabel.numberOfLines = 0
+    }
 }

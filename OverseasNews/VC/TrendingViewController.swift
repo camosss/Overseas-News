@@ -205,9 +205,7 @@ extension TrendingViewController: UICollectionViewDataSource, UICollectionViewDe
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TrendingCollectionViewCell.identifier, for: indexPath) as! TrendingCollectionViewCell
   
         let trendingTopic = trendingTopic[indexPath.row]
-        cell.imageView.setImage(imageUrl: trendingTopic.postImage)
-        cell.titleLabel.text = trendingTopic.title
-        cell.titleLabel.numberOfLines = 0
+        cell.trendingTopic = trendingTopic
         return cell
     }
     

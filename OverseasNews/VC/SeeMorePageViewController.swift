@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class SeeMorePageViewController: UIViewController {
     
@@ -14,6 +16,10 @@ class SeeMorePageViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var sectionTitle = ""
+    
+    private var category = [Category]() {
+        didSet { tableView.reloadData() }
+    }
     
     // MARK: - Lifecycle
     
@@ -25,6 +31,39 @@ class SeeMorePageViewController: UIViewController {
         tableView.delegate = self
         tableView.rowHeight = 80
         tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 50, right: 0)
+        
+        fetchNewsDate(urlString: sectionTitle)
+    }
+    
+    // MARK: - Helper
+    
+    func fetchNewsDate(urlString: String) {
+        let url = "https://bing-news-search1.p.rapidapi.com/news?category=\(urlString)&cc=US&safeSearch=Off&textFormat=Raw"
+        let headers: HTTPHeaders = ["x-rapidapi-host": "bing-news-search1.p.rapidapi.com",
+                       "x-rapidapi-key": Bundle.main.bingApiKey]
+        
+        AF.request(url, method: .get, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                
+                let json = JSON(value)
+                
+                for idx in 0..<json["value"].count {
+                    let title = "\(json["value"][idx]["name"])"
+                    let description = "\(json["value"][idx]["description"])"
+                    let postImage = "\(json["value"][idx]["image"]["thumbnail"]["contentUrl"])"
+                    let url = "\(json["value"][idx]["url"])"
+                    let datePublished = "\(json["value"][idx]["datePublished"])"
+                    let providerName = "\(json["value"][idx]["provider"][0]["name"])"
+                    let providerImage = "\(json["value"][idx]["provider"][0]["image"]["thumbnail"]["contentUrl"])"
+                    
+                    self.category.append(Category(title: title, description: description, postImage: postImage, url: url, datePublished: datePublished, providerName: providerName, providerImage: providerImage))
+                }
+
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }
 
@@ -32,17 +71,14 @@ class SeeMorePageViewController: UIViewController {
 
 extension SeeMorePageViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 12
+        return category.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SeeMorePageTableViewCell.identifier, for: indexPath) as! SeeMorePageTableViewCell
         
-        cell.titleLabel.text = "기사 제목"
-        cell.providerLabel.text = "제공자"
-        cell.postImageView.backgroundColor = .lightGray
-        cell.postImageView.clipsToBounds = true
-        cell.postImageView.layer.cornerRadius = 10
+        let category = category[indexPath.row]
+        cell.category = category
         return cell
         
     }
