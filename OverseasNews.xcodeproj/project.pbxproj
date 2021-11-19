@@ -55,6 +55,7 @@
 		B4B096EC2746AD5A00240D76 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B096EB2746AD5A00240D76 /* WebViewController.swift */; };
 		B4B096EE2746B09800240D76 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B096ED2746B09800240D76 /* Category.swift */; };
 		B4B096F22747AD2900240D76 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B096F12747AD2900240D76 /* Search.swift */; };
+		B4B096F42747C06900240D76 /* EmptySearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B096F32747C06800240D76 /* EmptySearchCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -102,6 +103,7 @@
 		B4B096EB2746AD5A00240D76 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		B4B096ED2746B09800240D76 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		B4B096F12747AD2900240D76 /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
+		B4B096F32747C06800240D76 /* EmptySearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySearchCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +188,7 @@
 				B4B0965B2744F35900240D76 /* SearchTableViewCell.swift */,
 				B4B096632745121000240D76 /* ScrapTableViewCell.swift */,
 				B4B096CF2746689700240D76 /* SeeMorePageTableViewCell.swift */,
+				B4B096F32747C06800240D76 /* EmptySearchCollectionViewCell.swift */,
 				B4B096BC27463F1200240D76 /* CategoryList */,
 			);
 			path = View;
@@ -372,6 +375,7 @@
 				B4B0965C2744F35900240D76 /* SearchTableViewCell.swift in Sources */,
 				B4B0969F2746330100240D76 /* NewsViewController.swift in Sources */,
 				B4B096A72746337F00240D76 /* USViewController.swift in Sources */,
+				B4B096F42747C06900240D76 /* EmptySearchCollectionViewCell.swift in Sources */,
 				B4B096462744E03B00240D76 /* SearchViewController.swift in Sources */,
 				B4B096CE274664C000240D76 /* SeeMorePageViewController.swift in Sources */,
 				B4B096BE27463F3600240D76 /* NewsTableViewCell.swift in Sources */,

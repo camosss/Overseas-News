@@ -39,9 +39,9 @@ class EntertainmentViewController: UIViewController {
         tableView.rowHeight = 80
         tableView.contentInset = UIEdgeInsets(top: 30, left: 0, bottom: 50, right: 0)
         
-        fetchDate(urlString: "Entertainment")
-        fetchDate(urlString: urlStrings[1])
-        fetchDate(urlString: urlStrings[2])
+//        fetchDate(urlString: "Entertainment")
+//        fetchDate(urlString: urlStrings[1])
+//        fetchDate(urlString: urlStrings[2])
     }
     
     // MARK: - Helper

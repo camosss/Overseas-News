@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 import Alamofire
 import SwiftyJSON
 
@@ -28,6 +29,15 @@ class SearchViewController: UIViewController {
         didSet { tableView.reloadData() }
     }
     
+    private lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.dataSource = self
+        cv.delegate = self
+        cv.register(EmptySearchCollectionViewCell.self, forCellWithReuseIdentifier: EmptySearchCollectionViewCell.identifier)
+        return cv
+    }()
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -37,6 +47,11 @@ class SearchViewController: UIViewController {
         
         configureLeftTitle(title: "Search")
         configureSearchController()
+        
+        view.addSubview(collectionView)
+        collectionView.snp.makeConstraints { make in
+            make.top.leading.trailing.bottom.equalToSuperview()
+        }
     }
     
     
@@ -48,6 +63,8 @@ class SearchViewController: UIViewController {
         searchController.hidesNavigationBarDuringPresentation = true
         searchController.searchBar.becomeFirstResponder()
         searchController.searchBar.placeholder = "검색"
+        searchController.searchBar.delegate = self
+        
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         definesPresentationContext = false
@@ -116,7 +133,46 @@ extension SearchViewController: UISearchResultsUpdating {
                 }
             }
         }
+    }
+}
+
+// MARK: - UISearchBarDelegate
+
+extension SearchViewController: UISearchBarDelegate {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = true
+        collectionView.isHidden = true
+        tableView.isHidden = false
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.endEditing(true)
+        searchBar.showsCancelButton = false
+        searchBar.text = nil
         
-       
+        collectionView.isHidden = false
+        tableView.isHidden = true
+    }
+}
+
+
+// MARK: - UICollectionViewDataSource
+
+extension SearchViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptySearchCollectionViewCell.identifier, for: indexPath) as! EmptySearchCollectionViewCell
+        return cell
+    }
+}
+
+// MARK: - UICollectionViewDelegateFlowLayout
+
+extension SearchViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width, height: view.frame.width)
     }
 }
