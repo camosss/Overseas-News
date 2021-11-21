@@ -66,10 +66,16 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="url" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="654-9b-ibq">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="654-9b-ibq">
                                                 <rect key="frame" x="15" y="529.5" width="384" height="17"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <nil key="textColor"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="url">
+                                                        <attributes>
+                                                            <font key="NSFont" metaFont="menu" size="14"/>
+                                                            <integer key="NSUnderline" value="1"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="URL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AYP-Du-Kis">
@@ -136,13 +142,13 @@
                             <barButtonItem image="square.and.arrow.up" catalog="system" id="GBl-aW-Zvi">
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
-                                    <action selector="shareButton:" destination="Y6W-OH-hqX" id="ge6-Sm-9u8"/>
+                                    <action selector="handleShareButton:" destination="Y6W-OH-hqX" id="47T-K6-MeV"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem image="star" catalog="system" id="DOP-Ys-gGB">
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
-                                    <action selector="scrapButton:" destination="Y6W-OH-hqX" id="wKl-jv-Nlw"/>
+                                    <action selector="handleScrapButton:" destination="Y6W-OH-hqX" id="4an-BB-2AG"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
@@ -153,6 +159,7 @@
                         <outlet property="postImage" destination="igQ-a4-6hY" id="0uV-PG-XO1"/>
                         <outlet property="providerImage" destination="1iT-vv-c7V" id="mAB-iH-Y5H"/>
                         <outlet property="providerName" destination="DJp-1h-Bhe" id="yv2-xJ-v93"/>
+                        <outlet property="scrapButton" destination="DOP-Ys-gGB" id="WJm-rz-66W"/>
                         <outlet property="titleLabel" destination="wki-q1-zTS" id="K3k-To-1fr"/>
                         <outlet property="urlLabel" destination="654-9b-ibq" id="ljr-so-dde"/>
                     </connections>

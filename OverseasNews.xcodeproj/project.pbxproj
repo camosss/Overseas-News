@@ -57,7 +57,6 @@
 		B4B096EA2746AD4B00240D76 /* Web.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4B096E92746AD4B00240D76 /* Web.storyboard */; };
 		B4B096EC2746AD5A00240D76 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B096EB2746AD5A00240D76 /* WebViewController.swift */; };
 		B4B096EE2746B09800240D76 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B096ED2746B09800240D76 /* Article.swift */; };
-		B4B096F22747AD2900240D76 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B096F12747AD2900240D76 /* Search.swift */; };
 		B4B096F42747C06900240D76 /* EmptySearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B096F32747C06800240D76 /* EmptySearchCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -106,7 +105,6 @@
 		B4B096E92746AD4B00240D76 /* Web.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Web.storyboard; sourceTree = "<group>"; };
 		B4B096EB2746AD5A00240D76 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		B4B096ED2746B09800240D76 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
-		B4B096F12747AD2900240D76 /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 		B4B096F32747C06800240D76 /* EmptySearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySearchCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -205,7 +203,6 @@
 			children = (
 				B4B096E227468B1800240D76 /* TrendingTopic.swift */,
 				B4B096ED2746B09800240D76 /* Article.swift */,
-				B4B096F12747AD2900240D76 /* Search.swift */,
 				B4216C09274A2A570028DBBF /* RealmModel.swift */,
 			);
 			path = Model;
@@ -374,7 +371,6 @@
 				B4B096582744E6D500240D76 /* LeftTitle+Extension.swift in Sources */,
 				B4B0968F27454C5E00240D76 /* ArticleBodyViewController.swift in Sources */,
 				B40CCD092743DE67004C83C4 /* SceneDelegate.swift in Sources */,
-				B4B096F22747AD2900240D76 /* Search.swift in Sources */,
 				B4B096D02746689700240D76 /* SeeMorePageTableViewCell.swift in Sources */,
 				B4B096A12746335900240D76 /* EntertainmentViewController.swift in Sources */,
 				B4B0965E2745014D00240D76 /* TrendingCollectionViewCell.swift in Sources */,
@@ -618,7 +614,7 @@
 			repositoryURL = "https://github.com/realm/realm-cocoa.git";
 			requirement = {
 				kind = exactVersion;
-				version = 10.19.0;
+				version = 10.20.0;
 			};
 		};
 		B4B0966527452CE600240D76 /* XCRemoteSwiftPackageReference "CHTCollectionViewWaterfallLayout" */ = {
@@ -650,7 +646,7 @@
 			repositoryURL = "https://github.com/Alamofire/Alamofire";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
+				minimumVersion = 5.4.4;
 			};
 		};
 		B4B096D9274684F800240D76 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {

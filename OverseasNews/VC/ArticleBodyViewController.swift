@@ -12,8 +12,13 @@ class ArticleBodyViewController: UIViewController {
     
     // MARK: - Properties
     
+    let localRealm = try! Realm()
+    var tasks: Results<RealmModel>!
+    
     var article: Article!
 
+    @IBOutlet weak var scrapButton: UIBarButtonItem!
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var providerImage: UIImageView!
@@ -27,6 +32,7 @@ class ArticleBodyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureArticle()
+//        print(localRealm.configuration.fileURL!)
     }
     
     // MARK: - Helper
@@ -35,21 +41,56 @@ class ArticleBodyViewController: UIViewController {
         titleLabel.text = article.title
         dateLabel.text = article.datePublished
         providerName.text = article.providerName
-        bodyLabel.text = article.description
-        urlLabel.text = article.url
+        bodyLabel.text = "\(article.description)..."
         
+        urlLabel.text = article.url
+        urlLabel.textColor = .systemOrange
+        urlLabel.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(goArticleURL))
+        tapGesture.numberOfTapsRequired = 1
+        urlLabel.addGestureRecognizer(tapGesture)
+
         providerImage.setImage(imageUrl: article.providerImage)
         postImage.setImage(imageUrl: article.postImage)
     }
     
     // MARK: - Action
     
-    @IBAction func scrapButton(_ sender: UIBarButtonItem) {
-        print("스크랩")
+    @objc func goArticleURL() {
+        guard let url = URL(string: article.url), UIApplication.shared.canOpenURL(url) else { return }
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
-    @IBAction func shareButton(_ sender: UIBarButtonItem) {
-        print("공유")
+    @IBAction func handleScrapButton(_ sender: UIBarButtonItem) {
+        print("스크랩")
+                
+        let title = article.title
+        let contents = article.description
+        let postImage = article.postImage
+        let url = article.url
+        let datePublished = article.datePublished
+        let providerName = article.providerName
+        let providerImage = article.providerImage
+        
+        let task = RealmModel(title: title, contents: contents, postImage: postImage, url: url, datePublished: datePublished, providerName: providerName, providerImage: providerImage)
+        
+        try! localRealm.write {
+            localRealm.add(task)
+            
+            // Realm 데이터안의 indexPath가 있어야 해당 데이터의 토클이 진행된다
+            task.scrap.toggle()
+        }
+        tasks = localRealm.objects(RealmModel.self)
+        
+        DispatchQueue.main.async {
+            self.scrapButton.image = task.scrap ? UIImage(systemName: "star.fill") : UIImage(systemName: "star")
+        }
+    }
+    
+    
+    @IBAction func handleShareButton(_ sender: UIBarButtonItem) {
+        let activityController = UIActivityViewController(activityItems: [article.url], applicationActivities: nil)
+        present(activityController, animated: true, completion: nil)
     }
 }
 
