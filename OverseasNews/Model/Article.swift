@@ -1,5 +1,5 @@
 //
-//  Category.swift
+//  Article.swift
 //  OverseasNews
 //
 //  Created by 강호성 on 2021/11/19.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Category {
+struct Article {
     let title: String
     let description: String
     let postImage: String

@@ -23,7 +23,7 @@ class SearchViewController: UIViewController {
         return searchController.isActive && !searchController.searchBar.text!.isEmpty
     }
     
-    private var search = [Search]() {
+    private var article = [Article]() {
         didSet { tableView.reloadData() }
     }
     
@@ -40,7 +40,7 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.rowHeight = 100
+        tableView.rowHeight = 80
         tableView.contentInset.bottom = 50
         
         configureLeftTitle(title: "Search")
@@ -70,10 +70,10 @@ class SearchViewController: UIViewController {
     func fetchData(searchText: String) {
         let url = "https://bing-news-search1.p.rapidapi.com/news/search?q=\(searchText)&cc=US&freshness=Day&textFormat=Raw&safeSearch=Off"
         
-        var tmp = [Search]()
+        var tmp = [Article]()
         
         if searchText.isEmpty {
-            search = []
+            article = []
         } else {
             AF.request(url, method: .get, headers: Bundle.headers).validate().responseJSON { response in
                 switch response.result {
@@ -89,12 +89,11 @@ class SearchViewController: UIViewController {
                         let datePublished = "\(json["value"][idx]["datePublished"])"
                         let providerName = "\(json["value"][idx]["provider"][0]["name"])"
                         let providerImage = "\(json["value"][idx]["provider"][0]["image"]["thumbnail"]["contentUrl"])"
-                        let category = "\(json["value"][idx]["category"])"
                         
-                        tmp.append(Search(title: title, description: description, postImage: postImage, url: url, datePublished: datePublished, providerName: providerName, providerImage: providerImage, category: category))
+                        tmp.append(Article(title: title, description: description, postImage: postImage, url: url, datePublished: datePublished, providerName: providerName, providerImage: providerImage))
                         
                         DispatchQueue.main.async {
-                            self.search = tmp
+                            self.article = tmp
                         }
                     }
 
@@ -110,18 +109,19 @@ class SearchViewController: UIViewController {
 
 extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return search.count
+        return article.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.identifier, for: indexPath) as! SearchTableViewCell
-        cell.search = search[indexPath.row]
+        cell.article = article[indexPath.row]
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let sb = UIStoryboard(name: "ArticleBody", bundle: Bundle.main)
         let vc = sb.instantiateViewController(withIdentifier: "ArticleBodyViewController") as! ArticleBodyViewController
+        vc.article = article[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }

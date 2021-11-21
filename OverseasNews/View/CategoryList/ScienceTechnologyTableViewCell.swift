@@ -11,10 +11,6 @@ class ScienceTechnologyTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
-    var category: Category? {
-        didSet { configure() }
-    }
-    
     static let identifier = "ScienceTechnologyTableViewCell"
     
     @IBOutlet weak var postImageView: UIImageView!
@@ -30,18 +26,5 @@ class ScienceTechnologyTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-    }
-
-    // MARK: - Helper
-    
-    func configure() {
-        guard let category = category else { return }
-        
-        titleLabel.text = category.title
-        providerLabel.text = category.providerName
-        
-        postImageView.setImage(imageUrl: category.postImage)
-        postImageView.clipsToBounds = true
-        postImageView.layer.cornerRadius = 10
     }
 }

@@ -11,7 +11,7 @@ class SeeMorePageTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
-    var category: Category? {
+    var article: Article? {
         didSet { configure() }
     }
     
@@ -35,12 +35,12 @@ class SeeMorePageTableViewCell: UITableViewCell {
     // MARK: - Helper
     
     func configure() {
-        guard let category = category else { return }
+        guard let article = article else { return }
         
-        titleLabel.text = category.title
-        providerLabel.text = category.providerName
+        titleLabel.text = article.title
+        providerLabel.text = article.providerName
         
-        postImageView.setImage(imageUrl: category.postImage)
+        postImageView.setImage(imageUrl: article.postImage)
         postImageView.clipsToBounds = true
         postImageView.layer.cornerRadius = 10
     }

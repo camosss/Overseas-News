@@ -18,15 +18,15 @@ class EntertainmentViewController: UIViewController {
     let sectionName = ["Entertainment", "Movie/TV", "Music"]
     let urlStrings = ["Entertainment", "Entertainment_MovieAndTV", "Entertainment_Music"]
     
-    private var categoryEntertainment = [Category]() {
+    private var categoryEntertainment = [Article]() {
         didSet { tableView.reloadData() }
     }
     
-    private var categoryMovieTv = [Category]() {
+    private var categoryMovieTv = [Article]() {
         didSet { tableView.reloadData() }
     }
     
-    private var categoryMusic = [Category]() {
+    private var categoryMusic = [Article]() {
         didSet { tableView.reloadData() }
     }
     
@@ -65,11 +65,11 @@ class EntertainmentViewController: UIViewController {
                     let providerImage = "\(json["value"][idx]["provider"][0]["image"]["thumbnail"]["contentUrl"])"
                 
                     if urlString == self.urlStrings[0] {
-                        self.categoryEntertainment.append(Category(title: title, description: description, postImage: postImage, url: url, datePublished: datePublished, providerName: providerName, providerImage: providerImage))
+                        self.categoryEntertainment.append(Article(title: title, description: description, postImage: postImage, url: url, datePublished: datePublished, providerName: providerName, providerImage: providerImage))
                     } else if urlString == self.urlStrings[1] {
-                        self.categoryMovieTv.append(Category(title: title, description: description, postImage: postImage, url: url, datePublished: datePublished, providerName: providerName, providerImage: providerImage))
+                        self.categoryMovieTv.append(Article(title: title, description: description, postImage: postImage, url: url, datePublished: datePublished, providerName: providerName, providerImage: providerImage))
                     } else if urlString == self.urlStrings[2] {
-                        self.categoryMusic.append(Category(title: title, description: description, postImage: postImage, url: url, datePublished: datePublished, providerName: providerName, providerImage: providerImage))
+                        self.categoryMusic.append(Article(title: title, description: description, postImage: postImage, url: url, datePublished: datePublished, providerName: providerName, providerImage: providerImage))
                     }
                 }
 
@@ -122,7 +122,7 @@ extension EntertainmentViewController: UITableViewDataSource, UITableViewDelegat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: EntertainmentTableViewCell.identifier, for: indexPath) as! EntertainmentTableViewCell
         let row = indexPath.section == 0 ? categoryEntertainment[indexPath.row] : indexPath.section == 1 ? categoryMovieTv[indexPath.row] : categoryMusic[indexPath.row]
-        cell.category = row
+        cell.article = row
         return cell
     }
     

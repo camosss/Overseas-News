@@ -11,7 +11,7 @@ class SearchTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
-    var search: Search? {
+    var article: Article? {
         didSet { configure() }
     }
     
@@ -34,13 +34,12 @@ class SearchTableViewCell: UITableViewCell {
     }
     
     func configure() {
-        guard let search = search else { return }
+        guard let article = article else { return }
         
-        titleLabel.text = search.title
-        providerLabel.text = search.providerName
-        categoryLabel.text = search.category == "null" ? "" : search.category
+        titleLabel.text = article.title
+        providerLabel.text = article.providerName
         
-        postImageView.setImage(imageUrl: search.postImage)
+        postImageView.setImage(imageUrl: article.postImage)
         postImageView.clipsToBounds = true
         postImageView.layer.cornerRadius = 10
     }

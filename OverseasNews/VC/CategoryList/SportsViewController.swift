@@ -18,33 +18,6 @@ class SportsViewController: UIViewController {
     let sectionName = ["Sports", "Soccer", "NBA", "MLB", "NFL", "Golf", "Tennis", "NHL"]
     let urlStrings = ["Sports", "Sports_Soccer", "Sports_NBA", "Sports_MLB", "Sports_NFL", "Sports_Tennis", "Sports_NHL"]
 
-    private var categorySports = [Category]() {
-        didSet { tableView.reloadData() }
-    }
-    
-    private var categorySoccer = [Category]() {
-        didSet { tableView.reloadData() }
-    }
-    
-    private var categoryNBA = [Category]() {
-        didSet { tableView.reloadData() }
-    }
-    
-    private var categoryMLB = [Category]() {
-        didSet { tableView.reloadData() }
-    }
-    
-    private var categoryNFL = [Category]() {
-        didSet { tableView.reloadData() }
-    }
-    
-    private var categoryTennis = [Category]() {
-        didSet { tableView.reloadData() }
-    }
-    
-    private var categoryNHL = [Category]() {
-        didSet { tableView.reloadData() }
-    }
     
     // MARK: - Lifecycle
     

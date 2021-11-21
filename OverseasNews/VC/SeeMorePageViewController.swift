@@ -17,7 +17,7 @@ class SeeMorePageViewController: UIViewController {
     
     var sectionTitle = ""
     
-    private var category = [Category]() {
+    private var article = [Article]() {
         didSet { tableView.reloadData() }
     }
     
@@ -55,7 +55,7 @@ class SeeMorePageViewController: UIViewController {
                     let providerName = "\(json["value"][idx]["provider"][0]["name"])"
                     let providerImage = "\(json["value"][idx]["provider"][0]["image"]["thumbnail"]["contentUrl"])"
                     
-                    self.category.append(Category(title: title, description: description, postImage: postImage, url: url, datePublished: datePublished, providerName: providerName, providerImage: providerImage))
+                    self.article.append(Article(title: title, description: description, postImage: postImage, url: url, datePublished: datePublished, providerName: providerName, providerImage: providerImage))
                 }
 
             case .failure(let error):
@@ -69,14 +69,14 @@ class SeeMorePageViewController: UIViewController {
 
 extension SeeMorePageViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return category.count
+        return article.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SeeMorePageTableViewCell.identifier, for: indexPath) as! SeeMorePageTableViewCell
         
-        let category = category[indexPath.row]
-        cell.category = category
+        let article = article[indexPath.row]
+        cell.article = article
         return cell
         
     }
@@ -84,6 +84,7 @@ extension SeeMorePageViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let sb = UIStoryboard(name: "ArticleBody", bundle: Bundle.main)
         let vc = sb.instantiateViewController(withIdentifier: "ArticleBodyViewController") as! ArticleBodyViewController
+        vc.article = article[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }

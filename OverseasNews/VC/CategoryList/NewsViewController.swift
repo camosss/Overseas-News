@@ -17,11 +17,11 @@ class NewsViewController: UIViewController {
     
     let sectionName = ["Business", "Politics"]
     
-    private var categoryBusiness = [Category]() {
+    private var categoryBusiness = [Article]() {
         didSet { tableView.reloadData() }
     }
     
-    private var categoryPolitics = [Category]() {
+    private var categoryPolitics = [Article]() {
         didSet { tableView.reloadData() }
     }
     
@@ -59,9 +59,9 @@ class NewsViewController: UIViewController {
                     let providerImage = "\(json["value"][idx]["provider"][0]["image"]["thumbnail"]["contentUrl"])"
                     
                     if urlString == self.sectionName[0] {
-                        self.categoryBusiness.append(Category(title: title, description: description, postImage: postImage, url: url, datePublished: datePublished, providerName: providerName, providerImage: providerImage))
+                        self.categoryBusiness.append(Article(title: title, description: description, postImage: postImage, url: url, datePublished: datePublished, providerName: providerName, providerImage: providerImage))
                     } else {
-                        self.categoryPolitics.append(Category(title: title, description: description, postImage: postImage, url: url, datePublished: datePublished, providerName: providerName, providerImage: providerImage))
+                        self.categoryPolitics.append(Article(title: title, description: description, postImage: postImage, url: url, datePublished: datePublished, providerName: providerName, providerImage: providerImage))
                     }
                 }
 
@@ -114,13 +114,15 @@ extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: NewsTableViewCell.identifier, for: indexPath) as! NewsTableViewCell
         let row = indexPath.section == 0 ? categoryBusiness[indexPath.row] : categoryPolitics[indexPath.row]
-        cell.category = row
+        cell.article = row
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let sb = UIStoryboard(name: "ArticleBody", bundle: Bundle.main)
         let vc = sb.instantiateViewController(withIdentifier: "ArticleBodyViewController") as! ArticleBodyViewController
+        let row = indexPath.section == 0 ? categoryBusiness[indexPath.row] : categoryPolitics[indexPath.row]
+        vc.article = row
         navigationController?.pushViewController(vc, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
