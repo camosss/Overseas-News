@@ -36,9 +36,9 @@ class SearchTableViewCell: UITableViewCell {
     func configure() {
         guard let search = search else { return }
         
-        titleLabel.text = search.title
-        providerLabel.text = search.providerName
         categoryLabel.text = search.category
+        titleLabel.text = search.title
+        providerLabel.text = search.providerName == "null" ? "" : search.providerName
         
         postImageView.setImage(imageUrl: search.postImage)
         postImageView.clipsToBounds = true

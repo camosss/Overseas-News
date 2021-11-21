@@ -17,6 +17,7 @@
 		B4216C0A274A2A570028DBBF /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4216C09274A2A570028DBBF /* RealmModel.swift */; };
 		B4216C0E274A60050028DBBF /* APIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4216C0D274A60050028DBBF /* APIModel.swift */; };
 		B4216C11274A7DAD0028DBBF /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = B4216C10274A7DAD0028DBBF /* Toast */; };
+		B4216C13274A9C7A0028DBBF /* HighlightLabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4216C12274A9C7A0028DBBF /* HighlightLabel+Extension.swift */; };
 		B4B096442744E03500240D76 /* TrendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B096432744E03500240D76 /* TrendingViewController.swift */; };
 		B4B096462744E03B00240D76 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B096452744E03B00240D76 /* SearchViewController.swift */; };
 		B4B096482744E04400240D76 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B096472744E04400240D76 /* CategoryViewController.swift */; };
@@ -36,16 +37,12 @@
 		B4B0969F2746330100240D76 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B0969E2746330100240D76 /* NewsViewController.swift */; };
 		B4B096A12746335900240D76 /* EntertainmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B096A02746335900240D76 /* EntertainmentViewController.swift */; };
 		B4B096A32746336400240D76 /* SportsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B096A22746336400240D76 /* SportsViewController.swift */; };
-		B4B096A72746337F00240D76 /* USViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B096A62746337F00240D76 /* USViewController.swift */; };
-		B4B096A92746338800240D76 /* WorldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B096A82746338800240D76 /* WorldViewController.swift */; };
 		B4B096AB274633BE00240D76 /* ScienceTechnologyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B096AA274633BE00240D76 /* ScienceTechnologyViewController.swift */; };
 		B4B096BB274638B400240D76 /* Category.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4B096BA274638B400240D76 /* Category.storyboard */; };
 		B4B096BE27463F3600240D76 /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B096BD27463F3600240D76 /* NewsTableViewCell.swift */; };
 		B4B096C027463F4800240D76 /* EntertainmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B096BF27463F4800240D76 /* EntertainmentTableViewCell.swift */; };
 		B4B096C227463F5600240D76 /* SportsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B096C127463F5600240D76 /* SportsTableViewCell.swift */; };
 		B4B096C427463F6800240D76 /* ScienceTechnologyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B096C327463F6800240D76 /* ScienceTechnologyTableViewCell.swift */; };
-		B4B096C627463F7400240D76 /* USTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B096C527463F7400240D76 /* USTableViewCell.swift */; };
-		B4B096C827463F7E00240D76 /* WorldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B096C727463F7E00240D76 /* WorldTableViewCell.swift */; };
 		B4B096CA2746649D00240D76 /* SeeMorePage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4B096C92746649D00240D76 /* SeeMorePage.storyboard */; };
 		B4B096CE274664C000240D76 /* SeeMorePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B096CD274664C000240D76 /* SeeMorePageViewController.swift */; };
 		B4B096D02746689700240D76 /* SeeMorePageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B096CF2746689700240D76 /* SeeMorePageTableViewCell.swift */; };
@@ -68,6 +65,7 @@
 		B40CCD142743DE69004C83C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B4216C09274A2A570028DBBF /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
 		B4216C0D274A60050028DBBF /* APIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIModel.swift; sourceTree = "<group>"; };
+		B4216C12274A9C7A0028DBBF /* HighlightLabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HighlightLabel+Extension.swift"; sourceTree = "<group>"; };
 		B4B096432744E03500240D76 /* TrendingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingViewController.swift; sourceTree = "<group>"; };
 		B4B096452744E03B00240D76 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		B4B096472744E04400240D76 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
@@ -84,16 +82,12 @@
 		B4B0969E2746330100240D76 /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		B4B096A02746335900240D76 /* EntertainmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntertainmentViewController.swift; sourceTree = "<group>"; };
 		B4B096A22746336400240D76 /* SportsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsViewController.swift; sourceTree = "<group>"; };
-		B4B096A62746337F00240D76 /* USViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USViewController.swift; sourceTree = "<group>"; };
-		B4B096A82746338800240D76 /* WorldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldViewController.swift; sourceTree = "<group>"; };
 		B4B096AA274633BE00240D76 /* ScienceTechnologyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScienceTechnologyViewController.swift; sourceTree = "<group>"; };
 		B4B096BA274638B400240D76 /* Category.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Category.storyboard; sourceTree = "<group>"; };
 		B4B096BD27463F3600240D76 /* NewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
 		B4B096BF27463F4800240D76 /* EntertainmentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntertainmentTableViewCell.swift; sourceTree = "<group>"; };
 		B4B096C127463F5600240D76 /* SportsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsTableViewCell.swift; sourceTree = "<group>"; };
 		B4B096C327463F6800240D76 /* ScienceTechnologyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScienceTechnologyTableViewCell.swift; sourceTree = "<group>"; };
-		B4B096C527463F7400240D76 /* USTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USTableViewCell.swift; sourceTree = "<group>"; };
-		B4B096C727463F7E00240D76 /* WorldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldTableViewCell.swift; sourceTree = "<group>"; };
 		B4B096C92746649D00240D76 /* SeeMorePage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SeeMorePage.storyboard; sourceTree = "<group>"; };
 		B4B096CD274664C000240D76 /* SeeMorePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeMorePageViewController.swift; sourceTree = "<group>"; };
 		B4B096CF2746689700240D76 /* SeeMorePageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeMorePageTableViewCell.swift; sourceTree = "<group>"; };
@@ -162,6 +156,7 @@
 				B4B096572744E6D500240D76 /* LeftTitle+Extension.swift */,
 				B4B096DE2746879900240D76 /* HIDEAPIKEY++Bundle.swift */,
 				B4B096E72746905E00240D76 /* KF+Extension.swift */,
+				B4216C12274A9C7A0028DBBF /* HighlightLabel+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -232,8 +227,6 @@
 				B4B096A02746335900240D76 /* EntertainmentViewController.swift */,
 				B4B096A22746336400240D76 /* SportsViewController.swift */,
 				B4B096AA274633BE00240D76 /* ScienceTechnologyViewController.swift */,
-				B4B096A62746337F00240D76 /* USViewController.swift */,
-				B4B096A82746338800240D76 /* WorldViewController.swift */,
 			);
 			path = CategoryList;
 			sourceTree = "<group>";
@@ -245,8 +238,6 @@
 				B4B096BF27463F4800240D76 /* EntertainmentTableViewCell.swift */,
 				B4B096C127463F5600240D76 /* SportsTableViewCell.swift */,
 				B4B096C327463F6800240D76 /* ScienceTechnologyTableViewCell.swift */,
-				B4B096C527463F7400240D76 /* USTableViewCell.swift */,
-				B4B096C727463F7E00240D76 /* WorldTableViewCell.swift */,
 			);
 			path = CategoryList;
 			sourceTree = "<group>";
@@ -353,8 +344,6 @@
 				B4B096482744E04400240D76 /* CategoryViewController.swift in Sources */,
 				B4B096E82746905E00240D76 /* KF+Extension.swift in Sources */,
 				B40CCD072743DE67004C83C4 /* AppDelegate.swift in Sources */,
-				B4B096C627463F7400240D76 /* USTableViewCell.swift in Sources */,
-				B4B096A92746338800240D76 /* WorldViewController.swift in Sources */,
 				B4B096C227463F5600240D76 /* SportsTableViewCell.swift in Sources */,
 				B4B096C427463F6800240D76 /* ScienceTechnologyTableViewCell.swift in Sources */,
 				B4B096DF2746879900240D76 /* HIDEAPIKEY++Bundle.swift in Sources */,
@@ -367,13 +356,12 @@
 				B4B096A12746335900240D76 /* EntertainmentViewController.swift in Sources */,
 				B4B0965E2745014D00240D76 /* TrendingCollectionViewCell.swift in Sources */,
 				B4B096642745121000240D76 /* ScrapTableViewCell.swift in Sources */,
-				B4B096C827463F7E00240D76 /* WorldTableViewCell.swift in Sources */,
+				B4216C13274A9C7A0028DBBF /* HighlightLabel+Extension.swift in Sources */,
 				B4B096AB274633BE00240D76 /* ScienceTechnologyViewController.swift in Sources */,
 				B4B0965C2744F35900240D76 /* SearchTableViewCell.swift in Sources */,
 				B4B0969F2746330100240D76 /* NewsViewController.swift in Sources */,
 				B4216C0A274A2A570028DBBF /* RealmModel.swift in Sources */,
 				B4216C0E274A60050028DBBF /* APIModel.swift in Sources */,
-				B4B096A72746337F00240D76 /* USViewController.swift in Sources */,
 				B4B096F42747C06900240D76 /* EmptySearchCollectionViewCell.swift in Sources */,
 				B4B096462744E03B00240D76 /* SearchViewController.swift in Sources */,
 				B4B096CE274664C000240D76 /* SeeMorePageViewController.swift in Sources */,

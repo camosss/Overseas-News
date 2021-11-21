@@ -13,8 +13,7 @@ class ScienceTechnologyViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    let sectionName = ["Science/Tech", "Science", "Technology"]
-    let urlStrings = ["ScienceAndTechnology", "Science", "Technology"]
+    let sectionName = ["Science", "Technology"]
 
     // MARK: - Lifecycle
     

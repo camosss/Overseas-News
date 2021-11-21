@@ -8,7 +8,6 @@
 import UIKit
 
 extension UIViewController {
-    
     func configureLeftTitle(title: String) {
         let label = UILabel()
         label.textColor = UIColor.label

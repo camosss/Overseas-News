@@ -54,13 +54,13 @@ class ArticleBodyViewController: UIViewController {
     }
     
     func configureSearch() {
-        titleLabel.text = search.title
-        dateLabel.text = search.datePublished
-        providerName.text = search.providerName
-        bodyLabel.text = "\(search.description)..."
+        titleLabel.text = search.title == "null" ? "" : search.title
+        dateLabel.text = search.datePublished == "null" ? "" : search.datePublished
+        providerName.text = search.providerName == "null" ? "" : search.providerName
+        bodyLabel.text = search.description == "null" ? "" : "\(search.description)..."
         postImage.setImage(imageUrl: search.postImage)
 
-        urlLabel.text = search.url
+        urlLabel.text = search.url == "null" ? "" : search.url
         urlLabel.textColor = .systemOrange
         urlLabel.isUserInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(goArticleURL))

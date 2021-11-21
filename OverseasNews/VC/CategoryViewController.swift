@@ -36,15 +36,11 @@ class CategoryViewController: TabmanViewController {
         let entertainmentVC = UIStoryboard.init(name: "Category", bundle: nil).instantiateViewController(withIdentifier: "EntertainmentViewController") as! EntertainmentViewController
         let sportsVC = UIStoryboard.init(name: "Category", bundle: nil).instantiateViewController(withIdentifier: "SportsViewController") as! SportsViewController
         let scienceTechnologyVC = UIStoryboard.init(name: "Category", bundle: nil).instantiateViewController(withIdentifier: "ScienceTechnologyViewController") as! ScienceTechnologyViewController
-        let usVC = UIStoryboard.init(name: "Category", bundle: nil).instantiateViewController(withIdentifier: "USViewController") as! USViewController
-        let worldVC = UIStoryboard.init(name: "Category", bundle: nil).instantiateViewController(withIdentifier: "WorldViewController") as! WorldViewController
         
         viewControllers.append(newsVC)
         viewControllers.append(entertainmentVC)
         viewControllers.append(sportsVC)
         viewControllers.append(scienceTechnologyVC)
-        viewControllers.append(usVC)
-        viewControllers.append(worldVC)
     }
     
     func settingTabBar(ctBar: TMBar.ButtonBar) {

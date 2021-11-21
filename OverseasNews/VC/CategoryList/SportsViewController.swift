@@ -15,10 +15,9 @@ class SportsViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    let sectionName = ["Sports", "Soccer", "NBA", "MLB", "NFL", "Golf", "Tennis", "NHL"]
-    let urlStrings = ["Sports", "Sports_Soccer", "Sports_NBA", "Sports_MLB", "Sports_NFL", "Sports_Tennis", "Sports_NHL"]
+    let sectionName = ["Soccer", "NBA", "MLB"]
+    let urlStrings = ["Sports_Soccer", "Sports_NBA", "Sports_MLB"]
 
-    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {

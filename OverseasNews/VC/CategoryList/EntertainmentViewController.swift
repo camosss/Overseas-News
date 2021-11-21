@@ -15,8 +15,8 @@ class EntertainmentViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    let sectionName = ["Entertainment", "Movie/TV", "Music"]
-    let urlStrings = ["Entertainment", "Entertainment_MovieAndTV", "Entertainment_Music"]
+    let sectionName = ["Movie/TV", "Music"]
+    let urlStrings = ["Entertainment_MovieAndTV", "Entertainment_Music"]
     
     // MARK: - Lifecycle
     
