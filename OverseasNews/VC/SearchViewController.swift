@@ -40,7 +40,7 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.rowHeight = 80
+        tableView.rowHeight = 100
         tableView.contentInset.bottom = 50
         
         configureLeftTitle(title: "Search")

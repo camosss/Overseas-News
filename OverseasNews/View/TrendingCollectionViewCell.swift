@@ -26,14 +26,14 @@ class TrendingCollectionViewCell: UICollectionViewCell {
     
     let backgroundImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .black.withAlphaComponent(0.2)
+        imageView.backgroundColor = .black.withAlphaComponent(0.1)
         return imageView
     }()
     
     let titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
-        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.font = UIFont.boldSystemFont(ofSize: 16)
         return label
     }()
     
@@ -41,9 +41,9 @@ class TrendingCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.addSubview(imageView)
-        contentView.clipsToBounds = true
         
+        contentView.clipsToBounds = true
+        contentView.addSubview(imageView)
         contentView.addSubview(backgroundImageView)
         backgroundImageView.snp.makeConstraints { make in
             make.top.leading.trailing.bottom.equalToSuperview()
@@ -51,10 +51,9 @@ class TrendingCollectionViewCell: UICollectionViewCell {
         
         contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
-            make.centerX.bottom.equalToSuperview()
+            make.centerX.equalToSuperview()
             make.leading.equalTo(10)
-            make.trailing.equalTo(-10)
-            make.height.equalTo(100)
+            make.trailing.bottom.equalTo(-10)
         }
     }
     

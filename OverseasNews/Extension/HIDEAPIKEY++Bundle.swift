@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 
 extension Bundle {
-    var bingApiKey: String {
+    var ApiKey: String {
         get {
             guard let filePath = self.path(forResource: "KeyInfo", ofType: "plist") else { fatalError("Couldn't find file 'KeyInfo.plist'.")}
             let plist = NSDictionary(contentsOfFile: filePath)
@@ -19,10 +19,12 @@ extension Bundle {
         }
     }
     
-    static let headers: HTTPHeaders = ["x-rapidapi-host": "bing-news-search1.p.rapidapi.com",
-                                       "x-rapidapi-key": Bundle.main.bingApiKey]
+    static let trendingHeaders: HTTPHeaders = ["x-rapidapi-host": "contextualwebsearch-websearch-v1.p.rapidapi.com",
+                                               "x-rapidapi-key": Bundle.main.ApiKey]
+
+    static let categoryHeaders: HTTPHeaders = ["x-rapidapi-host": "bing-news-search1.p.rapidapi.com",
+                                               "x-rapidapi-key": Bundle.main.ApiKey]
     
     static let searchHeaders: HTTPHeaders = ["x-rapidapi-host": "free-news.p.rapidapi.com",
-                                       "x-rapidapi-key": Bundle.main.bingApiKey]
-
+                                             "x-rapidapi-key": Bundle.main.ApiKey]
 }

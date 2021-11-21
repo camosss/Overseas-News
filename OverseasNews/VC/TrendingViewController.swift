@@ -15,9 +15,11 @@ class TrendingViewController: UIViewController {
     
     // MARK: - Properties
     
+    var urlString: String?
+
     var containerView = UIView()
     var slideUpView = UIView()
-    let slideUpViewHeight: CGFloat = 350
+    let slideUpViewHeight: CGFloat = 400
     
     private var trendingTopic = [TrendingTopic]() {
         didSet { collectionView.reloadData() }
@@ -33,43 +35,47 @@ class TrendingViewController: UIViewController {
         return collectionView
     }()
     
-    private var mainLabel: UILabel = {
+    private var providerLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .label
+        label.textColor = .systemOrange
         label.numberOfLines = 0
-        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.font = UIFont.boldSystemFont(ofSize: 16)
         return label
     }()
     
-    private var providerLabel: UILabel = {
+    private var titleLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .lightGray
+        label.textColor = .label
+        label.numberOfLines = 0
+        label.font = UIFont.boldSystemFont(ofSize: 18)
+        return label
+    }()
+    
+    private var snippetLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .label
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
     
+    private var dateLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .lightGray
+        label.numberOfLines = 0
+        label.font = UIFont.systemFont(ofSize: 12)
+        return label
+    }()
+    
     private lazy var webSearchButton: UIButton = {
         let button = UIButton()
-        button.setTitle("키워드 검색", for: .normal)
+        button.setTitle("Go To Article", for: .normal)
         button.setTitleColor(.label, for: .normal)
         button.backgroundColor = .systemGroupedBackground
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         button.layer.cornerRadius = 10
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
         button.addTarget(self, action: #selector(goWebSearch), for: .touchUpInside)
-        return button
-    }()
-    
-    private lazy var newsSearchButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("관련 기사 검색", for: .normal)
-        button.setTitleColor(.label, for: .normal)
-        button.backgroundColor = .systemGroupedBackground
-        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        button.layer.cornerRadius = 10
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
-        button.addTarget(self, action: #selector(goNewsSearch), for: .touchUpInside)
         return button
     }()
     
@@ -80,11 +86,10 @@ class TrendingViewController: UIViewController {
         super.viewDidLoad()
         configureLeftTitle(title: "Trending Topic")
         configureSlideView()
-        handleRefresh()
 //        fetchTrendingTopicData()
         
         view.addSubview(collectionView)
-        collectionView.contentInset.top = 20
+        collectionView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 50, right: 0)
         collectionView.dataSource = self
         collectionView.delegate = self
     }
@@ -96,14 +101,8 @@ class TrendingViewController: UIViewController {
     
     // MARK: - Helper
     
-    func handleRefresh() {
-        let refresher = UIRefreshControl()
-        refresher.addTarget(self, action: #selector(handleRefreshEvent), for: .valueChanged)
-        collectionView.refreshControl = refresher
-    }
-    
     func configureSlideView() {
-        let labelStack = UIStackView(arrangedSubviews: [mainLabel, providerLabel])
+        let labelStack = UIStackView(arrangedSubviews: [providerLabel, titleLabel, snippetLabel, dateLabel])
         labelStack.axis = .vertical
         labelStack.spacing = 10
         
@@ -114,34 +113,31 @@ class TrendingViewController: UIViewController {
             make.trailing.equalTo(-20)
         }
         
-        let buttonStack = UIStackView(arrangedSubviews: [webSearchButton, newsSearchButton])
-        buttonStack.axis = .vertical
-        buttonStack.spacing = 10
-        
-        slideUpView.addSubview(buttonStack)
-        buttonStack.snp.makeConstraints { make in
+        slideUpView.addSubview(webSearchButton)
+        webSearchButton.snp.makeConstraints { make in
             make.top.equalTo(labelStack.snp.bottom).offset(20)
             make.leading.trailing.equalTo(labelStack)
         }
     }
     
     func fetchTrendingTopicData() {
-        let url = "https://bing-news-search1.p.rapidapi.com/news/trendingtopics?cc=US&textFormat=Raw&safeSearch=Off"
+        let url = "https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/search/TrendingNewsAPI?pageNumber=1&pageSize=10&withThumbnails=false&location=us"
         
-        AF.request(url, method: .get, headers: Bundle.headers).validate().responseJSON { response in
+        AF.request(url, method: .get, headers: Bundle.trendingHeaders).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
                 
                 let json = JSON(value)
                 
                 for idx in 0..<json["value"].count {
-                    let title = "\(json["value"][idx]["query"]["text"])"
+                    let title = "\(json["value"][idx]["title"])"
+                    let snippet = "\(json["value"][idx]["snippet"])"
                     let postImage = "\(json["value"][idx]["image"]["url"])"
-                    let newsSearchUrl = "\(json["value"][idx]["newsSearchUrl"])"
-                    let webSearchUrl = "\(json["value"][idx]["webSearchUrl"])"
-                    let provider = "\(json["value"][idx]["image"]["provider"][0]["name"])"
+                    let url = "\(json["value"][idx]["url"])"
+                    let provider = "\(json["value"][idx]["provider"]["name"])"
+                    let datePublished = "\(json["value"][idx]["datePublished"])"
                     
-                    self.trendingTopic.append(TrendingTopic(title: title, postImage: postImage, newsSearchUrl: newsSearchUrl, webSearchUrl: webSearchUrl, provider: provider))
+                    self.trendingTopic.append(TrendingTopic(title: title, snippet: snippet, postImage: postImage, url: url, provider: provider, datePublished: datePublished))
                 }
 
             case .failure(let error):
@@ -152,18 +148,9 @@ class TrendingViewController: UIViewController {
     
     // MARK: - Action
     
-    @objc func handleRefreshEvent() {
-        trendingTopic.removeAll()
-        fetchTrendingTopicData()
-        collectionView.refreshControl?.endRefreshing()
-    }
-    
     @objc func goWebSearch() {
-        print("WebSearch")
-    }
-    
-    @objc func goNewsSearch() {
-        print("NewsSearch")
+        guard let url = URL(string: urlString ?? ""), UIApplication.shared.canOpenURL(url) else { return }
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
     @objc func slideViewDown() {
@@ -239,8 +226,11 @@ extension TrendingViewController: UICollectionViewDataSource, UICollectionViewDe
                                             width: screenSize.width,
                                             height: self.slideUpViewHeight)
             
-            self.mainLabel.text = trendingTopic.title
+            self.urlString = trendingTopic.url
             self.providerLabel.text = trendingTopic.provider
+            self.titleLabel.text = trendingTopic.title
+            self.snippetLabel.text = trendingTopic.snippet
+            self.dateLabel.text = trendingTopic.datePublished
             
         }, completion: nil)
         
