@@ -23,7 +23,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="발행 날짜" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pyT-t0-47K">
-                                                <rect key="frame" x="20" y="60.5" width="374" height="20"/>
+                                                <rect key="frame" x="20" y="66" width="374" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="v7Y-Iw-eth"/>
                                                 </constraints>
@@ -32,26 +32,26 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="igQ-a4-6hY">
-                                                <rect key="frame" x="0.0" y="100.5" width="414" height="250"/>
+                                                <rect key="frame" x="0.0" y="106" width="414" height="250"/>
                                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="250" id="mdA-2i-Lg4"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제공" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DJp-1h-Bhe">
-                                                <rect key="frame" x="20" y="0.0" width="374" height="21.5"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제공" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DJp-1h-Bhe">
+                                                <rect key="frame" x="20" y="10" width="374" height="17"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="본문" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o2Q-XV-Ubw">
-                                                <rect key="frame" x="15" y="370.5" width="384" height="19.5"/>
+                                                <rect key="frame" x="15" y="376" width="384" height="19.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="654-9b-ibq">
-                                                <rect key="frame" x="15" y="450" width="384" height="16"/>
+                                                <rect key="frame" x="15" y="455.5" width="384" height="17"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="url">
                                                         <attributes>
@@ -64,7 +64,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="URL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AYP-Du-Kis">
-                                                <rect key="frame" x="15" y="420" width="384" height="20"/>
+                                                <rect key="frame" x="15" y="425.5" width="384" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="ecK-k9-sAm"/>
                                                 </constraints>
@@ -73,7 +73,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제목" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wki-q1-zTS">
-                                                <rect key="frame" x="20" y="31.5" width="374" height="24"/>
+                                                <rect key="frame" x="20" y="37" width="374" height="24"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -97,7 +97,7 @@
                                             <constraint firstAttribute="trailing" secondItem="654-9b-ibq" secondAttribute="trailing" constant="15" id="Y0K-KR-rLr"/>
                                             <constraint firstAttribute="height" constant="1000" id="YLA-LH-vXy"/>
                                             <constraint firstItem="pyT-t0-47K" firstAttribute="leading" secondItem="szd-Nb-437" secondAttribute="leading" constant="20" id="Ynb-fe-5Pk"/>
-                                            <constraint firstItem="DJp-1h-Bhe" firstAttribute="top" secondItem="szd-Nb-437" secondAttribute="top" id="ZNz-fI-6Pj"/>
+                                            <constraint firstItem="DJp-1h-Bhe" firstAttribute="top" secondItem="szd-Nb-437" secondAttribute="top" constant="10" id="ZNz-fI-6Pj"/>
                                             <constraint firstItem="igQ-a4-6hY" firstAttribute="top" secondItem="pyT-t0-47K" secondAttribute="bottom" constant="20" id="dyb-Oi-Sm0"/>
                                             <constraint firstItem="o2Q-XV-Ubw" firstAttribute="leading" secondItem="szd-Nb-437" secondAttribute="leading" constant="15" id="eR0-KU-BG9"/>
                                             <constraint firstAttribute="trailing" secondItem="DJp-1h-Bhe" secondAttribute="trailing" constant="20" id="hTa-Yu-mHj"/>

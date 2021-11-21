@@ -54,8 +54,6 @@
 		B4B096DF2746879900240D76 /* HIDEAPIKEY++Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B096DE2746879900240D76 /* HIDEAPIKEY++Bundle.swift */; };
 		B4B096E62746904900240D76 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = B4B096E52746904900240D76 /* Kingfisher */; };
 		B4B096E82746905E00240D76 /* KF+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B096E72746905E00240D76 /* KF+Extension.swift */; };
-		B4B096EA2746AD4B00240D76 /* Web.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4B096E92746AD4B00240D76 /* Web.storyboard */; };
-		B4B096EC2746AD5A00240D76 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B096EB2746AD5A00240D76 /* WebViewController.swift */; };
 		B4B096F42747C06900240D76 /* EmptySearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B096F32747C06800240D76 /* EmptySearchCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -101,8 +99,6 @@
 		B4B096DC274686E800240D76 /* KeyInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = KeyInfo.plist; sourceTree = "<group>"; };
 		B4B096DE2746879900240D76 /* HIDEAPIKEY++Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HIDEAPIKEY++Bundle.swift"; sourceTree = "<group>"; };
 		B4B096E72746905E00240D76 /* KF+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KF+Extension.swift"; sourceTree = "<group>"; };
-		B4B096E92746AD4B00240D76 /* Web.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Web.storyboard; sourceTree = "<group>"; };
-		B4B096EB2746AD5A00240D76 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		B4B096F32747C06800240D76 /* EmptySearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySearchCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -178,7 +174,6 @@
 				B4B096492744E05200240D76 /* ScrapViewController.swift */,
 				B4B0968E27454C5E00240D76 /* ArticleBodyViewController.swift */,
 				B4B096CD274664C000240D76 /* SeeMorePageViewController.swift */,
-				B4B096EB2746AD5A00240D76 /* WebViewController.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -224,7 +219,6 @@
 				B4B096532744E1DD00240D76 /* Scrap.storyboard */,
 				B4B0969027454C8A00240D76 /* ArticleBody.storyboard */,
 				B4B096C92746649D00240D76 /* SeeMorePage.storyboard */,
-				B4B096E92746AD4B00240D76 /* Web.storyboard */,
 			);
 			path = SB;
 			sourceTree = "<group>";
@@ -332,7 +326,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B4B096EA2746AD4B00240D76 /* Web.storyboard in Resources */,
 				B4B096CA2746649D00240D76 /* SeeMorePage.storyboard in Resources */,
 				B4B096BB274638B400240D76 /* Category.storyboard in Resources */,
 				B4B096542744E1DD00240D76 /* Scrap.storyboard in Resources */,
@@ -372,7 +365,6 @@
 				B4B096642745121000240D76 /* ScrapTableViewCell.swift in Sources */,
 				B4B096C827463F7E00240D76 /* WorldTableViewCell.swift in Sources */,
 				B4B096AB274633BE00240D76 /* ScienceTechnologyViewController.swift in Sources */,
-				B4B096EC2746AD5A00240D76 /* WebViewController.swift in Sources */,
 				B4B0965C2744F35900240D76 /* SearchTableViewCell.swift in Sources */,
 				B4B0969F2746330100240D76 /* NewsViewController.swift in Sources */,
 				B4216C0A274A2A570028DBBF /* RealmModel.swift in Sources */,
@@ -610,7 +602,7 @@
 			repositoryURL = "https://github.com/realm/realm-cocoa.git";
 			requirement = {
 				kind = exactVersion;
-				version = 10.20.0;
+				version = 10.19.0;
 			};
 		};
 		B4B0966527452CE600240D76 /* XCRemoteSwiftPackageReference "CHTCollectionViewWaterfallLayout" */ = {

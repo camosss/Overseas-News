@@ -6,14 +6,10 @@
 //
 
 import UIKit
-import RealmSwift
 
 class ArticleBodyViewController: UIViewController {
     
     // MARK: - Properties
-    
-    let localRealm = try! Realm()
-    var tasks: Results<RealmModel>!
     
     var article: Article!
     var search: Search!
@@ -22,7 +18,6 @@ class ArticleBodyViewController: UIViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var providerImage: UIImageView!
     @IBOutlet weak var providerName: UILabel!
     @IBOutlet weak var postImage: UIImageView!
     @IBOutlet weak var bodyLabel: UILabel!
@@ -68,30 +63,26 @@ class ArticleBodyViewController: UIViewController {
         urlLabel.text = search.url
         urlLabel.textColor = .systemOrange
         urlLabel.isUserInteractionEnabled = true
-        let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(goSearchURL))
+        let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(goArticleURL))
         tapGesture.numberOfTapsRequired = 1
         urlLabel.addGestureRecognizer(tapGesture)
     }
     
     // MARK: - Action
     
-    @objc func goArticleURL() {
-        guard let url = URL(string: article.url), UIApplication.shared.canOpenURL(url) else { return }
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
-    }
-    
-    @objc func goSearchURL() {
-        guard let url = URL(string: search.url), UIApplication.shared.canOpenURL(url) else { return }
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
-    }
-    
     @IBAction func handleScrapButton(_ sender: UIBarButtonItem) {
         print("스크랩")
     }
     
+    @objc func goArticleURL() {
+        let urlString = article != nil ? article.url : search.url
+        guard let url = URL(string: urlString), UIApplication.shared.canOpenURL(url) else { return }
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
     
     @IBAction func handleShareButton(_ sender: UIBarButtonItem) {
-        let activityController = UIActivityViewController(activityItems: [article.url], applicationActivities: nil)
+        let urlString = article != nil ? article.url : search.url
+        let activityController = UIActivityViewController(activityItems: [urlString], applicationActivities: nil)
         present(activityController, animated: true, completion: nil)
     }
 }
