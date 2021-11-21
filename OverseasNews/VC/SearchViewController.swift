@@ -16,16 +16,14 @@ class SearchViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    var searchStringText: String?
+
     private let searchController = UISearchController(searchResultsController: nil)
     private var inSearchMode: Bool {
         return searchController.isActive && !searchController.searchBar.text!.isEmpty
     }
     
     private var search = [Search]() {
-        didSet { tableView.reloadData() }
-    }
-    
-    private var filterSearch = [Search]() {
         didSet { tableView.reloadData() }
     }
     
@@ -54,7 +52,6 @@ class SearchViewController: UIViewController {
         }
     }
     
-    
     // MARK: - Helper
     
     func configureSearchController() {
@@ -69,35 +66,8 @@ class SearchViewController: UIViewController {
         navigationItem.hidesSearchBarWhenScrolling = false
         definesPresentationContext = false
     }
-}
-
-// MARK: - UITableViewDataSource, UITableViewDelegate
-
-extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return search.count
-    }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.identifier, for: indexPath) as! SearchTableViewCell
-        cell.search = search[indexPath.row]
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let sb = UIStoryboard(name: "ArticleBody", bundle: Bundle.main)
-        let vc = sb.instantiateViewController(withIdentifier: "ArticleBodyViewController") as! ArticleBodyViewController
-        navigationController?.pushViewController(vc, animated: true)
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-}
-
-// MARK: - UISearchResultsUpdating
-
-extension SearchViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        guard let searchText = searchController.searchBar.text?.lowercased() else { return }
-        
+    func fetchData(searchText: String) {
         let url = "https://bing-news-search1.p.rapidapi.com/news/search?q=\(searchText)&cc=US&freshness=Day&textFormat=Raw&safeSearch=Off"
         
         var tmp = [Search]()
@@ -136,11 +106,42 @@ extension SearchViewController: UISearchResultsUpdating {
     }
 }
 
+// MARK: - UITableViewDataSource, UITableViewDelegate
+
+extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return search.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.identifier, for: indexPath) as! SearchTableViewCell
+        cell.search = search[indexPath.row]
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let sb = UIStoryboard(name: "ArticleBody", bundle: Bundle.main)
+        let vc = sb.instantiateViewController(withIdentifier: "ArticleBodyViewController") as! ArticleBodyViewController
+        navigationController?.pushViewController(vc, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+// MARK: - UISearchResultsUpdating
+
+extension SearchViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchText = searchController.searchBar.text?.lowercased() else { return }
+        searchStringText = searchText
+    }
+}
+
 // MARK: - UISearchBarDelegate
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = true
+        
         collectionView.isHidden = true
         tableView.isHidden = false
     }
@@ -153,8 +154,12 @@ extension SearchViewController: UISearchBarDelegate {
         collectionView.isHidden = false
         tableView.isHidden = true
     }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        fetchData(searchText: searchStringText ?? "")
+    }
 }
-
 
 // MARK: - UICollectionViewDataSource
 

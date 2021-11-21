@@ -81,7 +81,7 @@ class TrendingViewController: UIViewController {
         configureLeftTitle(title: "Trending Topic")
         configureSlideView()
         handleRefresh()
-        fetchTrendingTopicData()
+//        fetchTrendingTopicData()
         
         view.addSubview(collectionView)
         collectionView.contentInset.top = 20
