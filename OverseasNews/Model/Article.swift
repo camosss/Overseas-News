@@ -14,5 +14,4 @@ struct Article {
     let url: String
     let datePublished: String
     let providerName: String
-    let providerImage: String
 }

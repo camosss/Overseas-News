@@ -51,13 +51,13 @@ extension ScrapViewController: UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
-        let fix = UIContextualAction(style: .normal, title: "") { (action, view, nil) in
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let delete = UIContextualAction(style: .destructive, title: "Delete") { (action, view, nil) in
+            print("삭제")
             self.tableView.reloadData()
         }
-        fix.image = UIImage(systemName: "pin.slash.fill")
-        fix.backgroundColor = .systemOrange
-        return UISwipeActionsConfiguration(actions: [fix])
+        delete.backgroundColor = .red
+        delete.image = UIImage(systemName: "trash.fill")
+        return UISwipeActionsConfiguration(actions: [delete])
     }
 }

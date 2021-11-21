@@ -53,9 +53,8 @@ class SeeMorePageViewController: UIViewController {
                     let url = "\(json["value"][idx]["url"])"
                     let datePublished = "\(json["value"][idx]["datePublished"])"
                     let providerName = "\(json["value"][idx]["provider"][0]["name"])"
-                    let providerImage = "\(json["value"][idx]["provider"][0]["image"]["thumbnail"]["contentUrl"])"
                     
-                    self.article.append(Article(title: title, description: description, postImage: postImage, url: url, datePublished: datePublished, providerName: providerName, providerImage: providerImage))
+                    self.article.append(Article(title: title, description: description, postImage: postImage, url: url, datePublished: datePublished, providerName: providerName))
                 }
 
             case .failure(let error):

@@ -56,12 +56,11 @@ class NewsViewController: UIViewController {
                     let url = "\(json["value"][idx]["url"])"
                     let datePublished = "\(json["value"][idx]["datePublished"])"
                     let providerName = "\(json["value"][idx]["provider"][0]["name"])"
-                    let providerImage = "\(json["value"][idx]["provider"][0]["image"]["thumbnail"]["contentUrl"])"
                     
                     if urlString == self.sectionName[0] {
-                        self.categoryBusiness.append(Article(title: title, description: description, postImage: postImage, url: url, datePublished: datePublished, providerName: providerName, providerImage: providerImage))
+                        self.categoryBusiness.append(Article(title: title, description: description, postImage: postImage, url: url, datePublished: datePublished, providerName: providerName))
                     } else {
-                        self.categoryPolitics.append(Article(title: title, description: description, postImage: postImage, url: url, datePublished: datePublished, providerName: providerName, providerImage: providerImage))
+                        self.categoryPolitics.append(Article(title: title, description: description, postImage: postImage, url: url, datePublished: datePublished, providerName: providerName))
                     }
                 }
 

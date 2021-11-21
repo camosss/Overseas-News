@@ -18,18 +18,6 @@ class EntertainmentViewController: UIViewController {
     let sectionName = ["Entertainment", "Movie/TV", "Music"]
     let urlStrings = ["Entertainment", "Entertainment_MovieAndTV", "Entertainment_Music"]
     
-    private var categoryEntertainment = [Article]() {
-        didSet { tableView.reloadData() }
-    }
-    
-    private var categoryMovieTv = [Article]() {
-        didSet { tableView.reloadData() }
-    }
-    
-    private var categoryMusic = [Article]() {
-        didSet { tableView.reloadData() }
-    }
-    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -38,46 +26,8 @@ class EntertainmentViewController: UIViewController {
         tableView.delegate = self
         tableView.rowHeight = 80
         tableView.contentInset = UIEdgeInsets(top: 30, left: 0, bottom: 50, right: 0)
-        
-//        fetchDate(urlString: "Entertainment")
-//        fetchDate(urlString: urlStrings[1])
-//        fetchDate(urlString: urlStrings[2])
     }
     
-    // MARK: - Helper
-    
-    func fetchDate(urlString: String) {
-        let url = "https://bing-news-search1.p.rapidapi.com/news?category=\(urlString)&cc=US&safeSearch=Off&textFormat=Raw"
-        
-        AF.request(url, method: .get, headers: Bundle.headers).validate().responseJSON { response in
-            switch response.result {
-            case .success(let value):
-                
-                let json = JSON(value)
-                
-                for idx in 0..<3 {
-                    let title = "\(json["value"][idx]["name"])"
-                    let description = "\(json["value"][idx]["description"])"
-                    let postImage = "\(json["value"][idx]["image"]["thumbnail"]["contentUrl"])"
-                    let url = "\(json["value"][idx]["url"])"
-                    let datePublished = "\(json["value"][idx]["datePublished"])"
-                    let providerName = "\(json["value"][idx]["provider"][0]["name"])"
-                    let providerImage = "\(json["value"][idx]["provider"][0]["image"]["thumbnail"]["contentUrl"])"
-                
-                    if urlString == self.urlStrings[0] {
-                        self.categoryEntertainment.append(Article(title: title, description: description, postImage: postImage, url: url, datePublished: datePublished, providerName: providerName, providerImage: providerImage))
-                    } else if urlString == self.urlStrings[1] {
-                        self.categoryMovieTv.append(Article(title: title, description: description, postImage: postImage, url: url, datePublished: datePublished, providerName: providerName, providerImage: providerImage))
-                    } else if urlString == self.urlStrings[2] {
-                        self.categoryMusic.append(Article(title: title, description: description, postImage: postImage, url: url, datePublished: datePublished, providerName: providerName, providerImage: providerImage))
-                    }
-                }
-
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
     
     // MARK: - Action
     
@@ -116,13 +66,16 @@ extension EntertainmentViewController: UITableViewDataSource, UITableViewDelegat
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? categoryEntertainment.count : section == 1 ? categoryMovieTv.count : categoryMusic.count
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: EntertainmentTableViewCell.identifier, for: indexPath) as! EntertainmentTableViewCell
-        let row = indexPath.section == 0 ? categoryEntertainment[indexPath.row] : indexPath.section == 1 ? categoryMovieTv[indexPath.row] : categoryMusic[indexPath.row]
-        cell.article = row
+        cell.titleLabel.text = "기사 제목"
+        cell.providerLabel.text = "제공자"
+        cell.postImageView.backgroundColor = .lightGray
+        cell.postImageView.clipsToBounds = true
+        cell.postImageView.layer.cornerRadius = 10
         return cell
     }
     

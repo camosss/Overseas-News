@@ -23,7 +23,7 @@ class SearchViewController: UIViewController {
         return searchController.isActive && !searchController.searchBar.text!.isEmpty
     }
     
-    private var article = [Article]() {
+    private var search = [Search]() {
         didSet { tableView.reloadData() }
     }
     
@@ -68,32 +68,32 @@ class SearchViewController: UIViewController {
     }
     
     func fetchData(searchText: String) {
-        let url = "https://bing-news-search1.p.rapidapi.com/news/search?q=\(searchText)&cc=US&freshness=Day&textFormat=Raw&safeSearch=Off"
+        let url = "https://free-news.p.rapidapi.com/v1/search?q=\(searchText)&lang=en"
         
-        var tmp = [Article]()
+        var tmp = [Search]()
         
         if searchText.isEmpty {
-            article = []
+            search = []
         } else {
-            AF.request(url, method: .get, headers: Bundle.headers).validate().responseJSON { response in
+            AF.request(url, method: .get, headers: Bundle.searchHeaders).validate().responseJSON { response in
                 switch response.result {
                 case .success(let value):
                     
                     let json = JSON(value)
                     
-                    for idx in 0..<json["value"].count {
-                        let title = "\(json["value"][idx]["name"])"
-                        let description = "\(json["value"][idx]["description"])"
-                        let postImage = "\(json["value"][idx]["image"]["thumbnail"]["contentUrl"])"
-                        let url = "\(json["value"][idx]["url"])"
-                        let datePublished = "\(json["value"][idx]["datePublished"])"
-                        let providerName = "\(json["value"][idx]["provider"][0]["name"])"
-                        let providerImage = "\(json["value"][idx]["provider"][0]["image"]["thumbnail"]["contentUrl"])"
+                    for idx in 0..<json["articles"].count {
+                        let category = "\(json["articles"][idx]["topic"])"
+                        let title = "\(json["articles"][idx]["title"])"
+                        let description = "\(json["articles"][idx]["summary"])"
+                        let postImage = "\(json["articles"][idx]["media"])"
+                        let url = "\(json["articles"][idx]["link"])"
+                        let datePublished = "\(json["articles"][idx]["published_date"])"
+                        let providerName = "\(json["articles"][idx]["author"])"
                         
-                        tmp.append(Article(title: title, description: description, postImage: postImage, url: url, datePublished: datePublished, providerName: providerName, providerImage: providerImage))
+                        tmp.append(Search(category: category, title: title, description: description, postImage: postImage, url: url, datePublished: datePublished, providerName: providerName))
                         
                         DispatchQueue.main.async {
-                            self.article = tmp
+                            self.search = tmp
                         }
                     }
 
@@ -109,19 +109,19 @@ class SearchViewController: UIViewController {
 
 extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return article.count
+        return search.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.identifier, for: indexPath) as! SearchTableViewCell
-        cell.article = article[indexPath.row]
+        cell.search = search[indexPath.row]
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let sb = UIStoryboard(name: "ArticleBody", bundle: Bundle.main)
         let vc = sb.instantiateViewController(withIdentifier: "ArticleBodyViewController") as! ArticleBodyViewController
-        vc.article = article[indexPath.row]
+        vc.search = search[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }

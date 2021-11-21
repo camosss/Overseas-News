@@ -16,6 +16,7 @@ class ArticleBodyViewController: UIViewController {
     var tasks: Results<RealmModel>!
     
     var article: Article!
+    var search: Search!
 
     @IBOutlet weak var scrapButton: UIBarButtonItem!
     
@@ -31,8 +32,12 @@ class ArticleBodyViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureArticle()
-//        print(localRealm.configuration.fileURL!)
+        
+        if article != nil {
+            configureArticle()
+        } else {
+            configureSearch()
+        }
     }
     
     // MARK: - Helper
@@ -42,7 +47,8 @@ class ArticleBodyViewController: UIViewController {
         dateLabel.text = article.datePublished
         providerName.text = article.providerName
         bodyLabel.text = "\(article.description)..."
-        
+        postImage.setImage(imageUrl: article.postImage)
+
         urlLabel.text = article.url
         urlLabel.textColor = .systemOrange
         urlLabel.isUserInteractionEnabled = true
@@ -50,8 +56,21 @@ class ArticleBodyViewController: UIViewController {
         tapGesture.numberOfTapsRequired = 1
         urlLabel.addGestureRecognizer(tapGesture)
 
-        providerImage.setImage(imageUrl: article.providerImage)
-        postImage.setImage(imageUrl: article.postImage)
+    }
+    
+    func configureSearch() {
+        titleLabel.text = search.title
+        dateLabel.text = search.datePublished
+        providerName.text = search.providerName
+        bodyLabel.text = "\(search.description)..."
+        postImage.setImage(imageUrl: search.postImage)
+
+        urlLabel.text = search.url
+        urlLabel.textColor = .systemOrange
+        urlLabel.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(goSearchURL))
+        tapGesture.numberOfTapsRequired = 1
+        urlLabel.addGestureRecognizer(tapGesture)
     }
     
     // MARK: - Action
@@ -61,30 +80,13 @@ class ArticleBodyViewController: UIViewController {
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
+    @objc func goSearchURL() {
+        guard let url = URL(string: search.url), UIApplication.shared.canOpenURL(url) else { return }
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
+    
     @IBAction func handleScrapButton(_ sender: UIBarButtonItem) {
         print("스크랩")
-                
-        let title = article.title
-        let contents = article.description
-        let postImage = article.postImage
-        let url = article.url
-        let datePublished = article.datePublished
-        let providerName = article.providerName
-        let providerImage = article.providerImage
-        
-        let task = RealmModel(title: title, contents: contents, postImage: postImage, url: url, datePublished: datePublished, providerName: providerName, providerImage: providerImage)
-        
-        try! localRealm.write {
-            localRealm.add(task)
-            
-            // Realm 데이터안의 indexPath가 있어야 해당 데이터의 토클이 진행된다
-            task.scrap.toggle()
-        }
-        tasks = localRealm.objects(RealmModel.self)
-        
-        DispatchQueue.main.async {
-            self.scrapButton.image = task.scrap ? UIImage(systemName: "star.fill") : UIImage(systemName: "star")
-        }
     }
     
     
