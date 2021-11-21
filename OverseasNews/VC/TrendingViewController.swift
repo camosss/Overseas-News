@@ -6,7 +6,9 @@
 //
 
 import UIKit
+import Network
 import SnapKit
+import Toast
 import Alamofire
 import SwiftyJSON
 import CHTCollectionViewWaterfallLayout
@@ -14,6 +16,8 @@ import CHTCollectionViewWaterfallLayout
 class TrendingViewController: UIViewController {
     
     // MARK: - Properties
+    
+    let networkMoniter = NWPathMonitor() // 네트워크 변경 감지
     
     var urlString: String?
 
@@ -84,6 +88,7 @@ class TrendingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        handleNetwork()
         configureLeftTitle(title: "Trending Topic")
         configureSlideView()
 //        fetchTrendingTopicData()
@@ -100,6 +105,27 @@ class TrendingViewController: UIViewController {
     }
     
     // MARK: - Helper
+    
+    func handleNetwork() {
+        networkMoniter.pathUpdateHandler = { path in
+            if path.status == .satisfied {
+                print("network connected")
+                if path.usesInterfaceType(.cellular) {
+                    print("cellular status")
+                } else if path.usesInterfaceType(.wifi) {
+                    print("wifi status")
+                } else {
+                    print("others")
+                }
+            } else {
+                print("network disconnected")
+                DispatchQueue.main.async {
+                    self.view.makeToast("Network Disconnected ‼️")
+                }
+            }
+        }
+        networkMoniter.start(queue: DispatchQueue.global())
+    }
     
     func configureSlideView() {
         let labelStack = UIStackView(arrangedSubviews: [providerLabel, titleLabel, snippetLabel, dateLabel])

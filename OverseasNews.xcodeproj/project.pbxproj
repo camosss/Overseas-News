@@ -16,6 +16,7 @@
 		B4216C07274A241F0028DBBF /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B4216C06274A241F0028DBBF /* RealmSwift */; };
 		B4216C0A274A2A570028DBBF /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4216C09274A2A570028DBBF /* RealmModel.swift */; };
 		B4216C0E274A60050028DBBF /* APIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4216C0D274A60050028DBBF /* APIModel.swift */; };
+		B4216C11274A7DAD0028DBBF /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = B4216C10274A7DAD0028DBBF /* Toast */; };
 		B4B096442744E03500240D76 /* TrendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B096432744E03500240D76 /* TrendingViewController.swift */; };
 		B4B096462744E03B00240D76 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B096452744E03B00240D76 /* SearchViewController.swift */; };
 		B4B096482744E04400240D76 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B096472744E04400240D76 /* CategoryViewController.swift */; };
@@ -110,6 +111,7 @@
 				B4216C07274A241F0028DBBF /* RealmSwift in Frameworks */,
 				B4216C05274A241F0028DBBF /* Realm in Frameworks */,
 				B4B096E62746904900240D76 /* Kingfisher in Frameworks */,
+				B4216C11274A7DAD0028DBBF /* Toast in Frameworks */,
 				B4B0966727452CE600240D76 /* CHTCollectionViewWaterfallLayout in Frameworks */,
 				B4B096D82746848F00240D76 /* Alamofire in Frameworks */,
 				B4B09694274560E300240D76 /* SnapKit in Frameworks */,
@@ -274,6 +276,7 @@
 				B4B096E52746904900240D76 /* Kingfisher */,
 				B4216C04274A241F0028DBBF /* Realm */,
 				B4216C06274A241F0028DBBF /* RealmSwift */,
+				B4216C10274A7DAD0028DBBF /* Toast */,
 			);
 			productName = OverseasNews;
 			productReference = B40CCD032743DE67004C83C4 /* OverseasNews.app */;
@@ -311,6 +314,7 @@
 				B4B096D9274684F800240D76 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				B4B096E42746904900240D76 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				B4216C03274A241F0028DBBF /* XCRemoteSwiftPackageReference "realm-cocoa" */,
+				B4216C0F274A7DAD0028DBBF /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 			);
 			productRefGroup = B40CCD042743DE67004C83C4 /* Products */;
 			projectDirPath = "";
@@ -605,6 +609,14 @@
 				version = 10.19.0;
 			};
 		};
+		B4216C0F274A7DAD0028DBBF /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scalessec/Toast-Swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		B4B0966527452CE600240D76 /* XCRemoteSwiftPackageReference "CHTCollectionViewWaterfallLayout" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/chiahsien/CHTCollectionViewWaterfallLayout";
@@ -665,6 +677,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B4216C03274A241F0028DBBF /* XCRemoteSwiftPackageReference "realm-cocoa" */;
 			productName = RealmSwift;
+		};
+		B4216C10274A7DAD0028DBBF /* Toast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B4216C0F274A7DAD0028DBBF /* XCRemoteSwiftPackageReference "Toast-Swift" */;
+			productName = Toast;
 		};
 		B4B0966627452CE600240D76 /* CHTCollectionViewWaterfallLayout */ = {
 			isa = XCSwiftPackageProductDependency;
