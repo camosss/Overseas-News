@@ -32,7 +32,7 @@ class SeeMorePageViewController: UIViewController {
         tableView.rowHeight = 80
         tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 50, right: 0)
         
-        fetchNewsDate(urlString: sectionTitle)
+//        fetchNewsDate(urlString: sectionTitle)
     }
     
     // MARK: - Helper
@@ -72,7 +72,7 @@ extension SeeMorePageViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: SeeMorePageTableViewCell.identifier, for: indexPath) as! SeeMorePageTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: CategoryTableViewCell.identifier, for: indexPath) as! CategoryTableViewCell
         
         let article = article[indexPath.row]
         cell.article = article

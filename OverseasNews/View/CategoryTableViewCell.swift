@@ -1,13 +1,13 @@
 //
-//  NewsTableViewCell.swift
+//  CategoryTableViewCell.swift
 //  OverseasNews
 //
-//  Created by 강호성 on 2021/11/18.
+//  Created by 강호성 on 2021/11/22.
 //
 
 import UIKit
 
-class NewsTableViewCell: UITableViewCell {
+class CategoryTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
@@ -15,7 +15,7 @@ class NewsTableViewCell: UITableViewCell {
         didSet { configure() }
     }
     
-    static let identifier = "NewsTableViewCell"
+    static let identifier = "CategoryTableViewCell"
     
     @IBOutlet weak var postImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!

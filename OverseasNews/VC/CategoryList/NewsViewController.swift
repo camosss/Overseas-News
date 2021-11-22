@@ -49,7 +49,7 @@ class NewsViewController: UIViewController {
                 
                 let json = JSON(value)
                 
-                for idx in 0..<3 {
+                for idx in 0..<json["value"].count {
                     let title = "\(json["value"][idx]["name"])"
                     let description = "\(json["value"][idx]["description"])"
                     let postImage = "\(json["value"][idx]["image"]["thumbnail"]["contentUrl"])"
@@ -94,7 +94,7 @@ extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let button = UIButton(type: .system)
-        button.setTitle("see more", for: .normal)
+        button.setTitle("View all", for: .normal)
         button.setTitleColor(.lightGray, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         button.addTarget(self, action: #selector(handleSeeMore(button:)), for: .touchUpInside)
@@ -111,7 +111,8 @@ extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: NewsTableViewCell.identifier, for: indexPath) as! NewsTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: CategoryTableViewCell.identifier, for: indexPath) as! CategoryTableViewCell
+        
         let row = indexPath.section == 0 ? categoryBusiness[indexPath.row] : categoryPolitics[indexPath.row]
         cell.article = row
         return cell

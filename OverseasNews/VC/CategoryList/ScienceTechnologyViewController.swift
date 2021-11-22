@@ -49,7 +49,7 @@ extension ScienceTechnologyViewController: UITableViewDataSource, UITableViewDel
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let button = UIButton(type: .system)
-        button.setTitle("see more", for: .normal)
+        button.setTitle("View all", for: .normal)
         button.setTitleColor(.lightGray, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         button.addTarget(self, action: #selector(handleSeeMore(button:)), for: .touchUpInside)
@@ -66,7 +66,7 @@ extension ScienceTechnologyViewController: UITableViewDataSource, UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ScienceTechnologyTableViewCell.identifier, for: indexPath) as! ScienceTechnologyTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: CategoryTableViewCell.identifier, for: indexPath) as! CategoryTableViewCell
         cell.titleLabel.text = "기사 제목"
         cell.providerLabel.text = "제공자"
         cell.postImageView.backgroundColor = .lightGray
