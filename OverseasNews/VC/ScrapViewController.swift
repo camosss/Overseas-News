@@ -19,6 +19,12 @@ class ScrapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureLeftTitle(title: "Scrap")
+        configureTableView()
+    }
+    
+    // MARK: - Helper
+    
+    func configureTableView() {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = 80

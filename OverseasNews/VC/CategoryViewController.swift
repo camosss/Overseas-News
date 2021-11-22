@@ -21,7 +21,6 @@ class CategoryViewController: TabmanViewController {
         super.viewDidLoad()
         configureLeftTitle(title: "Category")
         configureViewControllers()
-        
         self.dataSource = self
 
         let bar = TMBar.ButtonBar()

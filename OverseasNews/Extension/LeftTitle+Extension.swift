@@ -12,7 +12,7 @@ extension UIViewController {
         let label = UILabel()
         label.textColor = UIColor.label
         label.text = title
-        label.font = UIFont.boldSystemFont(ofSize: 30)
+        label.font = UIFont().mainFont
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: label)
         self.navigationItem.leftItemsSupplementBackButton = true
     }

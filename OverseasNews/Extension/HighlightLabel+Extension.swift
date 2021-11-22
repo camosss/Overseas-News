@@ -9,9 +9,7 @@ import UIKit
 
 extension UILabel {
     func highlight(searchText: String, color: UIColor = .systemTeal) {
-       
         guard let labelText = self.text else { return }
-       
         do {
            let mutableString = NSMutableAttributedString(string: labelText)
            let regex = try NSRegularExpression(pattern: searchText, options: .caseInsensitive)
