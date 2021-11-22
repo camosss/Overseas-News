@@ -15,6 +15,7 @@ class SeeMorePageViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    var articles: Article!
     var sectionTitle = ""
     
     private var article = [Article]() {

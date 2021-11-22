@@ -91,7 +91,7 @@ class TrendingViewController: UIViewController {
         handleNetwork()
         configureLeftTitle(title: "Trending Topic")
         configureSlideView()
-        fetchTrendingTopicData()
+//        fetchTrendingTopicData()
         
         view.addSubview(collectionView)
         collectionView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 50, right: 0)

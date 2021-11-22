@@ -107,7 +107,7 @@ extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? categoryBusiness.count : categoryPolitics.count
+        return (section == 0 ? categoryBusiness.count : categoryPolitics.count)/4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
