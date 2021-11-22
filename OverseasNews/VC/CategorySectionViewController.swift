@@ -1,20 +1,27 @@
 //
-//  ScienceTechnologyViewController.swift
+//  CategorySectionViewController.swift
 //  OverseasNews
 //
 //  Created by 강호성 on 2021/11/18.
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
-class ScienceTechnologyViewController: UIViewController {
+class CategorySectionViewController: UIViewController {
     
     // MARK: - Properties
     
     @IBOutlet weak var tableView: UITableView!
     
-    let sectionName = ["Science", "Technology"]
-
+    var sectionURL = [String]()
+    var sectionName = [String]()
+    
+    private var article = [Article]() {
+        didSet { tableView.reloadData() }
+    }
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -23,6 +30,38 @@ class ScienceTechnologyViewController: UIViewController {
         tableView.delegate = self
         tableView.rowHeight = 80
         tableView.contentInset = UIEdgeInsets(top: 30, left: 0, bottom: 50, right: 0)
+    }
+    
+    // MARK: - Helper
+    
+    func fetchDate(urlString: String) {
+        let url = "https://bing-news-search1.p.rapidapi.com/news?category=\(urlString)&cc=US&safeSearch=Off&textFormat=Raw"
+        
+        AF.request(url, method: .get, headers: Bundle.categoryHeaders).validate().responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                
+                let json = JSON(value)
+                
+                for idx in 0..<json["value"].count {
+                    let title = "\(json["value"][idx]["name"])"
+                    let description = "\(json["value"][idx]["description"])"
+                    let postImage = "\(json["value"][idx]["image"]["thumbnail"]["contentUrl"])"
+                    let url = "\(json["value"][idx]["url"])"
+                    let datePublished = "\(json["value"][idx]["datePublished"])"
+                    let providerName = "\(json["value"][idx]["provider"][0]["name"])"
+                    
+//                    if urlString == self.sectionName[0] {
+//                        self.categoryBusiness.append(Article(title: title, description: description, postImage: postImage, url: url, datePublished: datePublished, providerName: providerName))
+//                    } else {
+//                        self.categoryPolitics.append(Article(title: title, description: description, postImage: postImage, url: url, datePublished: datePublished, providerName: providerName))
+//                    }
+                }
+
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
     // MARK: - Action
@@ -38,7 +77,7 @@ class ScienceTechnologyViewController: UIViewController {
 
 // MARK: - UITableViewDataSource, UITableViewDelegate
 
-extension ScienceTechnologyViewController: UITableViewDataSource, UITableViewDelegate {
+extension CategorySectionViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return sectionName.count
     }
@@ -56,29 +95,31 @@ extension ScienceTechnologyViewController: UITableViewDataSource, UITableViewDel
         button.tag = section
         return button
     }
-    
+
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 36
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+//        return (section == 0 ? categoryBusiness.count : categoryPolitics.count)/4
+        return 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CategoryTableViewCell.identifier, for: indexPath) as! CategoryTableViewCell
-        cell.titleLabel.text = "기사 제목"
-        cell.providerLabel.text = "제공자"
-        cell.postImageView.backgroundColor = .lightGray
-        cell.postImageView.clipsToBounds = true
-        cell.postImageView.layer.cornerRadius = 10
+        
+//        let row = indexPath.section == 0 ? categoryBusiness[indexPath.row] : categoryPolitics[indexPath.row]
+//        cell.article = row
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let sb = UIStoryboard(name: "ArticleBody", bundle: Bundle.main)
         let vc = sb.instantiateViewController(withIdentifier: "ArticleBodyViewController") as! ArticleBodyViewController
+//        let row = indexPath.section == 0 ? categoryBusiness[indexPath.row] : categoryPolitics[indexPath.row]
+//        vc.article = row
         navigationController?.pushViewController(vc, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
 }

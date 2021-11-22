@@ -32,10 +32,10 @@ class CategoryViewController: TabmanViewController {
     // MARK: - Helper
     
     func configureViewControllers() {
-        let newsVC = UIStoryboard.init(name: "Category", bundle: nil).instantiateViewController(withIdentifier: "NewsViewController") as! NewsViewController
-        let entertainmentVC = UIStoryboard.init(name: "Category", bundle: nil).instantiateViewController(withIdentifier: "EntertainmentViewController") as! EntertainmentViewController
-        let sportsVC = UIStoryboard.init(name: "Category", bundle: nil).instantiateViewController(withIdentifier: "SportsViewController") as! SportsViewController
-        let scienceTechnologyVC = UIStoryboard.init(name: "Category", bundle: nil).instantiateViewController(withIdentifier: "ScienceTechnologyViewController") as! ScienceTechnologyViewController
+        let newsVC = UIStoryboard.init(name: "Category", bundle: nil).instantiateViewController(withIdentifier: "CategorySectionViewController") as! CategorySectionViewController
+        let entertainmentVC = UIStoryboard.init(name: "Category", bundle: nil).instantiateViewController(withIdentifier: "CategorySectionViewController") as! CategorySectionViewController
+        let sportsVC = UIStoryboard.init(name: "Category", bundle: nil).instantiateViewController(withIdentifier: "CategorySectionViewController") as! CategorySectionViewController
+        let scienceTechnologyVC = UIStoryboard.init(name: "Category", bundle: nil).instantiateViewController(withIdentifier: "CategorySectionViewController") as! CategorySectionViewController
         
         viewControllers.append(newsVC)
         viewControllers.append(entertainmentVC)
@@ -74,10 +74,6 @@ extension CategoryViewController: PageboyViewControllerDataSource, TMBarDataSour
             return TMBarItem(title: "Sports")
         case 3:
             return TMBarItem(title: "Science&Technology")
-        case 4:
-            return TMBarItem(title: "US")
-        case 5:
-            return TMBarItem(title: "World")
         default:
             return TMBarItem(title: "\(index)")
         }
@@ -89,7 +85,10 @@ extension CategoryViewController: PageboyViewControllerDataSource, TMBarDataSour
     }
     
     func viewController(for pageboyViewController: PageboyViewController, at index: PageboyViewController.PageIndex) -> UIViewController? {
-        return viewControllers[index]
+        let vc = viewControllers[index] as? CategorySectionViewController
+        vc?.sectionURL = Category.allCases[index].description
+        vc?.sectionName = CategorySectionName.allCases[index].description
+        return vc
     }
     
     func defaultPage(for pageboyViewController: PageboyViewController) -> PageboyViewController.Page? {
