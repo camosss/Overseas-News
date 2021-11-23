@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 import Alamofire
 import SwiftyJSON
 
@@ -15,7 +16,7 @@ class SeeMorePageViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var article: [Article] = []
+    var article = List<ArticleModel>()
     var sectionTitle = ""
     
     // MARK: - Lifecycle
@@ -49,7 +50,7 @@ extension SeeMorePageViewController: UITableViewDataSource, UITableViewDelegate 
         let cell = tableView.dequeueReusableCell(withIdentifier: CategoryTableViewCell.identifier, for: indexPath) as! CategoryTableViewCell
         
         let article = article[indexPath.row]
-        cell.article = article
+        cell.configure(article)
         return cell
     }
     

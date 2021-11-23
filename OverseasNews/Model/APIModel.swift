@@ -26,7 +26,6 @@ struct Search {
     let providerName: String
 }
 
-
 struct Article {
     var sectionName: String
     let title: String

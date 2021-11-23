@@ -11,7 +11,7 @@ class ArticleBodyViewController: UIViewController {
     
     // MARK: - Properties
     
-    var article: Article!
+    var article: ArticleModel!
     var search: Search!
 
     @IBOutlet weak var providerName: UILabel!
@@ -39,7 +39,7 @@ class ArticleBodyViewController: UIViewController {
         titleLabel.text = article.title
         dateLabel.text = article.datePublished
         providerName.text = article.providerName
-        bodyLabel.text = "\(article.description)..."
+        bodyLabel.text = "\(article.contents)..."
         postImage.setImage(imageUrl: article.postImage)
 
         urlLabel.text = article.url

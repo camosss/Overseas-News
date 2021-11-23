@@ -11,10 +11,6 @@ class CategoryTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
-    var article: Article? {
-        didSet { configure() }
-    }
-    
     static let identifier = "CategoryTableViewCell"
     
     @IBOutlet weak var postImageView: UIImageView!
@@ -34,13 +30,11 @@ class CategoryTableViewCell: UITableViewCell {
 
     // MARK: - Helper
     
-    func configure() {
-        guard let article = article else { return }
+    func configure(_ articleModel: ArticleModel) {
+        titleLabel.text = articleModel.title
+        providerLabel.text = articleModel.providerName
         
-        titleLabel.text = article.title
-        providerLabel.text = article.providerName
-        
-        postImageView.setImage(imageUrl: article.postImage)
+        postImageView.setImage(imageUrl: articleModel.postImage)
         postImageView.clipsToBounds = true
         postImageView.layer.cornerRadius = 10
     }

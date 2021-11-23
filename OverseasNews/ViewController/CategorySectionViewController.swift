@@ -23,10 +23,15 @@ class CategorySectionViewController: UIViewController {
         didSet { tableView.reloadData() }
     }
     
+    let localRealm = try! Realm()
+    var tasks: Results<SaveArticle>?
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        print(localRealm.configuration.fileURL!)
+
         configureTableView()
         fetchDate()
     }
@@ -39,43 +44,55 @@ class CategorySectionViewController: UIViewController {
         tableView.rowHeight = 80
         tableView.contentInset = UIEdgeInsets(top: 30, left: 0, bottom: 50, right: 0)
     }
-    
-    func realmDate() {
-        
-        // List Object에 현재 시간과 같이 테이블 짜고
-        // 조건문으로 저장된 시간에서 24시간이 지나면 이전꺼 삭제하고, 새로운 테이블 저장
-        
-    }
-    
-    func fetchDate() {
-        for urlString in sectionURL {
-            let url = "https://bing-news-search1.p.rapidapi.com/news?category=\(urlString)&cc=US&safeSearch=Off&textFormat=Raw"
-            
-            AF.request(url, method: .get, headers: Bundle.categoryHeaders).validate().responseJSON { response in
-                switch response.result {
-                case .success(let value):
-                    
-                    let json = JSON(value)
-                    
-                    for idx in 0..<json["value"].count {
-                        let title = "\(json["value"][idx]["name"])"
-                        let description = "\(json["value"][idx]["description"])"
-                        let postImage = "\(json["value"][idx]["image"]["thumbnail"]["contentUrl"])"
-                        let url = "\(json["value"][idx]["url"])"
-                        let datePublished = "\(json["value"][idx]["datePublished"])"
-                        let providerName = "\(json["value"][idx]["provider"][0]["name"])"
-                        
-                        let articleDate = Article(sectionName: urlString, title: title, description: description, postImage: postImage, url: url, datePublished: datePublished, providerName: providerName)
-                        self.article.append(articleDate)
-                    }
-                    
-                    // realm 데이터에 저장
-                    
-                    
 
-                case .failure(let error):
-                    print(error)
+    func fetchDate() {
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let todayDateString = formatter.string(from: Date())
+        
+        for urlString in sectionURL {
+            if localRealm.objects(SaveArticle.self).filter("saveDate == '\(todayDateString)' AND sectionName == '\(urlString)'").isEmpty {
+                
+                let url = "https://bing-news-search1.p.rapidapi.com/news?category=\(urlString)&cc=US&safeSearch=Off&textFormat=Raw"
+                
+                AF.request(url, method: .get, headers: Bundle.categoryHeaders).validate().responseJSON { response in
+                    switch response.result {
+                    case .success(let value):
+                        
+                        let json = JSON(value)
+                        var tempArticle: [ArticleModel] = []
+                        
+                        for idx in 0..<json["value"].count {
+                            let title = "\(json["value"][idx]["name"])"
+                            let description = "\(json["value"][idx]["description"])"
+                            let postImage = "\(json["value"][idx]["image"]["thumbnail"]["contentUrl"])"
+                            let url = "\(json["value"][idx]["url"])"
+                            let datePublished = "\(json["value"][idx]["datePublished"])"
+                            let providerName = "\(json["value"][idx]["provider"][0]["name"])"
+                            
+                            let articles = ArticleModel(sectionName: urlString, title: title, contents: description, postImage: postImage, url: url, datePublished: datePublished, providerName: providerName)
+                            tempArticle.append(articles)
+                        }
+                        
+                        try! self.localRealm.write {
+                            let saveArticle: SaveArticle = .init(sectionName: urlString, saveDate: todayDateString, articleModels: tempArticle)
+                            self.localRealm.add(saveArticle)
+                        }
+                        
+                        DispatchQueue.main.async {
+                            self.tasks = self.localRealm.objects(SaveArticle.self).filter("saveDate == '\(todayDateString)'")
+                            self.tableView.reloadData()
+                        }
+                        
+                    case .failure(let error):
+                        print(error)
+                    }
                 }
+                
+            } else {
+                tasks = localRealm.objects(SaveArticle.self).filter("saveDate == '\(todayDateString)'")
+                tableView.reloadData()
             }
         }
         
@@ -84,12 +101,11 @@ class CategorySectionViewController: UIViewController {
     // MARK: - Action
     
     @objc func handleSeeMore(button: UIButton) {
-        print("더보기", button.tag)
         let sb = UIStoryboard(name: "SeeMorePage", bundle: Bundle.main)
         let vc = sb.instantiateViewController(withIdentifier: "SeeMorePageViewController") as! SeeMorePageViewController
         
-        let sectionData = article.filter{$0.sectionName == sectionURL[button.tag]}
-        vc.article = sectionData
+        let sectionData = tasks?.filter("sectionName == %@", sectionURL[button.tag]).first?.articleModels
+        vc.article = sectionData ?? List<ArticleModel>()
         vc.sectionTitle = sectionName[button.tag]
 
         navigationController?.pushViewController(vc, animated: true)
@@ -122,21 +138,24 @@ extension CategorySectionViewController: UITableViewDataSource, UITableViewDeleg
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (article.filter{ $0.sectionName == sectionURL[section] }.count)/4
+        let cnt = tasks?.filter("sectionName == %@", sectionURL[section]).first?.articleModels.count
+        return (cnt ?? 0)/4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CategoryTableViewCell.identifier, for: indexPath) as! CategoryTableViewCell
-        let row = article.filter{$0.sectionName == sectionURL[indexPath.section]}[indexPath.row]
-        cell.article = row
+        
+        guard let row = tasks?.filter("sectionName == %@", sectionURL[indexPath.section]).first?.articleModels[indexPath.row] else { return UITableViewCell() }
+        cell.configure(row)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let sb = UIStoryboard(name: "ArticleBody", bundle: Bundle.main)
         let vc = sb.instantiateViewController(withIdentifier: "ArticleBodyViewController") as! ArticleBodyViewController
-        let row = article.filter{$0.sectionName == sectionURL[indexPath.section]}[indexPath.row]
+        let row = tasks?.filter("sectionName == %@", sectionURL[indexPath.section]).first?.articleModels[indexPath.row]
         vc.article = row
+        
         navigationController?.pushViewController(vc, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
