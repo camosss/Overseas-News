@@ -28,6 +28,7 @@ struct Search {
 
 
 struct Article {
+    var sectionName: String
     let title: String
     let description: String
     let postImage: String

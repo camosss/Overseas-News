@@ -27,12 +27,7 @@ class CategorySectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        
-//        for idx in sectionURL {
-//            fetchDate(urlString: idx)
-//        }
-
-//        fetchDate()
+        fetchDate()
     }
     
     // MARK: - Helper
@@ -52,7 +47,6 @@ class CategorySectionViewController: UIViewController {
     }
     
     func fetchDate() {
-        
         for urlString in sectionURL {
             let url = "https://bing-news-search1.p.rapidapi.com/news?category=\(urlString)&cc=US&safeSearch=Off&textFormat=Raw"
             
@@ -61,7 +55,6 @@ class CategorySectionViewController: UIViewController {
                 case .success(let value):
                     
                     let json = JSON(value)
-                    var tmp = [Article]()
                     
                     for idx in 0..<json["value"].count {
                         let title = "\(json["value"][idx]["name"])"
@@ -71,10 +64,9 @@ class CategorySectionViewController: UIViewController {
                         let datePublished = "\(json["value"][idx]["datePublished"])"
                         let providerName = "\(json["value"][idx]["provider"][0]["name"])"
                         
-                        let articleDate = Article(title: title, description: description, postImage: postImage, url: url, datePublished: datePublished, providerName: providerName)
-                        tmp.append(articleDate)
+                        let articleDate = Article(sectionName: urlString, title: title, description: description, postImage: postImage, url: url, datePublished: datePublished, providerName: providerName)
+                        self.article.append(articleDate)
                     }
-                    print(tmp)
                     
                     
                     // realm 데이터에 저장
@@ -93,7 +85,11 @@ class CategorySectionViewController: UIViewController {
         print("더보기", button.tag)
         let sb = UIStoryboard(name: "SeeMorePage", bundle: Bundle.main)
         let vc = sb.instantiateViewController(withIdentifier: "SeeMorePageViewController") as! SeeMorePageViewController
+        
+        let sectionData = article.filter{$0.sectionName == sectionURL[button.tag]}
+        vc.article = sectionData
         vc.sectionTitle = sectionName[button.tag]
+
         navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -124,19 +120,21 @@ extension CategorySectionViewController: UITableViewDataSource, UITableViewDeleg
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return article.count/4
+        return (article.filter{ $0.sectionName == sectionURL[section] }.count)/4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CategoryTableViewCell.identifier, for: indexPath) as! CategoryTableViewCell
-        cell.article = article[indexPath.row]
+        let row = article.filter{$0.sectionName == sectionURL[indexPath.section]}[indexPath.row]
+        cell.article = row
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let sb = UIStoryboard(name: "ArticleBody", bundle: Bundle.main)
         let vc = sb.instantiateViewController(withIdentifier: "ArticleBodyViewController") as! ArticleBodyViewController
-        vc.article = article[indexPath.row]
+        let row = article.filter{$0.sectionName == sectionURL[indexPath.section]}[indexPath.row]
+        vc.article = row
         navigationController?.pushViewController(vc, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }

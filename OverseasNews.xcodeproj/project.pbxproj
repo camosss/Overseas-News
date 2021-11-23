@@ -127,9 +127,9 @@
 			isa = PBXGroup;
 			children = (
 				B4B0963C2744DF0E00240D76 /* Model */,
-				B4B0963E2744DF2900240D76 /* SB */,
+				B4B0963E2744DF2900240D76 /* StoryBoard */,
 				B4B0963B2744DF0A00240D76 /* View */,
-				B4B0963A2744DF0100240D76 /* VC */,
+				B4B0963A2744DF0100240D76 /* ViewController */,
 				B4B096392744DEF700240D76 /* Extension */,
 				B4B0963D2744DF1500240D76 /* App+SceneDelegate */,
 				B40CCD0F2743DE69004C83C4 /* Assets.xcassets */,
@@ -153,7 +153,7 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
-		B4B0963A2744DF0100240D76 /* VC */ = {
+		B4B0963A2744DF0100240D76 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
 				B4B096432744E03500240D76 /* TrendingViewController.swift */,
@@ -164,7 +164,7 @@
 				B4B0968E27454C5E00240D76 /* ArticleBodyViewController.swift */,
 				B4B096CD274664C000240D76 /* SeeMorePageViewController.swift */,
 			);
-			path = VC;
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		B4B0963B2744DF0A00240D76 /* View */ = {
@@ -197,7 +197,7 @@
 			path = "App+SceneDelegate";
 			sourceTree = "<group>";
 		};
-		B4B0963E2744DF2900240D76 /* SB */ = {
+		B4B0963E2744DF2900240D76 /* StoryBoard */ = {
 			isa = PBXGroup;
 			children = (
 				B40CCD0C2743DE67004C83C4 /* Main.storyboard */,
@@ -208,7 +208,7 @@
 				B4B0969027454C8A00240D76 /* ArticleBody.storyboard */,
 				B4B096C92746649D00240D76 /* SeeMorePage.storyboard */,
 			);
-			path = SB;
+			path = StoryBoard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
