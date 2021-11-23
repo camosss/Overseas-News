@@ -19,10 +19,6 @@ class CategorySectionViewController: UIViewController {
     var sectionURL = [String]()
     var sectionName = [String]()
     
-    private var article = [Article]() {
-        didSet { tableView.reloadData() }
-    }
-    
     let localRealm = try! Realm()
     var tasks: Results<SaveArticle>?
     
@@ -46,10 +42,7 @@ class CategorySectionViewController: UIViewController {
     }
 
     func fetchDate() {
-        
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        let todayDateString = formatter.string(from: Date())
+        let todayDateString = DateFormatter.currentFormatter.string(from: Date())
         
         for urlString in sectionURL {
             if localRealm.objects(SaveArticle.self).filter("saveDate == '\(todayDateString)' AND sectionName == '\(urlString)'").isEmpty {

@@ -7,6 +7,7 @@
 
 import UIKit
 import Network
+import RealmSwift
 import SnapKit
 import Toast
 import Alamofire
@@ -25,9 +26,12 @@ class TrendingViewController: UIViewController {
     var slideUpView = UIView()
     let slideUpViewHeight: CGFloat = 400
     
-    private var trendingTopic = [TrendingTopic]() {
-        didSet { collectionView.reloadData() }
-    }
+    let localRealm = try! Realm()
+    var tasks: Results<SaveTrending>?
+    
+    let todayDateString = DateFormatter.currentFormatter.string(from: Date())
+    
+    // MARK: - SlideView Properties
     
     private let collectionView: UICollectionView = {
         let layout = CHTCollectionViewWaterfallLayout()
@@ -88,10 +92,12 @@ class TrendingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        print(localRealm.configuration.fileURL!)
+
         handleNetwork()
         configureLeftTitle(title: "Trending Topic")
         configureSlideView()
-//        fetchTrendingTopicData()
+        fetchTrendingTopicData()
         
         view.addSubview(collectionView)
         collectionView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 50, right: 0)
@@ -147,28 +153,46 @@ class TrendingViewController: UIViewController {
     }
     
     func fetchTrendingTopicData() {
-        let url = "https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/search/TrendingNewsAPI?pageNumber=1&pageSize=10&withThumbnails=false&location=us"
-        
-        AF.request(url, method: .get, headers: Bundle.trendingHeaders).validate().responseJSON { response in
-            switch response.result {
-            case .success(let value):
-                
-                let json = JSON(value)
-                
-                for idx in 0..<json["value"].count {
-                    let title = "\(json["value"][idx]["title"])"
-                    let snippet = "\(json["value"][idx]["snippet"])"
-                    let postImage = "\(json["value"][idx]["image"]["url"])"
-                    let url = "\(json["value"][idx]["url"])"
-                    let provider = "\(json["value"][idx]["provider"]["name"])"
-                    let datePublished = "\(json["value"][idx]["datePublished"])"
+        if localRealm.objects(SaveTrending.self).filter("saveDate == '\(todayDateString)'").isEmpty {
+            let url = "https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/search/TrendingNewsAPI?pageNumber=1&pageSize=10&withThumbnails=false&location=us"
+            
+            AF.request(url, method: .get, headers: Bundle.trendingHeaders).validate().responseJSON { response in
+                switch response.result {
+                case .success(let value):
                     
-                    self.trendingTopic.append(TrendingTopic(title: title, snippet: snippet, postImage: postImage, url: url, provider: provider, datePublished: datePublished))
-                }
+                    let json = JSON(value)
+                    var tempTrendingTopic: [TrendingModel] = []
+                    
+                    for idx in 0..<json["value"].count {
+                        let title = "\(json["value"][idx]["title"])"
+                        let snippet = "\(json["value"][idx]["snippet"])"
+                        let postImage = "\(json["value"][idx]["image"]["url"])"
+                        let url = "\(json["value"][idx]["url"])"
+                        let provider = "\(json["value"][idx]["provider"]["name"])"
+                        let datePublished = "\(json["value"][idx]["datePublished"])"
+                                                
+                        let trendingTopic = TrendingModel(title: title, snippet: snippet, postImage: postImage, url: url, datePublished: datePublished, provider: provider)
+                        tempTrendingTopic.append(trendingTopic)
+                    }
 
-            case .failure(let error):
-                print(error)
+                    try! self.localRealm.write {
+                        let saveTrending: SaveTrending = .init(saveDate: self.todayDateString, trendingModels: tempTrendingTopic)
+                        self.localRealm.add(saveTrending)
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.tasks = self.localRealm.objects(SaveTrending.self).filter("saveDate == '\(self.todayDateString)'")
+                        self.collectionView.reloadData()
+                    }
+                    
+                    
+                case .failure(let error):
+                    print(error)
+                }
             }
+        } else {
+            tasks = localRealm.objects(SaveTrending.self).filter("saveDate == '\(todayDateString)'")
+            collectionView.reloadData()
         }
     }
     
@@ -209,14 +233,13 @@ class TrendingViewController: UIViewController {
 
 extension TrendingViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return trendingTopic.count
+        return tasks?.filter("saveDate == %@", todayDateString).first?.trendingModels.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TrendingCollectionViewCell.identifier, for: indexPath) as! TrendingCollectionViewCell
-  
-        let trendingTopic = trendingTopic[indexPath.row]
-        cell.trendingTopic = trendingTopic
+        guard let row = tasks?.filter("saveDate == %@", todayDateString).first?.trendingModels[indexPath.row] else { return UICollectionViewCell() }
+        cell.configure(row)
         return cell
     }
     
@@ -237,9 +260,9 @@ extension TrendingViewController: UICollectionViewDataSource, UICollectionViewDe
         slideUpView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         slideUpView.frame = CGRect(x: 0, y: screenSize.height,
                                    width: screenSize.width, height: slideUpViewHeight)
-
-        let trendingTopic = trendingTopic[indexPath.row]
-
+        
+        let row = tasks?.filter("saveDate == %@", todayDateString).first?.trendingModels[indexPath.row]
+        
         UIView.animate(withDuration: 0.5,
                        delay: 0, usingSpringWithDamping: 1.0,
                        initialSpringVelocity: 1.0,
@@ -252,11 +275,11 @@ extension TrendingViewController: UICollectionViewDataSource, UICollectionViewDe
                                             width: screenSize.width,
                                             height: self.slideUpViewHeight)
             
-            self.urlString = trendingTopic.url
-            self.providerLabel.text = trendingTopic.provider
-            self.titleLabel.text = trendingTopic.title
-            self.snippetLabel.text = trendingTopic.snippet
-            self.dateLabel.text = trendingTopic.datePublished
+            self.urlString = row?.url
+            self.providerLabel.text = row?.provider
+            self.titleLabel.text = row?.title
+            self.snippetLabel.text = row?.snippet
+            self.dateLabel.text = row?.datePublished
             
         }, completion: nil)
         

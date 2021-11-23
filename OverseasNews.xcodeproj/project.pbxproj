@@ -21,6 +21,7 @@
 		B4216C17274B67D60028DBBF /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4216C16274B67D60028DBBF /* CategoryTableViewCell.swift */; };
 		B421F662274BF8E200FD02B0 /* Jsongmyung-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B421F661274BF8E200FD02B0 /* Jsongmyung-Regular.otf */; };
 		B421F664274BFC5600FD02B0 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B421F663274BFC5600FD02B0 /* UIFont+Extension.swift */; };
+		B421F666274D457500FD02B0 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B421F665274D457500FD02B0 /* Date+Extension.swift */; };
 		B4B096442744E03500240D76 /* TrendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B096432744E03500240D76 /* TrendingViewController.swift */; };
 		B4B096462744E03B00240D76 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B096452744E03B00240D76 /* SearchViewController.swift */; };
 		B4B096482744E04400240D76 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B096472744E04400240D76 /* CategoryViewController.swift */; };
@@ -64,6 +65,7 @@
 		B4216C16274B67D60028DBBF /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		B421F661274BF8E200FD02B0 /* Jsongmyung-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Jsongmyung-Regular.otf"; sourceTree = "<group>"; };
 		B421F663274BFC5600FD02B0 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
+		B421F665274D457500FD02B0 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		B4B096432744E03500240D76 /* TrendingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingViewController.swift; sourceTree = "<group>"; };
 		B4B096452744E03B00240D76 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		B4B096472744E04400240D76 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				B4216C12274A9C7A0028DBBF /* HighlightLabel+Extension.swift */,
 				B421F663274BFC5600FD02B0 /* UIFont+Extension.swift */,
 				B421F661274BF8E200FD02B0 /* Jsongmyung-Regular.otf */,
+				B421F665274D457500FD02B0 /* Date+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B421F664274BFC5600FD02B0 /* UIFont+Extension.swift in Sources */,
+				B421F666274D457500FD02B0 /* Date+Extension.swift in Sources */,
 				B4B096482744E04400240D76 /* CategoryViewController.swift in Sources */,
 				B4B096E82746905E00240D76 /* KF+Extension.swift in Sources */,
 				B40CCD072743DE67004C83C4 /* AppDelegate.swift in Sources */,

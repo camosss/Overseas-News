@@ -8,6 +8,40 @@
 import Foundation
 import RealmSwift
 
+// MARK: - Trending
+
+class TrendingModel: Object {
+    @Persisted var title: String
+    @Persisted var snippet: String
+    @Persisted var postImage: String
+    @Persisted var url: String
+    @Persisted var datePublished: String
+    @Persisted var provider: String
+        
+    convenience init(title: String, snippet: String, postImage: String, url: String, datePublished: String, provider: String) {
+        self.init()
+        self.title = title
+        self.snippet = snippet
+        self.postImage = postImage
+        self.url = url
+        self.datePublished = datePublished
+        self.provider = provider
+    }
+}
+
+class SaveTrending: Object {
+    @Persisted var saveDate: String
+    @Persisted var trendingModels: List<TrendingModel>
+
+    convenience init(saveDate: String, trendingModels: [TrendingModel]) {
+        self.init()
+        self.saveDate = saveDate
+        self.trendingModels.append(objectsIn: trendingModels)
+    }
+}
+
+// MARK: - Category
+
 class ArticleModel: Object {
     @Persisted var sectionName: String
     @Persisted var title: String
