@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 import Alamofire
 import SwiftyJSON
 
@@ -68,8 +69,9 @@ class CategorySectionViewController: UIViewController {
                         self.article.append(articleDate)
                     }
                     
-                    
                     // realm 데이터에 저장
+                    
+                    
 
                 case .failure(let error):
                     print(error)

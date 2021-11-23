@@ -14,11 +14,9 @@ class ArticleBodyViewController: UIViewController {
     var article: Article!
     var search: Search!
 
-    @IBOutlet weak var scrapButton: UIBarButtonItem!
-    
+    @IBOutlet weak var providerName: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var providerName: UILabel!
     @IBOutlet weak var postImage: UIImageView!
     @IBOutlet weak var bodyLabel: UILabel!
     @IBOutlet weak var urlLabel: UILabel!
@@ -69,10 +67,6 @@ class ArticleBodyViewController: UIViewController {
     }
     
     // MARK: - Action
-    
-    @IBAction func handleScrapButton(_ sender: UIBarButtonItem) {
-        print("스크랩")
-    }
     
     @objc func goArticleURL() {
         let urlString = article != nil ? article.url : search.url
