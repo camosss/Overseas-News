@@ -18,7 +18,7 @@
                         <viewLayoutGuide key="safeArea" id="VEk-4W-a4t"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="NO"/>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                         </userDefinedRuntimeAttributes>
                     </view>
                     <navigationItem key="navigationItem" id="vgO-uT-dyO"/>

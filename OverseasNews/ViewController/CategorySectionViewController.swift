@@ -9,6 +9,7 @@ import UIKit
 import RealmSwift
 import Alamofire
 import SwiftyJSON
+import SkeletonView
 
 class CategorySectionViewController: UIViewController {
     
@@ -29,6 +30,13 @@ class CategorySectionViewController: UIViewController {
         print(localRealm.configuration.fileURL!)
 
         configureTableView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tableView.isSkeletonable = true
+        tableView.showAnimatedGradientSkeleton()
+        
         fetchDate()
     }
     
@@ -38,7 +46,14 @@ class CategorySectionViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = 80
-        tableView.contentInset = UIEdgeInsets(top: 30, left: 0, bottom: 50, right: 0)
+        tableView.estimatedRowHeight = 80
+        tableView.contentInset.bottom = 50
+    }
+    
+    func handleHideSkeleton() {
+        self.tableView.stopSkeletonAnimation()
+        self.view.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
+        self.tableView.reloadData()
     }
 
     func fetchDate() {
@@ -75,7 +90,7 @@ class CategorySectionViewController: UIViewController {
                         
                         DispatchQueue.main.async {
                             self.tasks = self.localRealm.objects(SaveArticle.self).filter("saveDate == '\(todayDateString)'")
-                            self.tableView.reloadData()
+                            self.handleHideSkeleton()
                         }
                         
                     case .failure(let error):
@@ -85,7 +100,7 @@ class CategorySectionViewController: UIViewController {
                 
             } else {
                 tasks = localRealm.objects(SaveArticle.self).filter("saveDate == '\(todayDateString)'")
-                tableView.reloadData()
+                handleHideSkeleton()
             }
         }
         
@@ -107,7 +122,7 @@ class CategorySectionViewController: UIViewController {
 
 // MARK: - UITableViewDataSource, UITableViewDelegate
 
-extension CategorySectionViewController: UITableViewDataSource, UITableViewDelegate {
+extension CategorySectionViewController: SkeletonTableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return sectionName.count
     }
@@ -133,6 +148,10 @@ extension CategorySectionViewController: UITableViewDataSource, UITableViewDeleg
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let cnt = tasks?.filter("sectionName == %@", sectionURL[section]).first?.articleModels.count
         return (cnt ?? 0)/4
+    }
+    
+    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return CategoryTableViewCell.identifier
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
