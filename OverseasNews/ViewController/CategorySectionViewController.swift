@@ -21,12 +21,12 @@ class CategorySectionViewController: UIViewController {
     
     let localRealm = try! Realm()
     var tasks: Results<SaveArticle>?
-    
+        
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        print(localRealm.configuration.fileURL!)
+        print(localRealm.configuration.fileURL!)
 
         configureTableView()
         fetchDate()

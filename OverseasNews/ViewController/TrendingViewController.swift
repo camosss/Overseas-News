@@ -24,7 +24,7 @@ class TrendingViewController: UIViewController {
 
     var containerView = UIView()
     var slideUpView = UIView()
-    let slideUpViewHeight: CGFloat = 400
+    let slideUpViewHeight: CGFloat = 450
     
     let localRealm = try! Realm()
     var tasks: Results<SaveTrending>?
@@ -184,7 +184,6 @@ class TrendingViewController: UIViewController {
                         self.tasks = self.localRealm.objects(SaveTrending.self).filter("saveDate == '\(self.todayDateString)'")
                         self.collectionView.reloadData()
                     }
-                    
                     
                 case .failure(let error):
                     print(error)

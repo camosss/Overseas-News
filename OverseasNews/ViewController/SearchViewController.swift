@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import Alamofire
 import SwiftyJSON
+import SkeletonView
 
 class SearchViewController: UIViewController {
     
@@ -41,6 +42,7 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = 100
+        tableView.estimatedRowHeight = 100
         tableView.contentInset.bottom = 50
         
         configureLeftTitle(title: "Search")
@@ -94,6 +96,10 @@ class SearchViewController: UIViewController {
                         
                         DispatchQueue.main.async {
                             self.search = tmp
+                            
+                            self.tableView.stopSkeletonAnimation()
+                            self.view.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
+                            self.tableView.reloadData()
                         }
                     }
 
@@ -107,15 +113,18 @@ class SearchViewController: UIViewController {
 
 // MARK: - UITableViewDataSource, UITableViewDelegate
 
-extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
+extension SearchViewController: SkeletonTableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return search.count
+    }
+    
+    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return SearchTableViewCell.identifier
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.identifier, for: indexPath) as! SearchTableViewCell
         cell.search = search[indexPath.row]
-        cell.titleLabel.highlight(searchText: searchStringText ?? "")
         return cell
     }
     
@@ -158,7 +167,10 @@ extension SearchViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-        fetchData(searchText: searchStringText ?? "")
+        tableView.isSkeletonable = true
+        tableView.showAnimatedGradientSkeleton()
+        
+        fetchData(searchText: self.searchStringText ?? "")
     }
 }
 

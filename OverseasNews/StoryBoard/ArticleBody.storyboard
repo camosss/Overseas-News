@@ -20,7 +20,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cKh-T3-zbF">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="562.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="557.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" text="제공" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DJp-1h-Bhe">
                                                 <rect key="frame" x="20" y="10" width="374" height="17"/>
@@ -66,7 +66,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="654-9b-ibq">
-                                                <rect key="frame" x="15" y="445.5" width="384" height="17"/>
+                                                <rect key="frame" x="15" y="440.5" width="384" height="17"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="url">
                                                         <attributes>
@@ -99,7 +99,7 @@
                                             <constraint firstItem="wki-q1-zTS" firstAttribute="top" secondItem="DJp-1h-Bhe" secondAttribute="bottom" constant="10" id="hmW-qP-8Gf"/>
                                             <constraint firstAttribute="bottom" secondItem="654-9b-ibq" secondAttribute="bottom" constant="100" id="kGo-kU-AKP"/>
                                             <constraint firstItem="pyT-t0-47K" firstAttribute="top" secondItem="wki-q1-zTS" secondAttribute="bottom" constant="5" id="kUY-f8-Mys"/>
-                                            <constraint firstItem="654-9b-ibq" firstAttribute="top" secondItem="AYP-Du-Kis" secondAttribute="bottom" constant="10" id="kqW-tR-EF9"/>
+                                            <constraint firstItem="654-9b-ibq" firstAttribute="top" secondItem="AYP-Du-Kis" secondAttribute="bottom" constant="5" id="kqW-tR-EF9"/>
                                             <constraint firstItem="DJp-1h-Bhe" firstAttribute="top" secondItem="cKh-T3-zbF" secondAttribute="top" constant="10" id="rEE-qJ-JXN"/>
                                             <constraint firstItem="o2Q-XV-Ubw" firstAttribute="top" secondItem="igQ-a4-6hY" secondAttribute="bottom" constant="20" id="veR-H6-NIh"/>
                                             <constraint firstItem="AYP-Du-Kis" firstAttribute="leading" secondItem="cKh-T3-zbF" secondAttribute="leading" constant="15" id="wKl-2M-res"/>

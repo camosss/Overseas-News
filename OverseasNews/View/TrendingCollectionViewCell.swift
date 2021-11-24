@@ -22,7 +22,7 @@ class TrendingCollectionViewCell: UICollectionViewCell {
     
     let backgroundImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .black.withAlphaComponent(0.1)
+        imageView.backgroundColor = .black.withAlphaComponent(0.2)
         return imageView
     }()
     
