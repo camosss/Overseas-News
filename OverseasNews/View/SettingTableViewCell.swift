@@ -1,21 +1,19 @@
 //
-//  ScrapTableViewCell.swift
+//  SettingTableViewCell.swift
 //  OverseasNews
 //
-//  Created by 강호성 on 2021/11/17.
+//  Created by 강호성 on 2021/11/25.
 //
 
 import UIKit
 
-class ScrapTableViewCell: UITableViewCell {
+class SettingTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
-    static let identifier = "ScrapTableViewCell"
+    static let identifier = "SettingTableViewCell"
     
-    @IBOutlet weak var postImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var providerLabel: UILabel!
     
     // MARK: - Lifecycle
 

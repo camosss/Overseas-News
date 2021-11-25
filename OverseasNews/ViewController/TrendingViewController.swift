@@ -126,7 +126,7 @@ class TrendingViewController: UIViewController {
             } else {
                 print("network disconnected")
                 DispatchQueue.main.async {
-                    self.view.makeToast("Network Disconnected ‼️")
+                    self.view.makeToast("네트워크 연결이 불안정합니다 ‼️")
                 }
             }
         }
