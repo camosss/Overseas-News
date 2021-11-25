@@ -50,7 +50,7 @@ class CategoryViewController: TabmanViewController {
         
         ctBar.buttons.customize { button in
             button.tintColor = .lightGray
-            button.selectedTintColor = .black
+            button.selectedTintColor = .label
             button.font = UIFont.systemFont(ofSize: 14)
             button.selectedFont = UIFont.systemFont(ofSize: 16, weight: .medium)
         }

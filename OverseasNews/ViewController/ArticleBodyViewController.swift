@@ -37,7 +37,7 @@ class ArticleBodyViewController: UIViewController {
     
     func configureArticle() {
         titleLabel.text = article.title
-        dateLabel.text = article.datePublished
+        dateLabel.text = article.datePublished.toString()
         providerName.text = article.providerName
         bodyLabel.text = "\(article.contents)..."
         

@@ -71,7 +71,7 @@ class TrendingViewController: UIViewController {
         let label = UILabel()
         label.textColor = .lightGray
         label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.systemFont(ofSize: 13)
         return label
     }()
     
@@ -79,7 +79,7 @@ class TrendingViewController: UIViewController {
         let button = UIButton()
         button.setTitle("Go To Article", for: .normal)
         button.setTitleColor(.label, for: .normal)
-        button.backgroundColor = .systemGroupedBackground
+        button.backgroundColor = .systemBackground
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         button.layer.cornerRadius = 10
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
@@ -157,7 +157,7 @@ class TrendingViewController: UIViewController {
         providerLabel.text = row?.provider
         titleLabel.text = row?.title
         snippetLabel.text = row?.snippet
-        dateLabel.text = row?.datePublished
+        dateLabel.text = row?.datePublished.toString()
     }
     
     func fetchTrendingTopicData() {
@@ -179,7 +179,7 @@ class TrendingViewController: UIViewController {
                         let provider = "\(json["value"][idx]["provider"]["name"])"
                         let datePublished = "\(json["value"][idx]["datePublished"])"
                                                 
-                        let trendingTopic = TrendingModel(title: title, snippet: snippet, postImage: postImage, url: url, datePublished: datePublished, provider: provider)
+                        let trendingTopic = TrendingModel(title: title, snippet: snippet, postImage: postImage, url: url, datePublished: datePublished.toDate() ?? Date(), provider: provider)
                         tempTrendingTopic.append(trendingTopic)
                     }
 
@@ -262,7 +262,7 @@ extension TrendingViewController: UICollectionViewDataSource, UICollectionViewDe
 
         let screenSize = UIScreen.main.bounds.size
         view.addSubview(slideUpView)
-        slideUpView.backgroundColor = .systemBackground
+        slideUpView.backgroundColor = .systemGray6
         slideUpView.layer.cornerRadius = 15
         slideUpView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         slideUpView.frame = CGRect(x: 0, y: screenSize.height,

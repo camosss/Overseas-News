@@ -74,8 +74,9 @@ class CategorySectionViewController: UIViewController {
                             let datePublished = "\(json["value"][idx]["datePublished"])"
                             let providerName = "\(json["value"][idx]["provider"][0]["name"])"
                             
-                            let articles = ArticleModel(sectionName: urlString, title: title, contents: description, postImage: postImage, url: url, datePublished: datePublished, providerName: providerName)
+                            let articles = ArticleModel(sectionName: urlString, title: title, contents: description, postImage: postImage, url: url, datePublished: datePublished.toDate() ?? Date(), providerName: providerName)
                             tempArticle.append(articles)
+                            
                         }
                         
                         try! self.localRealm.write {
