@@ -92,7 +92,7 @@ class TrendingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        print(localRealm.configuration.fileURL!)
+        print(localRealm.configuration.fileURL!)
 
         handleNetwork()
         configureLeftTitle(title: "Trending Topic")
@@ -150,6 +150,14 @@ class TrendingViewController: UIViewController {
             make.top.equalTo(labelStack.snp.bottom).offset(20)
             make.leading.trailing.equalTo(labelStack)
         }
+    }
+    
+    func configureSlideViewUI(row: TrendingModel?) {
+        urlString = row?.url
+        providerLabel.text = row?.provider
+        titleLabel.text = row?.title
+        snippetLabel.text = row?.snippet
+        dateLabel.text = row?.datePublished
     }
     
     func fetchTrendingTopicData() {
@@ -267,19 +275,13 @@ extension TrendingViewController: UICollectionViewDataSource, UICollectionViewDe
                        initialSpringVelocity: 1.0,
                        options: .curveEaseInOut,
                        animations: {
+            self.configureSlideViewUI(row: row)
             self.tabBarController?.tabBar.isHidden = true
             self.containerView.alpha = 0.8
             self.slideUpView.frame = CGRect(x: 0,
                                             y: screenSize.height - self.slideUpViewHeight,
                                             width: screenSize.width,
                                             height: self.slideUpViewHeight)
-            
-            self.urlString = row?.url
-            self.providerLabel.text = row?.provider
-            self.titleLabel.text = row?.title
-            self.snippetLabel.text = row?.snippet
-            self.dateLabel.text = row?.datePublished
-            
         }, completion: nil)
         
     }

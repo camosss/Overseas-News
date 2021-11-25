@@ -27,13 +27,8 @@ class CategorySectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(localRealm.configuration.fileURL!)
-
         configureTableView()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+        
         tableView.isSkeletonable = true
         tableView.showAnimatedGradientSkeleton()
         

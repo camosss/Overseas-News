@@ -40,7 +40,12 @@ class ArticleBodyViewController: UIViewController {
         dateLabel.text = article.datePublished
         providerName.text = article.providerName
         bodyLabel.text = "\(article.contents)..."
-        postImage.setImage(imageUrl: article.postImage)
+        
+        if article.postImage == "null" {
+            postImage.image = UIImage(named: "icon")
+        } else {
+            postImage.setImage(imageUrl: article.postImage)
+        }
 
         urlLabel.text = article.url
         urlLabel.textColor = .systemOrange
@@ -48,7 +53,6 @@ class ArticleBodyViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(goArticleURL))
         tapGesture.numberOfTapsRequired = 1
         urlLabel.addGestureRecognizer(tapGesture)
-
     }
     
     func configureSearch() {

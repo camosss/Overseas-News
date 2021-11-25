@@ -34,7 +34,12 @@ class CategoryTableViewCell: UITableViewCell {
         titleLabel.text = articleModel.title
         providerLabel.text = articleModel.providerName
         
-        postImageView.setImage(imageUrl: articleModel.postImage)
+        if articleModel.postImage == "null" {
+            postImageView.image = UIImage(named: "icon")
+        } else {
+            postImageView.setImage(imageUrl: articleModel.postImage)
+        }
+        
         postImageView.clipsToBounds = true
         postImageView.layer.cornerRadius = 10
     }

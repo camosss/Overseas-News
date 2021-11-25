@@ -70,7 +70,11 @@ class TrendingCollectionViewCell: UICollectionViewCell {
     // MARK: - Helper
     
     func configure(_ trendingModel: TrendingModel) {
-        imageView.setImage(imageUrl: trendingModel.postImage)
+        if trendingModel.postImage == "" {
+            imageView.image = UIImage(named: "icon")
+        } else {
+            imageView.setImage(imageUrl: trendingModel.postImage)
+        }
         titleLabel.text = trendingModel.title
         titleLabel.numberOfLines = 0
     }
