@@ -38,6 +38,11 @@ class TrendingCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        self.isSkeletonable = true
+        self.imageView.isSkeletonable = true
+        self.backgroundImageView.isSkeletonable = true
+        self.titleLabel.isSkeletonable = true
+        
         contentView.clipsToBounds = true
         contentView.addSubview(imageView)
         contentView.addSubview(backgroundImageView)

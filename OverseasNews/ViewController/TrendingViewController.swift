@@ -13,6 +13,7 @@ import Toast
 import Alamofire
 import SwiftyJSON
 import CHTCollectionViewWaterfallLayout
+import SkeletonView
 
 class TrendingViewController: UIViewController {
     
@@ -97,12 +98,11 @@ class TrendingViewController: UIViewController {
         handleNetwork()
         configureLeftTitle(title: "Trending Topic")
         configureSlideView()
-        fetchTrendingTopicData()
+        configureCollectionView()
         
-        view.addSubview(collectionView)
-        collectionView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 50, right: 0)
-        collectionView.dataSource = self
-        collectionView.delegate = self
+        collectionView.isSkeletonable = true
+        collectionView.showAnimatedGradientSkeleton()
+        fetchTrendingTopicData()
     }
     
     override func viewDidLayoutSubviews() {
@@ -111,6 +111,13 @@ class TrendingViewController: UIViewController {
     }
     
     // MARK: - Helper
+    
+    func configureCollectionView() {
+        view.addSubview(collectionView)
+        collectionView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 50, right: 0)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+    }
     
     func handleNetwork() {
         networkMoniter.pathUpdateHandler = { path in
@@ -160,6 +167,12 @@ class TrendingViewController: UIViewController {
         dateLabel.text = row?.datePublished.toString()
     }
     
+    func handleHideSkeleton() {
+        collectionView.stopSkeletonAnimation()
+        collectionView.hideSkeleton(reloadDataAfter: true)
+        collectionView.reloadData()
+    }
+    
     func fetchTrendingTopicData() {
         if localRealm.objects(SaveTrending.self).filter("saveDate == '\(todayDateString)'").isEmpty {
             let url = "https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/search/TrendingNewsAPI?pageNumber=1&pageSize=10&withThumbnails=false&location=us"
@@ -190,7 +203,7 @@ class TrendingViewController: UIViewController {
                     
                     DispatchQueue.main.async {
                         self.tasks = self.localRealm.objects(SaveTrending.self).filter("saveDate == '\(self.todayDateString)'")
-                        self.collectionView.reloadData()
+                        self.handleHideSkeleton()
                     }
                     
                 case .failure(let error):
@@ -199,7 +212,7 @@ class TrendingViewController: UIViewController {
             }
         } else {
             tasks = localRealm.objects(SaveTrending.self).filter("saveDate == '\(todayDateString)'")
-            collectionView.reloadData()
+            handleHideSkeleton()
         }
     }
     
@@ -238,9 +251,17 @@ class TrendingViewController: UIViewController {
 
 // MARK: - UICollectionViewDataSource, UICollectionViewDelegate
 
-extension TrendingViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension TrendingViewController: SkeletonCollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return tasks?.filter("saveDate == %@", todayDateString).first?.trendingModels.count ?? 0
+    }
+    
+    func collectionSkeletonView(_ skeletonView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return tasks?.filter("saveDate == %@", todayDateString).first?.trendingModels.count ?? 0
+    }
+    
+    func collectionSkeletonView(_ skeletonView: UICollectionView, cellIdentifierForItemAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return TrendingCollectionViewCell.identifier
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

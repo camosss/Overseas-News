@@ -46,9 +46,9 @@ class CategorySectionViewController: UIViewController {
     }
     
     func handleHideSkeleton() {
-        self.tableView.stopSkeletonAnimation()
-        self.view.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
-        self.tableView.reloadData()
+        tableView.stopSkeletonAnimation()
+        view.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
+        tableView.reloadData()
     }
 
     func fetchDate() {

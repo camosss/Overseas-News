@@ -14,7 +14,7 @@
 		B4216C05274A241F0028DBBF /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = B4216C04274A241F0028DBBF /* Realm */; };
 		B4216C07274A241F0028DBBF /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B4216C06274A241F0028DBBF /* RealmSwift */; };
 		B4216C0A274A2A570028DBBF /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4216C09274A2A570028DBBF /* RealmModel.swift */; };
-		B4216C0E274A60050028DBBF /* APIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4216C0D274A60050028DBBF /* APIModel.swift */; };
+		B4216C0E274A60050028DBBF /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4216C0D274A60050028DBBF /* SearchModel.swift */; };
 		B4216C11274A7DAD0028DBBF /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = B4216C10274A7DAD0028DBBF /* Toast */; };
 		B4216C17274B67D60028DBBF /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4216C16274B67D60028DBBF /* CategoryTableViewCell.swift */; };
 		B421F662274BF8E200FD02B0 /* Jsongmyung-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B421F661274BF8E200FD02B0 /* Jsongmyung-Regular.otf */; };
@@ -26,6 +26,7 @@
 		B421F689274F8E4C00FD02B0 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B421F688274F8E4C00FD02B0 /* SettingTableViewCell.swift */; };
 		B421F68D274FCE8200FD02B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B421F68C274FCE8200FD02B0 /* Assets.xcassets */; };
 		B421F692274FDD9B00FD02B0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B421F694274FDD9B00FD02B0 /* InfoPlist.strings */; };
+		B421F697274FE15600FD02B0 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B421F696274FE15600FD02B0 /* CategoryModel.swift */; };
 		B4B096442744E03500240D76 /* TrendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B096432744E03500240D76 /* TrendingViewController.swift */; };
 		B4B096462744E03B00240D76 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B096452744E03B00240D76 /* SearchViewController.swift */; };
 		B4B096482744E04400240D76 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B096472744E04400240D76 /* CategoryViewController.swift */; };
@@ -62,7 +63,7 @@
 		B40CCD122743DE69004C83C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B40CCD142743DE69004C83C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B4216C09274A2A570028DBBF /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
-		B4216C0D274A60050028DBBF /* APIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIModel.swift; sourceTree = "<group>"; };
+		B4216C0D274A60050028DBBF /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
 		B4216C16274B67D60028DBBF /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		B421F661274BF8E200FD02B0 /* Jsongmyung-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Jsongmyung-Regular.otf"; sourceTree = "<group>"; };
 		B421F663274BFC5600FD02B0 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
@@ -75,6 +76,7 @@
 		B421F68F274FDD5600FD02B0 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		B421F693274FDD9B00FD02B0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B421F695274FDD9D00FD02B0 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		B421F696274FE15600FD02B0 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
 		B4B096432744E03500240D76 /* TrendingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingViewController.swift; sourceTree = "<group>"; };
 		B4B096452744E03B00240D76 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		B4B096472744E04400240D76 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
@@ -212,7 +214,8 @@
 			isa = PBXGroup;
 			children = (
 				B4216C09274A2A570028DBBF /* RealmModel.swift */,
-				B4216C0D274A60050028DBBF /* APIModel.swift */,
+				B4216C0D274A60050028DBBF /* SearchModel.swift */,
+				B421F696274FE15600FD02B0 /* CategoryModel.swift */,
 				B421F67E274F81AD00FD02B0 /* SettingOption.swift */,
 			);
 			path = Model;
@@ -358,12 +361,13 @@
 				B421F681274F892200FD02B0 /* LicenseViewController.swift in Sources */,
 				B4B0968F27454C5E00240D76 /* ArticleBodyViewController.swift in Sources */,
 				B40CCD092743DE67004C83C4 /* SceneDelegate.swift in Sources */,
+				B421F697274FE15600FD02B0 /* CategoryModel.swift in Sources */,
 				B4216C17274B67D60028DBBF /* CategoryTableViewCell.swift in Sources */,
 				B4B0965E2745014D00240D76 /* TrendingCollectionViewCell.swift in Sources */,
 				B4B0965C2744F35900240D76 /* SearchTableViewCell.swift in Sources */,
 				B4B0969F2746330100240D76 /* CategorySectionViewController.swift in Sources */,
 				B4216C0A274A2A570028DBBF /* RealmModel.swift in Sources */,
-				B4216C0E274A60050028DBBF /* APIModel.swift in Sources */,
+				B4216C0E274A60050028DBBF /* SearchModel.swift in Sources */,
 				B4B096F42747C06900240D76 /* EmptySearchCollectionViewCell.swift in Sources */,
 				B4B096462744E03B00240D76 /* SearchViewController.swift in Sources */,
 				B4B096CE274664C000240D76 /* SeeMorePageViewController.swift in Sources */,
