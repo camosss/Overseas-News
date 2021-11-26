@@ -33,6 +33,8 @@ class SearchTableViewCell: UITableViewCell {
 
     }
     
+    // MARK: - Helper
+    
     func configure() {
         guard let search = search else { return }
         

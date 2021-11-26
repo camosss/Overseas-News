@@ -73,7 +73,5 @@ extension LicenseViewController: UITableViewDataSource, UITableViewDelegate {
         } else {
             goLicenseURL(url: "https://github.com/scalessec/Toast-Swift/blob/master/LICENSE")
         }
-        
-        
     }
 }

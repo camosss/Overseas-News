@@ -19,12 +19,13 @@ class ArticleBodyViewController: UIViewController {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var postImage: UIImageView!
     @IBOutlet weak var bodyLabel: UILabel!
-    @IBOutlet weak var urlLabel: UILabel!
+    @IBOutlet weak var urlButton: UIButton!
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureURLButton()
         
         if article != nil {
             configureArticle()
@@ -34,6 +35,15 @@ class ArticleBodyViewController: UIViewController {
     }
     
     // MARK: - Helper
+    
+    func configureURLButton() {
+        urlButton.setTitle("Go To Article", for: .normal)
+        urlButton.setTitleColor(.label, for: .normal)
+        urlButton.backgroundColor = .systemGray6
+        urlButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        urlButton.layer.cornerRadius = 10
+        urlButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
+    }
     
     func configureArticle() {
         titleLabel.text = article.title
@@ -46,13 +56,6 @@ class ArticleBodyViewController: UIViewController {
         } else {
             postImage.setImage(imageUrl: article.postImage)
         }
-
-        urlLabel.text = article.url
-        urlLabel.textColor = .systemOrange
-        urlLabel.isUserInteractionEnabled = true
-        let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(goArticleURL))
-        tapGesture.numberOfTapsRequired = 1
-        urlLabel.addGestureRecognizer(tapGesture)
     }
     
     func configureSearch() {
@@ -61,18 +64,11 @@ class ArticleBodyViewController: UIViewController {
         providerName.text = search.providerName == "null" ? "" : search.providerName
         bodyLabel.text = search.description == "null" ? "" : "\(search.description)..."
         postImage.setImage(imageUrl: search.postImage)
-
-        urlLabel.text = search.url == "null" ? "" : search.url
-        urlLabel.textColor = .systemOrange
-        urlLabel.isUserInteractionEnabled = true
-        let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(goArticleURL))
-        tapGesture.numberOfTapsRequired = 1
-        urlLabel.addGestureRecognizer(tapGesture)
     }
     
     // MARK: - Action
     
-    @objc func goArticleURL() {
+    @IBAction func handleGoURL(_ sender: UIButton) {
         let urlString = article != nil ? article.url : search.url
         guard let url = URL(string: urlString), UIApplication.shared.canOpenURL(url) else { return }
         UIApplication.shared.open(url, options: [:], completionHandler: nil)

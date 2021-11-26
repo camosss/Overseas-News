@@ -80,7 +80,7 @@ extension SettingViewController: MFMailComposeViewControllerDelegate {
         case .sent:
             showToastAlert(message: "피드백을 정상적으로 보냈습니다 😆")
         case .failed:
-            showToastAlert(message: "피드백 보내기를 실패했습니다..😭")
+            showToastAlert(message: "피드백 보내기를 실패했습니다 😭")
         @unknown default:
             showToastAlert(message: "😨")
         }
@@ -133,8 +133,5 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
             let vc = sb.instantiateViewController(withIdentifier: "LicenseViewController") as! LicenseViewController
             navigationController?.pushViewController(vc, animated: true)
         }
-        
-
-        
     }
 }
