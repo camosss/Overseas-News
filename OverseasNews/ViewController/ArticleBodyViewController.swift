@@ -63,7 +63,12 @@ class ArticleBodyViewController: UIViewController {
         dateLabel.text = search.datePublished == "null" ? "" : search.datePublished
         providerName.text = search.providerName == "null" ? "" : search.providerName
         bodyLabel.text = search.description == "null" ? "" : "\(search.description)..."
-        postImage.setImage(imageUrl: search.postImage)
+        
+        if search.postImage == "null" {
+            postImage.image = UIImage(named: "icon")
+        } else {
+            postImage.setImage(imageUrl: search.postImage)
+        }
     }
     
     // MARK: - Action

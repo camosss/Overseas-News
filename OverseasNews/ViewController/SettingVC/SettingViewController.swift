@@ -122,11 +122,9 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
         
         let row = indexPath.row
         
-        if row == 0 { // 공지사항
-            
-        } else if row == 1 { // 피드백 보내기
+        if row == 0 { // 피드백 보내기
             showMailComposer()
-        } else if row == 2 { // 앱스토어 연결
+        } else if row == 1 { // 앱스토어 연결
             goAppStoreURL(url: "itms-apps://itunes.apple.com/app/apple-store/id1596846397")
         } else { // 라이선스
             let sb = UIStoryboard(name: "Setting", bundle: Bundle.main)

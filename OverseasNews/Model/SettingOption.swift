@@ -8,15 +8,13 @@
 import Foundation
 
 enum SettingOption: Int, CaseIterable {
-    case notice
     case sendfeedback
     case appStore
     case license
     
     var description: String {
         switch self {
-        case .notice: return "Notice"
-        case .sendfeedback: return "Send feedback"
+        case .sendfeedback: return "Send Feedback"
         case .appStore: return "Leave App Store Ratings and Reviews"
         case .license: return "Open Source License"
         }

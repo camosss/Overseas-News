@@ -42,7 +42,11 @@ class SearchTableViewCell: UITableViewCell {
         titleLabel.text = search.title
         providerLabel.text = search.providerName == "null" ? "" : search.providerName
         
-        postImageView.setImage(imageUrl: search.postImage)
+        if search.postImage == "null" {
+            postImageView.image = UIImage(named: "icon")
+        } else {
+            postImageView.setImage(imageUrl: search.postImage)
+        }
         postImageView.clipsToBounds = true
         postImageView.layer.cornerRadius = 10
     }

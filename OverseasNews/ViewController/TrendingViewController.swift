@@ -114,7 +114,7 @@ class TrendingViewController: UIViewController {
     
     func configureCollectionView() {
         view.addSubview(collectionView)
-        collectionView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 50, right: 0)
+        collectionView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 50, right: 0)
         collectionView.dataSource = self
         collectionView.delegate = self
     }
@@ -257,7 +257,7 @@ extension TrendingViewController: SkeletonCollectionViewDataSource, UICollection
     }
     
     func collectionSkeletonView(_ skeletonView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return tasks?.filter("saveDate == %@", todayDateString).first?.trendingModels.count ?? 0
+        return 8
     }
     
     func collectionSkeletonView(_ skeletonView: UICollectionView, cellIdentifierForItemAt indexPath: IndexPath) -> ReusableCellIdentifier {
