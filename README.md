@@ -46,7 +46,6 @@
 
 ✓ 하루에 100번 요청가능한데, 그 이후로 추가요금 있음
 
-![스크린샷 2021-11-21 오후 7 53 20](https://user-images.githubusercontent.com/74236080/142763418-a9f07823-3166-4d7a-8a02-7e5a7666573e.png)
 
 
 > **Search**
@@ -56,7 +55,6 @@
 
 ✓ 콜수 제한 없음 !!
 
-![스크린샷 2021-11-21 오후 7 31 13](https://user-images.githubusercontent.com/74236080/142763434-0f4206e5-319c-43a8-a37a-4ffbdf191f2f.png)
 
 
 > **Category**
@@ -65,9 +63,6 @@
 **[Bing News Search](https://rapidapi.com/microsoft-azure-org-microsoft-cognitive-services/api/bing-news-search1/)**
 
 ✓ 콜수 제한 → 한달에 1,000
-
-![스크린샷 2021-11-21 오후 7 31 58](https://user-images.githubusercontent.com/74236080/142763456-5c96ab36-7d02-4567-8ece-6877f8e2c972.png)
-
 
 ```swift
 ‼️ 콜수 제한으로 **뉴스 (비즈니스, 정치) / 연예 (영화 및 티비, 음악) / 스포츠 (축구, 농구, 야구) / 테크놀로지 (테크, 과학)** 만 제공
