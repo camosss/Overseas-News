@@ -10,17 +10,19 @@
 - 검색을 통해 원하는 주제의 기사를 찾을 수 있어요.
 - 마음에 드는 기사를 공유해보세요 !
 
+```swift
 ✓ 개인 프로젝트
 ✓ iOS
 ✓ 기간: 21.11.16 ~ 21.11.27
+```
 
-
-📌  [***노션 링크***](https://www.notion.so/912caceec73d480982e656c018594c7d)
+💁🏻 [***노션 링크***](https://www.notion.so/912caceec73d480982e656c018594c7d)
 
 --- 
 
 ### 사용 라이브러리
 
+```swift
 ⚒ Alamofire
 ⚒ Realm
 ⚒ SwiftyJSON
@@ -32,7 +34,7 @@
 ⚒ SkeletonView
 ⚒ Snapkit
 ⚒ Toast
-
+```
 ---
 
 ### 📌  API
@@ -67,25 +69,9 @@
 ![스크린샷 2021-11-21 오후 7 31 58](https://user-images.githubusercontent.com/74236080/142763456-5c96ab36-7d02-4567-8ece-6877f8e2c972.png)
 
 
-**Category**
-
-- **뉴스**(비즈니스, 정치, products, 건강)
-
-- **연예**(영화 및 티비, 음악)
-
-- **스포츠**(축구, NBA(농구), MLB(야구), NFL(내셔널 풋볼리그), 골프, 테니스, NHL(하키))
-
-- **테크놀로지**(기술, 과학)
-
-- **US**(Northeast, South, Midwest, West)
-
-- **World**(아메리카, 유럽, 아시아, 아프리카, 중동)
-
-
-<aside>
+```swift
 ‼️ 콜수 제한으로 **뉴스 (비즈니스, 정치) / 연예 (영화 및 티비, 음악) / 스포츠 (축구, 농구, 야구) / 테크놀로지 (테크, 과학)** 만 제공
-
-</aside>
+```
 ---
 
 
@@ -99,8 +85,7 @@
 ### 📌  출시 프로젝트 기획 항목
 
 
-<img src = "https://user-images.githubusercontent.com/74236080/143826660-41559756-0adf-4e64-a1ca-899b6aade967.png" width="50%" height="50%"><img src = "https://user-images.githubusercontent.com/74236080/143826666-70513966-6319-422b-a513-9246f441bef4.png" width="50%" height="50%">
-
-
+![스크린샷 2021-11-29 오후 4 35 54](https://user-images.githubusercontent.com/74236080/143828766-ab66aeb8-9222-437d-9859-6bdbda7cf020.png)
+![스크린샷 2021-11-29 오후 4 36 25](https://user-images.githubusercontent.com/74236080/143828775-3d7f08a4-8a97-44df-b8e3-d1b83a8a6cb2.png)
 
 
