@@ -109,7 +109,7 @@ class SearchViewController: UIViewController {
 
                 case .failure(let error):
                     print(error)
-                    AlertHelper.defaultAlert(title: "No Result", message: "No results were found for your search (Please enter your search in English only)", okMessage: "OK", over: self)
+                    AlertHelper.defaultAlert(title: "No Result", message: "No results were found for your search (Please enter in English only)", okMessage: "OK", over: self)
                     
                     DispatchQueue.main.async {
                         self.tableView.stopSkeletonAnimation()
