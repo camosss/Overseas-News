@@ -61,7 +61,7 @@ class SearchViewController: UIViewController {
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = true
         searchController.searchBar.becomeFirstResponder()
-        searchController.searchBar.placeholder = "검색"
+        searchController.searchBar.placeholder = "English only"
         searchController.searchBar.delegate = self
         
         navigationItem.searchController = searchController
@@ -82,6 +82,10 @@ class SearchViewController: UIViewController {
                 case .success(let value):
                     
                     let json = JSON(value)
+                    
+                    if json == [] {
+                        print("no result")
+                    }
                     
                     for idx in 0..<json["articles"].count {
                         let category = "\(json["articles"][idx]["topic"])"
@@ -105,6 +109,13 @@ class SearchViewController: UIViewController {
 
                 case .failure(let error):
                     print(error)
+                    AlertHelper.defaultAlert(title: "No Result", message: "No results were found for your search (Please enter your search in English only)", okMessage: "OK", over: self)
+                    
+                    DispatchQueue.main.async {
+                        self.tableView.stopSkeletonAnimation()
+                        self.view.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
+                        self.tableView.reloadData()
+                    }
                 }
             }
         }
