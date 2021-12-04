@@ -86,6 +86,5 @@
 
 
 ![스크린샷 2021-11-29 오후 4 35 54](https://user-images.githubusercontent.com/74236080/143828766-ab66aeb8-9222-437d-9859-6bdbda7cf020.png)
-![스크린샷 2021-11-29 오후 4 36 25](https://user-images.githubusercontent.com/74236080/143828775-3d7f08a4-8a97-44df-b8e3-d1b83a8a6cb2.png)
-
+![스크린샷 2021-12-04 오후 4 26 18](https://user-images.githubusercontent.com/74236080/144701540-1b9340e5-50d1-4718-bb9e-14976311239e.png)
 
