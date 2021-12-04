@@ -71,10 +71,13 @@ class CategorySectionViewController: UIViewController {
                             let description = "\(json["value"][idx]["description"])"
                             let postImage = "\(json["value"][idx]["image"]["thumbnail"]["contentUrl"])"
                             let url = "\(json["value"][idx]["url"])"
-                            let datePublished = "\(json["value"][idx]["datePublished"])"
                             let providerName = "\(json["value"][idx]["provider"][0]["name"])"
                             
-                            let articles = ArticleModel(sectionName: urlString, title: title, contents: description, postImage: postImage, url: url, datePublished: datePublished.toDate() ?? Date(), providerName: providerName)
+                            let datePublished = "\(json["value"][idx]["datePublished"])"
+                            let endIndex: String.Index = datePublished.index(datePublished.startIndex, offsetBy: 18)
+                            let datePublish = String(datePublished[...endIndex])
+                            
+                            let articles = ArticleModel(sectionName: urlString, title: title, contents: description, postImage: postImage, url: url, datePublished: datePublished.toDate(stringValue: datePublish) ?? Date(), providerName: providerName)
                             tempArticle.append(articles)
                             
                         }

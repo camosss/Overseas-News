@@ -16,24 +16,17 @@ extension DateFormatter {
 }
 
 extension Date {
-    func toString() -> String {
+    func toString(dateValue: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        dateFormatter.timeZone = TimeZone(identifier: "UTC")
-        return dateFormatter.string(from: self)
+        return dateFormatter.string(from: dateValue)
     }
 }
 
 extension String {
-    func toDate() -> Date? {
+    func toDate(stringValue: String) -> Date? {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        dateFormatter.timeZone = TimeZone(identifier: "UTC")
-        
-        if let date = dateFormatter.date(from: self) {
-            return date
-        } else {
-            return nil
-        }
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        return dateFormatter.date(from: stringValue)
     }
 }

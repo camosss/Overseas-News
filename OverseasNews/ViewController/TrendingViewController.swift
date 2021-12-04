@@ -164,7 +164,7 @@ class TrendingViewController: UIViewController {
         providerLabel.text = row?.provider
         titleLabel.text = row?.title
         snippetLabel.text = row?.snippet
-        dateLabel.text = row?.datePublished.toString()
+        dateLabel.text = row?.datePublished.toString(dateValue: row?.datePublished ?? Date())
     }
     
     func handleHideSkeleton() {
@@ -190,9 +190,12 @@ class TrendingViewController: UIViewController {
                         let postImage = "\(json["value"][idx]["image"]["url"])"
                         let url = "\(json["value"][idx]["url"])"
                         let provider = "\(json["value"][idx]["provider"]["name"])"
+                        
                         let datePublished = "\(json["value"][idx]["datePublished"])"
-                                                
-                        let trendingTopic = TrendingModel(title: title, snippet: snippet, postImage: postImage, url: url, datePublished: datePublished.toDate() ?? Date(), provider: provider)
+                        let endIndex: String.Index = datePublished.index(datePublished.startIndex, offsetBy: 18)
+                        let datePublish = String(datePublished[...endIndex])
+                        
+                        let trendingTopic = TrendingModel(title: title, snippet: snippet, postImage: postImage, url: url, datePublished: datePublished.toDate(stringValue: datePublish) ?? Date(), provider: provider)
                         tempTrendingTopic.append(trendingTopic)
                     }
 
