@@ -143,7 +143,6 @@
 				E420A1CDEFFAB221B76E9BD5 /* Pods-OverseasNews.debug.xcconfig */,
 				2A109816A89EF35F25915763 /* Pods-OverseasNews.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -287,6 +286,7 @@
 				B40CCD002743DE67004C83C4 /* Frameworks */,
 				B40CCD012743DE67004C83C4 /* Resources */,
 				6F9C61C7C28276E906D30D41 /* [CP] Embed Pods Frameworks */,
+				B47A90292767560200C05428 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -341,7 +341,7 @@
 				B4B096D62746848F00240D76 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				B4B096D9274684F800240D76 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				B4B096E42746904900240D76 /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				B4216C03274A241F0028DBBF /* XCRemoteSwiftPackageReference "realm-cocoa.git" */,
+				B4216C03274A241F0028DBBF /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 				B4216C0F274A7DAD0028DBBF /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 				B421F667274E085C00FD02B0 /* XCRemoteSwiftPackageReference "SkeletonView" */,
 			);
@@ -416,6 +416,23 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		B47A90292767560200C05428 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -687,7 +704,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		B4216C03274A241F0028DBBF /* XCRemoteSwiftPackageReference "realm-cocoa.git" */ = {
+		B4216C03274A241F0028DBBF /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-cocoa.git";
 			requirement = {
@@ -764,12 +781,12 @@
 /* Begin XCSwiftPackageProductDependency section */
 		B4216C04274A241F0028DBBF /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = B4216C03274A241F0028DBBF /* XCRemoteSwiftPackageReference "realm-cocoa.git" */;
+			package = B4216C03274A241F0028DBBF /* XCRemoteSwiftPackageReference "realm-cocoa" */;
 			productName = Realm;
 		};
 		B4216C06274A241F0028DBBF /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = B4216C03274A241F0028DBBF /* XCRemoteSwiftPackageReference "realm-cocoa.git" */;
+			package = B4216C03274A241F0028DBBF /* XCRemoteSwiftPackageReference "realm-cocoa" */;
 			productName = RealmSwift;
 		};
 		B4216C10274A7DAD0028DBBF /* Toast */ = {
