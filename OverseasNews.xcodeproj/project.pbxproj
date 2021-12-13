@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		98CD4C62B431E883941D024C /* Pods_OverseasNews.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B824729380799B8B0121F5B /* Pods_OverseasNews.framework */; };
 		B40CCD072743DE67004C83C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40CCD062743DE67004C83C4 /* AppDelegate.swift */; };
 		B40CCD092743DE67004C83C4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40CCD082743DE67004C83C4 /* SceneDelegate.swift */; };
 		B40CCD0E2743DE67004C83C4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B40CCD0C2743DE67004C83C4 /* Main.storyboard */; };
@@ -28,6 +29,7 @@
 		B421F68D274FCE8200FD02B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B421F68C274FCE8200FD02B0 /* Assets.xcassets */; };
 		B421F692274FDD9B00FD02B0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B421F694274FDD9B00FD02B0 /* InfoPlist.strings */; };
 		B421F697274FE15600FD02B0 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B421F696274FE15600FD02B0 /* CategoryModel.swift */; };
+		B47A902827674B8900C05428 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B47A902727674B8900C05428 /* GoogleService-Info.plist */; };
 		B4B096442744E03500240D76 /* TrendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B096432744E03500240D76 /* TrendingViewController.swift */; };
 		B4B096462744E03B00240D76 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B096452744E03B00240D76 /* SearchViewController.swift */; };
 		B4B096482744E04400240D76 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B096472744E04400240D76 /* CategoryViewController.swift */; };
@@ -57,6 +59,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2A109816A89EF35F25915763 /* Pods-OverseasNews.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OverseasNews.release.xcconfig"; path = "Target Support Files/Pods-OverseasNews/Pods-OverseasNews.release.xcconfig"; sourceTree = "<group>"; };
+		9B824729380799B8B0121F5B /* Pods_OverseasNews.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OverseasNews.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B40CCD032743DE67004C83C4 /* OverseasNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OverseasNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B40CCD062743DE67004C83C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B40CCD082743DE67004C83C4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +83,7 @@
 		B421F693274FDD9B00FD02B0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B421F695274FDD9D00FD02B0 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B421F696274FE15600FD02B0 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
+		B47A902727674B8900C05428 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "OverseasNews/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		B4B096432744E03500240D76 /* TrendingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingViewController.swift; sourceTree = "<group>"; };
 		B4B096452744E03B00240D76 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		B4B096472744E04400240D76 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
@@ -99,6 +104,7 @@
 		B4B096DE2746879900240D76 /* HIDEAPIKEY++Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HIDEAPIKEY++Bundle.swift"; sourceTree = "<group>"; };
 		B4B096E72746905E00240D76 /* KF+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KF+Extension.swift"; sourceTree = "<group>"; };
 		B4B096F32747C06800240D76 /* EmptySearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySearchCollectionViewCell.swift; sourceTree = "<group>"; };
+		E420A1CDEFFAB221B76E9BD5 /* Pods-OverseasNews.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OverseasNews.debug.xcconfig"; path = "Target Support Files/Pods-OverseasNews/Pods-OverseasNews.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,17 +122,38 @@
 				B4B09694274560E300240D76 /* SnapKit in Frameworks */,
 				B4B096DB274684F800240D76 /* SwiftyJSON in Frameworks */,
 				B4B0969A27462DFE00240D76 /* Tabman in Frameworks */,
+				98CD4C62B431E883941D024C /* Pods_OverseasNews.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2736F891AD87B41889C3D84E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9B824729380799B8B0121F5B /* Pods_OverseasNews.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		44133C5BAD985B963C3DDF23 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E420A1CDEFFAB221B76E9BD5 /* Pods-OverseasNews.debug.xcconfig */,
+				2A109816A89EF35F25915763 /* Pods-OverseasNews.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		B40CCCFA2743DE67004C83C4 = {
 			isa = PBXGroup;
 			children = (
 				B40CCD052743DE67004C83C4 /* OverseasNews */,
 				B40CCD042743DE67004C83C4 /* Products */,
+				44133C5BAD985B963C3DDF23 /* Pods */,
+				2736F891AD87B41889C3D84E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -147,6 +174,7 @@
 				B4B0963A2744DF0100240D76 /* ViewController */,
 				B4B096392744DEF700240D76 /* Extension */,
 				B4B0963D2744DF1500240D76 /* App+SceneDelegate */,
+				B47A902727674B8900C05428 /* GoogleService-Info.plist */,
 				B40CCD112743DE69004C83C4 /* LaunchScreen.storyboard */,
 				B421F68C274FCE8200FD02B0 /* Assets.xcassets */,
 				B40CCD142743DE69004C83C4 /* Info.plist */,
@@ -254,9 +282,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B40CCD172743DE69004C83C4 /* Build configuration list for PBXNativeTarget "OverseasNews" */;
 			buildPhases = (
+				8B92B17702B69F6F9D3873FB /* [CP] Check Pods Manifest.lock */,
 				B40CCCFF2743DE67004C83C4 /* Sources */,
 				B40CCD002743DE67004C83C4 /* Frameworks */,
 				B40CCD012743DE67004C83C4 /* Resources */,
+				6F9C61C7C28276E906D30D41 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -311,7 +341,7 @@
 				B4B096D62746848F00240D76 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				B4B096D9274684F800240D76 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				B4B096E42746904900240D76 /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				B4216C03274A241F0028DBBF /* XCRemoteSwiftPackageReference "realm-cocoa" */,
+				B4216C03274A241F0028DBBF /* XCRemoteSwiftPackageReference "realm-cocoa.git" */,
 				B4216C0F274A7DAD0028DBBF /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 				B421F667274E085C00FD02B0 /* XCRemoteSwiftPackageReference "SkeletonView" */,
 			);
@@ -329,6 +359,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B47A902827674B8900C05428 /* GoogleService-Info.plist in Resources */,
 				B4B096CA2746649D00240D76 /* SeeMorePage.storyboard in Resources */,
 				B421F692274FDD9B00FD02B0 /* InfoPlist.strings in Resources */,
 				B4B096BB274638B400240D76 /* Category.storyboard in Resources */,
@@ -345,6 +376,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6F9C61C7C28276E906D30D41 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OverseasNews/Pods-OverseasNews-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OverseasNews/Pods-OverseasNews-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OverseasNews/Pods-OverseasNews-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8B92B17702B69F6F9D3873FB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-OverseasNews-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B40CCCFF2743DE67004C83C4 /* Sources */ = {
@@ -532,6 +605,7 @@
 		};
 		B40CCD182743DE69004C83C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E420A1CDEFFAB221B76E9BD5 /* Pods-OverseasNews.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -561,6 +635,7 @@
 		};
 		B40CCD192743DE69004C83C4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2A109816A89EF35F25915763 /* Pods-OverseasNews.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -612,7 +687,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		B4216C03274A241F0028DBBF /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
+		B4216C03274A241F0028DBBF /* XCRemoteSwiftPackageReference "realm-cocoa.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-cocoa.git";
 			requirement = {
@@ -689,12 +764,12 @@
 /* Begin XCSwiftPackageProductDependency section */
 		B4216C04274A241F0028DBBF /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = B4216C03274A241F0028DBBF /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			package = B4216C03274A241F0028DBBF /* XCRemoteSwiftPackageReference "realm-cocoa.git" */;
 			productName = Realm;
 		};
 		B4216C06274A241F0028DBBF /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = B4216C03274A241F0028DBBF /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			package = B4216C03274A241F0028DBBF /* XCRemoteSwiftPackageReference "realm-cocoa.git" */;
 			productName = RealmSwift;
 		};
 		B4216C10274A7DAD0028DBBF /* Toast */ = {
