@@ -57,9 +57,7 @@ class CategorySectionViewController: UIViewController {
         for urlString in sectionURL {
             if localRealm.objects(SaveArticle.self).filter("saveDate == '\(todayDateString)' AND sectionName == '\(urlString)'").isEmpty {
                 
-                let url = "https://bing-news-search1.p.rapidapi.com/news?category=\(urlString)&cc=US&safeSearch=Off&textFormat=Raw"
-                
-                AF.request(url, method: .get, headers: Bundle.categoryHeaders).validate().responseJSON { response in
+                AF.request(URL.categoryURL(urlString: urlString), method: .get, headers: Bundle.categoryHeaders).validate().responseJSON { response in
                     switch response.result {
                     case .success(let value):
                         

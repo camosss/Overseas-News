@@ -69,15 +69,13 @@ class SearchViewController: UIViewController {
         definesPresentationContext = false
     }
     
-    func fetchData(searchText: String) {
-        let url = "https://free-news.p.rapidapi.com/v1/search?q=\(searchText)&lang=en"
-        
+    func fetchData(searchText: String) {        
         var tmp = [Search]()
         
         if searchText.isEmpty {
             search = []
         } else {
-            AF.request(url, method: .get, headers: Bundle.searchHeaders).validate().responseJSON { response in
+            AF.request(URL.searchURL(searchText: searchText), method: .get, headers: Bundle.searchHeaders).validate().responseJSON { response in
                 switch response.result {
                 case .success(let value):
                     

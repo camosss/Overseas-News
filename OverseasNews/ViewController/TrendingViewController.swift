@@ -175,9 +175,7 @@ class TrendingViewController: UIViewController {
     
     func fetchTrendingTopicData() {
         if localRealm.objects(SaveTrending.self).filter("saveDate == '\(todayDateString)'").isEmpty {
-            let url = "https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/search/TrendingNewsAPI?pageNumber=1&pageSize=10&withThumbnails=false&location=us"
-            
-            AF.request(url, method: .get, headers: Bundle.trendingHeaders).validate().responseJSON { response in
+            AF.request(URL.trendingURL(), method: .get, headers: Bundle.trendingHeaders).validate().responseJSON { response in
                 switch response.result {
                 case .success(let value):
                     

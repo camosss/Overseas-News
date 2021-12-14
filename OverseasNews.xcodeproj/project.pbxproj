@@ -30,6 +30,7 @@
 		B421F692274FDD9B00FD02B0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B421F694274FDD9B00FD02B0 /* InfoPlist.strings */; };
 		B421F697274FE15600FD02B0 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B421F696274FE15600FD02B0 /* CategoryModel.swift */; };
 		B47A902827674B8900C05428 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B47A902727674B8900C05428 /* GoogleService-Info.plist */; };
+		B47A90562768EE7D00C05428 /* URL+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47A90552768EE7D00C05428 /* URL+Extension.swift */; };
 		B4B096442744E03500240D76 /* TrendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B096432744E03500240D76 /* TrendingViewController.swift */; };
 		B4B096462744E03B00240D76 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B096452744E03B00240D76 /* SearchViewController.swift */; };
 		B4B096482744E04400240D76 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B096472744E04400240D76 /* CategoryViewController.swift */; };
@@ -84,6 +85,7 @@
 		B421F695274FDD9D00FD02B0 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B421F696274FE15600FD02B0 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
 		B47A902727674B8900C05428 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "OverseasNews/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		B47A90552768EE7D00C05428 /* URL+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extension.swift"; sourceTree = "<group>"; };
 		B4B096432744E03500240D76 /* TrendingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingViewController.swift; sourceTree = "<group>"; };
 		B4B096452744E03B00240D76 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		B4B096472744E04400240D76 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
@@ -210,8 +212,9 @@
 				B4B096E72746905E00240D76 /* KF+Extension.swift */,
 				B421F663274BFC5600FD02B0 /* UIFont+Extension.swift */,
 				B421F665274D457500FD02B0 /* Date+Extension.swift */,
-				B421F661274BF8E200FD02B0 /* Jsongmyung-Regular.otf */,
 				B41C213727565E4C009744EC /* UIAlert+Extension.swift */,
+				B47A90552768EE7D00C05428 /* URL+Extension.swift */,
+				B421F661274BF8E200FD02B0 /* Jsongmyung-Regular.otf */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -462,6 +465,7 @@
 				B4B0969F2746330100240D76 /* CategorySectionViewController.swift in Sources */,
 				B4216C0A274A2A570028DBBF /* RealmModel.swift in Sources */,
 				B4216C0E274A60050028DBBF /* SearchModel.swift in Sources */,
+				B47A90562768EE7D00C05428 /* URL+Extension.swift in Sources */,
 				B4B096F42747C06900240D76 /* EmptySearchCollectionViewCell.swift in Sources */,
 				B4B096462744E03B00240D76 /* SearchViewController.swift in Sources */,
 				B4B096CE274664C000240D76 /* SeeMorePageViewController.swift in Sources */,
