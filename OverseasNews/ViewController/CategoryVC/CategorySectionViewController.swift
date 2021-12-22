@@ -23,6 +23,8 @@ class CategorySectionViewController: UIViewController {
     let localRealm = try! Realm()
     var tasks: Results<SaveArticle>?
         
+    let todayDateString = DateFormatter.currentFormatter.string(from: Date())
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -52,8 +54,6 @@ class CategorySectionViewController: UIViewController {
     }
 
     func fetchDate() {
-        let todayDateString = DateFormatter.currentFormatter.string(from: Date())
-        
         for urlString in sectionURL {
             if localRealm.objects(SaveArticle.self).filter("saveDate == '\(todayDateString)' AND sectionName == '\(urlString)'").isEmpty {
                 
@@ -81,12 +81,12 @@ class CategorySectionViewController: UIViewController {
                         }
                         
                         try! self.localRealm.write {
-                            let saveArticle: SaveArticle = .init(sectionName: urlString, saveDate: todayDateString, articleModels: tempArticle)
+                            let saveArticle: SaveArticle = .init(sectionName: urlString, saveDate: self.todayDateString, articleModels: tempArticle)
                             self.localRealm.add(saveArticle)
                         }
                         
                         DispatchQueue.main.async {
-                            self.tasks = self.localRealm.objects(SaveArticle.self).filter("saveDate == '\(todayDateString)'")
+                            self.tasks = self.localRealm.objects(SaveArticle.self).filter("saveDate == '\(self.todayDateString)'")
                             self.handleHideSkeleton()
                         }
                         

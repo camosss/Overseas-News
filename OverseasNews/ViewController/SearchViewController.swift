@@ -78,13 +78,13 @@ class SearchViewController: UIViewController {
             AF.request(URL.searchURL(searchText: searchText), method: .get, headers: Bundle.searchHeaders).validate().responseJSON { response in
                 switch response.result {
                 case .success(let value):
-                    
+
                     let json = JSON(value)
-                    
+
                     if json == [] {
                         print("no result")
                     }
-                    
+
                     for idx in 0..<json["articles"].count {
                         let category = "\(json["articles"][idx]["topic"])"
                         let title = "\(json["articles"][idx]["title"])"
@@ -93,12 +93,12 @@ class SearchViewController: UIViewController {
                         let url = "\(json["articles"][idx]["link"])"
                         let datePublished = "\(json["articles"][idx]["published_date"])"
                         let providerName = "\(json["articles"][idx]["author"])"
-                        
+
                         tmp.append(Search(category: category, title: title, description: description, postImage: postImage, url: url, datePublished: datePublished, providerName: providerName))
-                        
+
                         DispatchQueue.main.async {
                             self.search = tmp
-                            
+
                             self.tableView.stopSkeletonAnimation()
                             self.view.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
                             self.tableView.reloadData()
@@ -108,7 +108,7 @@ class SearchViewController: UIViewController {
                 case .failure(let error):
                     print(error)
                     AlertHelper.defaultAlert(title: "No Result", message: "No results were found for your search (Please enter in English only)", okMessage: "OK", over: self)
-                    
+
                     DispatchQueue.main.async {
                         self.tableView.stopSkeletonAnimation()
                         self.view.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
