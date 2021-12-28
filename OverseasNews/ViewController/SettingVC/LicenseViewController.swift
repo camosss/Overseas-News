@@ -25,7 +25,7 @@ class LicenseViewController: UIViewController {
     
     // MARK: - Helper
     
-    func goLicenseURL(url: String) {
+    private func goLicenseURL(url: String) {
         guard let url = URL(string: url), UIApplication.shared.canOpenURL(url) else { return }
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }

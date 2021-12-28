@@ -56,7 +56,7 @@ class SearchViewController: UIViewController {
     
     // MARK: - Helper
     
-    func configureSearchController() {
+    private func configureSearchController() {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = true
@@ -69,53 +69,69 @@ class SearchViewController: UIViewController {
         definesPresentationContext = false
     }
     
-    func fetchData(searchText: String) {        
-        var tmp = [Search]()
+    private func stopSkeleton() {
+        AlertHelper.defaultAlert(title: "No Result", message: "No results were found for your search (Please enter in English only)", okMessage: "OK", over: self)
+
+        DispatchQueue.main.async {
+            self.tableView.stopSkeletonAnimation()
+            self.view.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
+            self.tableView.reloadData()
+        }
+    }
+    
+    // MARK: - Fetch Data
+
+    private func fetchData(searchText: String) {        
         
         if searchText.isEmpty {
             search = []
         } else {
-            AF.request(URL.searchURL(searchText: searchText), method: .get, headers: Bundle.searchHeaders).validate().responseJSON { response in
-                switch response.result {
-                case .success(let value):
-
-                    let json = JSON(value)
-
-                    if json == [] {
-                        print("no result")
-                    }
-
-                    for idx in 0..<json["articles"].count {
-                        let category = "\(json["articles"][idx]["topic"])"
-                        let title = "\(json["articles"][idx]["title"])"
-                        let description = "\(json["articles"][idx]["summary"])"
-                        let postImage = "\(json["articles"][idx]["media"])"
-                        let url = "\(json["articles"][idx]["link"])"
-                        let datePublished = "\(json["articles"][idx]["published_date"])"
-                        let providerName = "\(json["articles"][idx]["author"])"
-
-                        tmp.append(Search(category: category, title: title, description: description, postImage: postImage, url: url, datePublished: datePublished, providerName: providerName))
-
-                        DispatchQueue.main.async {
-                            self.search = tmp
-
-                            self.tableView.stopSkeletonAnimation()
-                            self.view.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
-                            self.tableView.reloadData()
-                        }
-                    }
-
-                case .failure(let error):
-                    print(error)
-                    AlertHelper.defaultAlert(title: "No Result", message: "No results were found for your search (Please enter in English only)", okMessage: "OK", over: self)
-
-                    DispatchQueue.main.async {
-                        self.tableView.stopSkeletonAnimation()
-                        self.view.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
-                        self.tableView.reloadData()
-                    }
+            APIService.shared.requestSearch(url: URL.searchURL(searchText: searchText)) { search in
+                DispatchQueue.main.async {
+                    self.search = search
+                    
+                    self.tableView.stopSkeletonAnimation()
+                    self.view.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
+                    self.tableView.reloadData()
                 }
             }
+            
+//            AF.request(URL.searchURL(searchText: searchText), method: .get, headers: Bundle.searchHeaders).validate().responseJSON { response in
+//                switch response.result {
+//                case .success(let value):
+//
+//                    let json = JSON(value)
+//
+//                    if json == [] {
+//                        print("no result")
+//                        self.stopSkeleton()
+//                    }
+//
+//                    for idx in 0..<json["articles"].count {
+//                        let category = "\(json["articles"][idx]["topic"])"
+//                        let title = "\(json["articles"][idx]["title"])"
+//                        let description = "\(json["articles"][idx]["summary"])"
+//                        let postImage = "\(json["articles"][idx]["media"])"
+//                        let url = "\(json["articles"][idx]["link"])"
+//                        let datePublished = "\(json["articles"][idx]["published_date"])"
+//                        let providerName = "\(json["articles"][idx]["author"])"
+//
+//                        tmp.append(Search(category: category, title: title, description: description, postImage: postImage, url: url, datePublished: datePublished, providerName: providerName))
+//
+//                        DispatchQueue.main.async {
+//                            self.search = tmp
+//
+//                            self.tableView.stopSkeletonAnimation()
+//                            self.view.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
+//                            self.tableView.reloadData()
+//                        }
+//                    }
+//
+//                case .failure(let error):
+//                    print(error)
+//                    self.stopSkeleton()
+//                }
+//            }
         }
     }
 }

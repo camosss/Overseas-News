@@ -30,7 +30,7 @@ class CategoryViewController: TabmanViewController {
     
     // MARK: - Helper
     
-    func configureViewControllers() {
+    private func configureViewControllers() {
         let newsVC = UIStoryboard.init(name: "Category", bundle: nil).instantiateViewController(withIdentifier: "CategorySectionViewController") as! CategorySectionViewController
         let entertainmentVC = UIStoryboard.init(name: "Category", bundle: nil).instantiateViewController(withIdentifier: "CategorySectionViewController") as! CategorySectionViewController
         let sportsVC = UIStoryboard.init(name: "Category", bundle: nil).instantiateViewController(withIdentifier: "CategorySectionViewController") as! CategorySectionViewController
@@ -42,7 +42,7 @@ class CategoryViewController: TabmanViewController {
         viewControllers.append(scienceTechnologyVC)
     }
     
-    func settingTabBar(ctBar: TMBar.ButtonBar) {
+    private func settingTabBar(ctBar: TMBar.ButtonBar) {
         ctBar.layout.transitionStyle = .snap
         ctBar.layout.contentInset = UIEdgeInsets(top: 0.0, left: 20.0, bottom: 0.0, right: 20.0)
         ctBar.layout.interButtonSpacing = 20

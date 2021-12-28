@@ -112,14 +112,14 @@ class TrendingViewController: UIViewController {
     
     // MARK: - Helper
     
-    func configureCollectionView() {
+    private func configureCollectionView() {
         view.addSubview(collectionView)
         collectionView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 50, right: 0)
         collectionView.dataSource = self
         collectionView.delegate = self
     }
     
-    func handleNetwork() {
+    private func handleNetwork() {
         networkMoniter.pathUpdateHandler = { path in
             if path.status == .satisfied {
                 print("network connected")
@@ -140,7 +140,7 @@ class TrendingViewController: UIViewController {
         networkMoniter.start(queue: DispatchQueue.global())
     }
     
-    func configureSlideView() {
+    private func configureSlideView() {
         let labelStack = UIStackView(arrangedSubviews: [providerLabel, titleLabel, snippetLabel, dateLabel])
         labelStack.axis = .vertical
         labelStack.spacing = 10
@@ -159,7 +159,7 @@ class TrendingViewController: UIViewController {
         }
     }
     
-    func configureSlideViewUI(row: TrendingModel?) {
+    private func configureSlideViewUI(row: TrendingModel?) {
         urlString = row?.url
         providerLabel.text = row?.provider
         titleLabel.text = row?.title
@@ -167,50 +167,29 @@ class TrendingViewController: UIViewController {
         dateLabel.text = row?.datePublished.toString(dateValue: row?.datePublished ?? Date())
     }
     
-    func handleHideSkeleton() {
+    private func handleHideSkeleton() {
         collectionView.stopSkeletonAnimation()
         collectionView.hideSkeleton(reloadDataAfter: true)
         collectionView.reloadData()
     }
     
-    func fetchTrendingTopicData() {
+    // MARK: - Fetch Data
+    
+    private func fetchTrendingTopicData() {
         if localRealm.objects(SaveTrending.self).filter("saveDate == '\(todayDateString)'").isEmpty {
-            AF.request(URL.trendingURL(), method: .get, headers: Bundle.trendingHeaders).validate().responseJSON { response in
-                switch response.result {
-                case .success(let value):
-                    
-                    let json = JSON(value)
-                    var tempTrendingTopic: [TrendingModel] = []
-                    
-                    for idx in 0..<json["value"].count {
-                        let title = "\(json["value"][idx]["title"])"
-                        let snippet = "\(json["value"][idx]["snippet"])"
-                        let postImage = "\(json["value"][idx]["image"]["url"])"
-                        let url = "\(json["value"][idx]["url"])"
-                        let provider = "\(json["value"][idx]["provider"]["name"])"
-                        
-                        let datePublished = "\(json["value"][idx]["datePublished"])"
-                        let endIndex: String.Index = datePublished.index(datePublished.startIndex, offsetBy: 18)
-                        let datePublish = String(datePublished[...endIndex])
-                        
-                        let trendingTopic = TrendingModel(title: title, snippet: snippet, postImage: postImage, url: url, datePublished: datePublished.toDate(stringValue: datePublish) ?? Date(), provider: provider)
-                        tempTrendingTopic.append(trendingTopic)
-                    }
+            
+            APIService.shared.requestTrending { tempTrendingTopic in
+                try! self.localRealm.write {
+                    let saveTrending: SaveTrending = .init(saveDate: self.todayDateString, trendingModels: tempTrendingTopic)
+                    self.localRealm.add(saveTrending)
+                }
 
-                    try! self.localRealm.write {
-                        let saveTrending: SaveTrending = .init(saveDate: self.todayDateString, trendingModels: tempTrendingTopic)
-                        self.localRealm.add(saveTrending)
-                    }
-                    
-                    DispatchQueue.main.async {
-                        self.tasks = self.localRealm.objects(SaveTrending.self).filter("saveDate == '\(self.todayDateString)'")
-                        self.handleHideSkeleton()
-                    }
-                    
-                case .failure(let error):
-                    print(error)
+                DispatchQueue.main.async {
+                    self.tasks = self.localRealm.objects(SaveTrending.self).filter("saveDate == '\(self.todayDateString)'")
+                    self.handleHideSkeleton()
                 }
             }
+            
         } else {
             tasks = localRealm.objects(SaveTrending.self).filter("saveDate == '\(todayDateString)'")
             handleHideSkeleton()

@@ -16,3 +16,22 @@ struct Search {
     let datePublished: String
     let providerName: String
 }
+
+struct SearchData: Codable {
+    var articles: [Article]
+}
+
+struct Article: Codable {
+    let title: String
+    let author: String?
+    let publishedDate: String
+    let link: String
+    let summary: String
+    let media: String?
+    let topic: String
+
+    enum CodingKeys: String, CodingKey {
+        case title, link, summary, author, media, topic
+        case publishedDate = "published_date"
+    }
+}

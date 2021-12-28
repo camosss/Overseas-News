@@ -31,7 +31,7 @@ class SeeMorePageViewController: UIViewController {
     
     // MARK: - Helper
     
-    func configureTableView() {
+    private func configureTableView() {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = 80

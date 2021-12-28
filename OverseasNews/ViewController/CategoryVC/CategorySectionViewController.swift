@@ -39,7 +39,7 @@ class CategorySectionViewController: UIViewController {
     
     // MARK: - Helper
     
-    func configureTableView() {
+    private func configureTableView() {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = 80
@@ -47,51 +47,27 @@ class CategorySectionViewController: UIViewController {
         tableView.contentInset.bottom = 50
     }
     
-    func handleHideSkeleton() {
+    private func handleHideSkeleton() {
         tableView.stopSkeletonAnimation()
         view.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
         tableView.reloadData()
     }
 
-    func fetchDate() {
+    // MARK: - Fetch Data
+
+    private func fetchDate() {
         for urlString in sectionURL {
             if localRealm.objects(SaveArticle.self).filter("saveDate == '\(todayDateString)' AND sectionName == '\(urlString)'").isEmpty {
                 
-                AF.request(URL.categoryURL(urlString: urlString), method: .get, headers: Bundle.categoryHeaders).validate().responseJSON { response in
-                    switch response.result {
-                    case .success(let value):
-                        
-                        let json = JSON(value)
-                        var tempArticle: [ArticleModel] = []
-                        
-                        for idx in 0..<json["value"].count {
-                            let title = "\(json["value"][idx]["name"])"
-                            let description = "\(json["value"][idx]["description"])"
-                            let postImage = "\(json["value"][idx]["image"]["thumbnail"]["contentUrl"])"
-                            let url = "\(json["value"][idx]["url"])"
-                            let providerName = "\(json["value"][idx]["provider"][0]["name"])"
-                            
-                            let datePublished = "\(json["value"][idx]["datePublished"])"
-                            let endIndex: String.Index = datePublished.index(datePublished.startIndex, offsetBy: 18)
-                            let datePublish = String(datePublished[...endIndex])
-                            
-                            let articles = ArticleModel(sectionName: urlString, title: title, contents: description, postImage: postImage, url: url, datePublished: datePublished.toDate(stringValue: datePublish) ?? Date(), providerName: providerName)
-                            tempArticle.append(articles)
-                            
-                        }
-                        
-                        try! self.localRealm.write {
-                            let saveArticle: SaveArticle = .init(sectionName: urlString, saveDate: self.todayDateString, articleModels: tempArticle)
-                            self.localRealm.add(saveArticle)
-                        }
-                        
-                        DispatchQueue.main.async {
-                            self.tasks = self.localRealm.objects(SaveArticle.self).filter("saveDate == '\(self.todayDateString)'")
-                            self.handleHideSkeleton()
-                        }
-                        
-                    case .failure(let error):
-                        print(error)
+                APIService.shared.requestCategory(urlString: urlString) { tempArticle in
+                    try! self.localRealm.write {
+                        let saveArticle: SaveArticle = .init(sectionName: urlString, saveDate: self.todayDateString, articleModels: tempArticle)
+                        self.localRealm.add(saveArticle)
+                    }
+
+                    DispatchQueue.main.async {
+                        self.tasks = self.localRealm.objects(SaveArticle.self).filter("saveDate == '\(self.todayDateString)'")
+                        self.handleHideSkeleton()
                     }
                 }
                 
@@ -100,7 +76,6 @@ class CategorySectionViewController: UIViewController {
                 handleHideSkeleton()
             }
         }
-        
     }
     
     // MARK: - Action

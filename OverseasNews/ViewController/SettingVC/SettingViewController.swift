@@ -25,19 +25,19 @@ class SettingViewController: UIViewController {
     
     // MARK: - Helper
     
-    func configureTableView() {
+    private func configureTableView() {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 50, right: 0)
     }
     
-    func showToastAlert(message: String) {
+    private func showToastAlert(message: String) {
         DispatchQueue.main.async {
             self.view.makeToast(message)
         }
     }
     
-    func goAppStoreURL(url: String) {
+    private func goAppStoreURL(url: String) {
         if let appstoreURL = URL(string: url) {
             var components = URLComponents(url: appstoreURL, resolvingAgainstBaseURL: false)
             components?.queryItems = [
@@ -50,7 +50,7 @@ class SettingViewController: UIViewController {
         }
     }
     
-    func showMailComposer() {
+    private func showMailComposer() {
         guard MFMailComposeViewController.canSendMail() else {
             showToastAlert(message: "피드백을 보내기 전에 메일 등록을 먼저 해주세요 ‼️")
             return

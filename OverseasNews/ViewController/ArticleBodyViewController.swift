@@ -36,7 +36,7 @@ class ArticleBodyViewController: UIViewController {
     
     // MARK: - Helper
     
-    func configureURLButton() {
+    private func configureURLButton() {
         urlButton.setTitle("Go To Article", for: .normal)
         urlButton.setTitleColor(.label, for: .normal)
         urlButton.backgroundColor = .systemGray6
@@ -45,7 +45,7 @@ class ArticleBodyViewController: UIViewController {
         urlButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
     }
     
-    func configureArticle() {
+    private func configureArticle() {
         titleLabel.text = article.title
         dateLabel.text = article.datePublished.toString(dateValue: article.datePublished)
         providerName.text = article.providerName
@@ -58,7 +58,7 @@ class ArticleBodyViewController: UIViewController {
         }
     }
     
-    func configureSearch() {
+    private func configureSearch() {
         titleLabel.text = search.title == "null" ? "" : search.title
         dateLabel.text = search.datePublished == "null" ? "" : search.datePublished
         providerName.text = search.providerName == "null" ? "" : search.providerName
