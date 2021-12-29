@@ -12,7 +12,7 @@ import SwiftyJSON
 class APIService {
     static let shared = APIService()
     
-    func requestSearch(url: URL, completion: @escaping ([Search]) -> ()) {
+    func requestSearch(url: String, completion: @escaping ([Search]?, Error?) -> ()) {
         AF.request(url, method: .get, headers: Bundle.searchHeaders).validate().responseJSON { response in
             var tmp = [Search]()
             
@@ -31,10 +31,10 @@ class APIService {
                     
                     tmp.append(Search(category: category, title: title, description: description, postImage: postImage, url: url, datePublished: datePublished, providerName: providerName))
                 }
-                completion(tmp)
+                completion(tmp, nil)
                 
             case .failure(let error):
-                print(error)
+                completion(nil, error)
             }
         }
     }
