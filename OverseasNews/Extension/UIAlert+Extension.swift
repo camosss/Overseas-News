@@ -7,8 +7,6 @@
 
 import UIKit
 
-typealias Action = () -> ()
-
 class AlertHelper {
         static func defaultAlert(title: String?, message: String?, okMessage: String, over viewController: UIViewController) {
         let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)

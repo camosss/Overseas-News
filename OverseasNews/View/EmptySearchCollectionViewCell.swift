@@ -11,9 +11,7 @@ import SnapKit
 class EmptySearchCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Properties
-    
-    static let identifier = "EmptySearchCollectionViewCell"
-    
+        
     let iconimageView: UIImageView = {
         let imageView = UIImageView()
         imageView.tintColor = .systemOrange

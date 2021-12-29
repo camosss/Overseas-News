@@ -40,7 +40,7 @@ class TrendingViewController: UIViewController {
         layout.columnCount = 2
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(TrendingCollectionViewCell.self, forCellWithReuseIdentifier: TrendingCollectionViewCell.identifier)
+        collectionView.register(TrendingCollectionViewCell.self, forCellWithReuseIdentifier: UICollectionViewCell.reuseIdentifier)
         return collectionView
     }()
     
@@ -241,11 +241,11 @@ extension TrendingViewController: SkeletonCollectionViewDataSource, UICollection
     }
     
     func collectionSkeletonView(_ skeletonView: UICollectionView, cellIdentifierForItemAt indexPath: IndexPath) -> ReusableCellIdentifier {
-        return TrendingCollectionViewCell.identifier
+        return UICollectionViewCell.reuseIdentifier
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TrendingCollectionViewCell.identifier, for: indexPath) as! TrendingCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UICollectionViewCell.reuseIdentifier, for: indexPath) as! TrendingCollectionViewCell
         guard let row = tasks?.filter("saveDate == %@", todayDateString).first?.trendingModels[indexPath.row] else { return UICollectionViewCell() }
         cell.configure(row)
         return cell

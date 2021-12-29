@@ -12,8 +12,6 @@ class TrendingCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Properties
     
-    static let identifier = "TrendingCollectionViewCell"
-
     let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleToFill
