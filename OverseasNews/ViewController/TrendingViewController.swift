@@ -8,7 +8,6 @@
 import UIKit
 import Network
 import RealmSwift
-import SnapKit
 import Toast
 import Alamofire
 import SwiftyJSON
@@ -25,70 +24,26 @@ class TrendingViewController: UIViewController {
 
     var containerView = UIView()
     var slideUpView = UIView()
+    let slideView = SlideView()
     let slideUpViewHeight: CGFloat = 450
     
     let localRealm = try! Realm()
     var tasks: Results<SaveTrending>?
     
     let todayDateString = DateFormatter.currentFormatter.string(from: Date())
-    
-    // MARK: - SlideView Properties
-    
-    private let collectionView: UICollectionView = {
+        
+    private lazy var collectionView: UICollectionView = {
         let layout = CHTCollectionViewWaterfallLayout()
         layout.itemRenderDirection = .leftToRight
         layout.columnCount = 2
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.dataSource = self
+        collectionView.delegate = self
         collectionView.register(TrendingCollectionViewCell.self, forCellWithReuseIdentifier: UICollectionViewCell.reuseIdentifier)
         return collectionView
     }()
-    
-    private var providerLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .systemOrange
-        label.numberOfLines = 0
-        label.font = UIFont.boldSystemFont(ofSize: 16)
-        return label
-    }()
-    
-    private var titleLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .label
-        label.numberOfLines = 0
-        label.font = UIFont.boldSystemFont(ofSize: 18)
-        return label
-    }()
-    
-    private var snippetLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .label
-        label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 14)
-        return label
-    }()
-    
-    private var dateLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .lightGray
-        label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 13)
-        return label
-    }()
-    
-    private lazy var webSearchButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Go To Article", for: .normal)
-        button.setTitleColor(.label, for: .normal)
-        button.backgroundColor = .systemBackground
-        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        button.layer.cornerRadius = 10
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
-        button.addTarget(self, action: #selector(goWebSearch), for: .touchUpInside)
-        return button
-    }()
-    
-    
+
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -97,8 +52,8 @@ class TrendingViewController: UIViewController {
 
         handleNetwork()
         configureLeftTitle(title: "Trending Topic")
-        configureSlideView()
         configureCollectionView()
+        setSlideView()
         
         collectionView.isSkeletonable = true
         collectionView.showAnimatedGradientSkeleton()
@@ -115,8 +70,6 @@ class TrendingViewController: UIViewController {
     private func configureCollectionView() {
         view.addSubview(collectionView)
         collectionView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 50, right: 0)
-        collectionView.dataSource = self
-        collectionView.delegate = self
     }
     
     private func handleNetwork() {
@@ -140,31 +93,21 @@ class TrendingViewController: UIViewController {
         networkMoniter.start(queue: DispatchQueue.global())
     }
     
-    private func configureSlideView() {
-        let labelStack = UIStackView(arrangedSubviews: [providerLabel, titleLabel, snippetLabel, dateLabel])
-        labelStack.axis = .vertical
-        labelStack.spacing = 10
-        
-        slideUpView.addSubview(labelStack)
-        labelStack.snp.makeConstraints { make in
-            make.top.equalTo(20)
-            make.leading.equalTo(20)
-            make.trailing.equalTo(-20)
+    private func setSlideView() {
+        slideUpView.addSubview(slideView)
+        slideView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
         
-        slideUpView.addSubview(webSearchButton)
-        webSearchButton.snp.makeConstraints { make in
-            make.top.equalTo(labelStack.snp.bottom).offset(20)
-            make.leading.trailing.equalTo(labelStack)
-        }
+        slideView.webSearchButton.addTarget(self, action: #selector(goWebSearch), for: .touchUpInside)
     }
     
     private func configureSlideViewUI(row: TrendingModel?) {
         urlString = row?.url
-        providerLabel.text = row?.provider
-        titleLabel.text = row?.title
-        snippetLabel.text = row?.snippet
-        dateLabel.text = row?.datePublished.toString(dateValue: row?.datePublished ?? Date())
+        slideView.providerLabel.text = row?.provider
+        slideView.titleLabel.text = row?.title
+        slideView.snippetLabel.text = row?.snippet
+        slideView.dateLabel.text = row?.datePublished.toString(dateValue: row?.datePublished ?? Date())
     }
     
     private func handleHideSkeleton() {
