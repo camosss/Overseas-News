@@ -61,10 +61,19 @@
 
 ## 📌  버전
 
-- [v1.0.1](https://www.notion.so/v1-0-1-2285257857644e7b8916099eb816309a)
-- [v1.0.2(~ing)](https://www.notion.so/v1-0-2-57a5662ca6c44d94a1c306df9d3b5083)
+> [v1.0.1](https://www.notion.so/v1-0-1-2285257857644e7b8916099eb816309a)
 
+- Date값 Format 오류 수정
+- 21/12/04 **제출**
+- 21/12/08 **심사 통과**
 
+<br>
+
+> [v1.0.2](https://www.notion.so/v1-0-2-57a5662ca6c44d94a1c306df9d3b5083)
+
+- Firebase [Analytics, Crashlytics] 적용
+- 코드 리펙토링 (API 호출 메서드, Custom View)
+- 22/01/10 **제출**
 
 
 
