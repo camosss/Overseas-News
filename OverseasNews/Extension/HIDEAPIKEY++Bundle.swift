@@ -21,10 +21,8 @@ extension Bundle {
     
     static let trendingHeaders: HTTPHeaders = ["x-rapidapi-host": "contextualwebsearch-websearch-v1.p.rapidapi.com",
                                                "x-rapidapi-key": Bundle.main.ApiKey]
-
     static let categoryHeaders: HTTPHeaders = ["x-rapidapi-host": "bing-news-search1.p.rapidapi.com",
                                                "x-rapidapi-key": Bundle.main.ApiKey]
-    
-    static let searchHeaders: HTTPHeaders = ["x-rapidapi-host": "free-news.p.rapidapi.com",
+        static let searchHeaders: HTTPHeaders = ["x-rapidapi-host": "free-news.p.rapidapi.com",
                                              "x-rapidapi-key": Bundle.main.ApiKey]
 }
