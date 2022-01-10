@@ -74,6 +74,7 @@
 - Firebase [Analytics, Crashlytics] 적용
 - 코드 리펙토링 (API 호출 메서드, Custom View)
 - 22/01/10 **제출**
+- 22/01/10 **심사 통과**
 
 
 
