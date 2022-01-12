@@ -1,7 +1,7 @@
+<img width="1534" alt="12" src="https://user-images.githubusercontent.com/74236080/143826875-c12c807d-0b03-4c25-8e97-38b79119164d.png">
 
 # 영자 신문을 앱으로 간편하게, 해외뉴우스<img src = "https://user-images.githubusercontent.com/93528918/149170874-1428e755-5919-4f06-a153-631c55d4e09e.png" width = 80  align = right> 
 
-<img width="1534" alt="12" src="https://user-images.githubusercontent.com/74236080/143826875-c12c807d-0b03-4c25-8e97-38b79119164d.png">
 
 <br>
 
@@ -395,7 +395,6 @@ if localRealm.objects(SaveTrending.self).filter("saveDate == '\(todayDateString)
 	
 1. `datePublished`의 값을 문자열로 받는데, `2021-11-25T11:19:00` 로 저장하기 위해 문자열을 자른다.
 
-<br />
 	
 ```swift
 ex) datePublished = "2021-11-24T07:23:00.0000000Z"
@@ -408,11 +407,9 @@ let datePublish = String(datePublished[...endIndex])
 // "2021-11-24T07:23:00"
 ```
 	
+<br />
 	
 2. `"2021-11-24T07:23:00"` 값을 Date로 포맷해서 Realm에 저장
-
-<br />
-<br />
 
 ```swift
 extension String {
@@ -435,7 +432,6 @@ TrendingModel(title: title, ...datePublished: **datePublished.toDate(stringValue
 	
 3. View에 String으로 포맷해서 띄우기
 
-<br />
 
 ```swift
 extension Date {
