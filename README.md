@@ -203,8 +203,8 @@ func numberOfViewControllers(in pageboyViewController: PageboyViewController) ->
 private var viewControllers: Array<UIViewController> = []
 
 // 필요한 페이지만큼의 Property를 생성하여 배열에 추가
-let newsVC = UIStoryboard.init(name: "Category", bundle: nil)
-								.instantiateViewController(withIdentifier: "CategorySectionViewController") as! CategorySectionViewController
+let newsVC = UIStoryboard.init(name: "Category", bundle: nil).instantiateViewController(withIdentifier: "CategorySectionViewController") as! CategorySectionViewController
+	
 let entertainmentVC = ...
 
 ...
@@ -267,7 +267,7 @@ func viewController(for pageboyViewController: PageboyViewController, at **index
 	
 ```swift
 func fetchData() {
-	for urlString in **sectionURL** {
+	for urlString in sectionURL {
 		AF.request(URL.categoryURL(urlString: urlString), method: .get)
 		...
 ```
@@ -302,7 +302,7 @@ API 제한
 	
 1. **Trending Topic와 Category 테이블 작성**
 
-[Overseas-News/RealmModel.swift at main · camosss/Overseas-News](https://github.com/camosss/Overseas-News/blob/main/OverseasNews/Model/RealmModel.swift)
+[RealmModel](https://github.com/camosss/Overseas-News/blob/main/OverseasNews/Model/RealmModel.swift)
 
 <br />
 	
