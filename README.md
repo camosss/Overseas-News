@@ -96,8 +96,8 @@
 - Cell을 선택하면 **SlideView**에 각각의 기사 데이터 구성 및 원본 기사 웹뷰로 이동
  
  <br>
-
-https://user-images.githubusercontent.com/93528918/149177563-49d2cd84-64b0-4c40-9401-3d7f96055d16.mov
+	
+<img src = "https://user-images.githubusercontent.com/93528918/149971523-e6c13f4b-322e-4835-a459-fd855b06188b.gif" width="30%" height="30%">
 
  </div>
 </details>
@@ -116,7 +116,8 @@ https://user-images.githubusercontent.com/93528918/149177563-49d2cd84-64b0-4c40-
  
  <br>
 
-https://user-images.githubusercontent.com/93528918/149177637-8c0916cb-58c4-432a-baa9-0d435888c145.mov
+<img src = "https://user-images.githubusercontent.com/93528918/149971528-35fd604a-68c0-41d9-ae2c-8385da279827.gif" width="30%" height="30%">
+
 
 </div>
 </details>
@@ -135,7 +136,8 @@ https://user-images.githubusercontent.com/93528918/149177637-8c0916cb-58c4-432a-
  
  <br>
 
-https://user-images.githubusercontent.com/93528918/149177675-c867cd6e-98fe-4de1-9d57-4abaad2c3bd3.mov
+<img src = "https://user-images.githubusercontent.com/93528918/149971533-0e9f8dde-712f-49b0-962e-a226f48d359a.gif" width="30%" height="30%">
+
 
 </div>
 </details>
@@ -152,8 +154,8 @@ https://user-images.githubusercontent.com/93528918/149177675-c867cd6e-98fe-4de1-
 
  <br>
 
-https://user-images.githubusercontent.com/93528918/149177687-7447a7a6-8bfc-4e18-ac5e-23907748dafd.mov
-
+<img src = "https://user-images.githubusercontent.com/93528918/149971537-27026971-fa90-48e8-99eb-2d8853e17e19.gif" width="30%" height="30%">
+	
 </div>
 </details>
 
