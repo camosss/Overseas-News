@@ -30,6 +30,7 @@
 ![Badge](https://img.shields.io/badge/Toast-5.0.1-yellow)
 ![Badge](https://img.shields.io/badge/SkeletonView-1.26.0-ff69b4)
 ![Badge](https://img.shields.io/badge/CHTCollectionViewWaterfallLayout-0.9.19-lightgrey)
+![Badge](https://img.shields.io/badge/IAMPopup-0.2.0-blueviolet)
 
 
 
@@ -475,7 +476,7 @@ dateLabel.text = row?.**datePublished.toString(dateValue: row?.datePublished** ?
 
 > [v1.0.3](https://www.notion.so/v1-0-3-a15eb71a45364214adb2073999176486)
 
-- `IAMPopup` 라이브러리 적용으로 SlideView 코드 리펙토링
+- [IAMPopup](https://github.com/camosss/IAMPopup) 라이브러리 적용으로 SlideView 코드 리펙토링
 - Category [Entertainment, Sports] - HTTP Headers 이슈
     - HTTP에서 디폴드로 전달되는 헤더가 변경이 되었는데, `accept-language`를 지정해주고 오류 해결
 
