@@ -471,5 +471,12 @@ dateLabel.text = row?.**datePublished.toString(dateValue: row?.datePublished** ?
 - 22/01/10 **심사 통과**
 
 
+<br>
+
+> [v1.0.3](https://www.notion.so/v1-0-3-a15eb71a45364214adb2073999176486)
+
+- `IAMPopup` 라이브러리 적용으로 SlideView 코드 리펙토링
+- Category [Entertainment, Sports] - HTTP Headers 이슈
+    - HTTP에서 디폴드로 전달되는 헤더가 변경이 되었는데, `accept-language`를 지정해주고 오류 해결
 
 
