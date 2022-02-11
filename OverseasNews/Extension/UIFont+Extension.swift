@@ -15,4 +15,8 @@ extension UIFont {
     var smallFont: UIFont {
         return UIFont(name: "Jsongmyung-Regular", size: 17)!
     }
+    
+    var trendingFont: UIFont {
+        return UIFont(name: "Jsongmyung-Regular", size: 13)!
+    }
 }

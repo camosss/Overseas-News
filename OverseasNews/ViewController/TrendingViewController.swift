@@ -10,9 +10,9 @@ import Network
 import RealmSwift
 import Toast
 import Alamofire
-import SwiftyJSON
 import CHTCollectionViewWaterfallLayout
 import SkeletonView
+import IAMPopup
 
 class TrendingViewController: UIViewController {
     
@@ -22,8 +22,6 @@ class TrendingViewController: UIViewController {
     
     var urlString: String?
 
-    var containerView = UIView()
-    var slideUpView = UIView()
     let slideView = SlideView()
     let slideUpViewHeight: CGFloat = 450
     
@@ -53,7 +51,6 @@ class TrendingViewController: UIViewController {
         handleNetwork()
         configureLeftTitle(title: "Trending Topic")
         configureCollectionView()
-        setSlideView()
         
         collectionView.isSkeletonable = true
         collectionView.showAnimatedGradientSkeleton()
@@ -93,21 +90,13 @@ class TrendingViewController: UIViewController {
         networkMoniter.start(queue: DispatchQueue.global())
     }
     
-    private func setSlideView() {
-        slideUpView.addSubview(slideView)
-        slideView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-        
-        slideView.webSearchButton.addTarget(self, action: #selector(goWebSearch), for: .touchUpInside)
-    }
-    
     func configureSlideViewUI(row: TrendingModel?) {
         urlString = row?.url
         slideView.providerLabel.text = row?.provider
         slideView.titleLabel.text = row?.title
         slideView.snippetLabel.text = row?.snippet
         slideView.dateLabel.text = row?.datePublished.toString(dateValue: row?.datePublished ?? Date())
+        slideView.webSearchButton.addTarget(self, action: #selector(goWebSearch), for: .touchUpInside)
     }
     
     private func handleHideSkeleton() {
@@ -170,7 +159,16 @@ extension TrendingViewController: SkeletonCollectionViewDataSource, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        slideViewEvent(indexPath: indexPath)
+        self.view.IAM_bottom(height: slideUpViewHeight) { popupView in
+            
+            popupView.addSubview(self.slideView)
+            self.slideView.snp.makeConstraints { make in
+                make.edges.equalToSuperview()
+            }
+
+            let row = self.tasks?.filter("saveDate == %@", self.todayDateString).first?.trendingModels[indexPath.row]
+            self.configureSlideViewUI(row: row)
+        }
     }
 }
 

@@ -23,7 +23,7 @@ class SlideView: UIView {
         let label = UILabel()
         label.textColor = .label
         label.numberOfLines = 0
-        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.font = UIFont().smallFont
         return label
     }()
     
