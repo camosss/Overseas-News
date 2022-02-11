@@ -78,18 +78,17 @@
 
 ## 🗞 View 구성 및 소개
 
-**해외 뉴스로 세상을 바라보는 시야를 넓히고, 영어 공부까지 !**
+### 해외 뉴스로 세상을 바라보는 시야를 넓히고, 영어 공부까지 !
 
 - 현재 해외에서 인기 급상승중인 주제와 카테고리별 기사들의 목록을 볼 수 있어요.
 - 검색을 통해 원하는 주제의 기사를 찾을 수 있어요.
 - 마음에 드는 기사를 공유해보세요 !
 
 <br>
-
-<details>
-<summary>Trending Topic</summary>
- 
 <br>
+
+> Trending Topic
+
 	
 - **SkeletonView** 라이브러리를 통해 로딩 View 구현
 - **WaterfallLayout**을 적용하여 트렌드한 주제의 기사 데이터를 받아와서 Collection View 구성
@@ -99,36 +98,31 @@
 	
 <img src = "https://user-images.githubusercontent.com/93528918/149971523-e6c13f4b-322e-4835-a459-fd855b06188b.gif" width="30%" height="30%">
 
- </div>
-</details>
 
 
-<br />
 
-
-<details>
-<summary>Search</summary>
- 
 <br>
+<br>
+
+> Search
+ 
+
 	
 - **SkeletonView** 라이브러리를 통해 검색한 데이터를 받아오는 동안 로딩 View 구현
 - Cell을 선택하면 해당 기사 본문 페이지로 이동
  
- <br>
+<br>
 
 <img src = "https://user-images.githubusercontent.com/93528918/149971528-35fd604a-68c0-41d9-ae2c-8385da279827.gif" width="30%" height="30%">
 
 
-</div>
-</details>
-
-<br />
-
-
-<details>
-<summary>Category</summary>
 
 <br>
+<br>
+
+> Category
+
+
 	
 - **Tabman, Pageboy** 라이브러리를 통해 카테고리 별 탭페이징 구현
 - **하나의 View, Cell, Controller 재사용**
@@ -139,25 +133,20 @@
 <img src = "https://user-images.githubusercontent.com/93528918/149971533-0e9f8dde-712f-49b0-962e-a226f48d359a.gif" width="30%" height="30%">
 
 
-</div>
-</details>
 
-<br />
-
-
-<details>
-<summary>기사 본문</summary>
- 
 <br>
+<br>
+
+> 기사 본문
+ 
+
 	
  - **ScrollView**를 적용하여 각 기사의 본문 길이만큼 동적인 높이 조정
 
  <br>
 
 <img src = "https://user-images.githubusercontent.com/93528918/149971537-27026971-fa90-48e8-99eb-2d8853e17e19.gif" width="30%" height="30%">
-	
-</div>
-</details>
+
 
 
 <br />
