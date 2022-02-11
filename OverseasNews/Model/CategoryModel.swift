@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Category: Int, CaseIterable {
+enum CategorySectionURL: Int, CaseIterable {
     case news
     case entertainment
     case sports

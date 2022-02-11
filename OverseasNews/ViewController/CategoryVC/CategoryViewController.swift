@@ -85,7 +85,7 @@ extension CategoryViewController: PageboyViewControllerDataSource, TMBarDataSour
     
     func viewController(for pageboyViewController: PageboyViewController, at index: PageboyViewController.PageIndex) -> UIViewController? {
         let vc = viewControllers[index] as? CategorySectionViewController
-        vc?.sectionURL = Category.allCases[index].description
+        vc?.sectionURL = CategorySectionURL.allCases[index].description
         vc?.sectionName = CategorySectionName.allCases[index].description
         return vc
     }

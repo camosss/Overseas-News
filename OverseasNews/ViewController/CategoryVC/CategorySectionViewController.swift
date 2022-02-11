@@ -58,7 +58,6 @@ class CategorySectionViewController: UIViewController {
     private func fetchDate() {
         for urlString in sectionURL {
             if localRealm.objects(SaveArticle.self).filter("saveDate == '\(todayDateString)' AND sectionName == '\(urlString)'").isEmpty {
-                
                 APIService.shared.requestCategory(urlString: urlString) { tempArticle in
                     try! self.localRealm.write {
                         let saveArticle: SaveArticle = .init(sectionName: urlString, saveDate: self.todayDateString, articleModels: tempArticle)
@@ -70,7 +69,7 @@ class CategorySectionViewController: UIViewController {
                         self.handleHideSkeleton()
                     }
                 }
-                
+
             } else {
                 tasks = localRealm.objects(SaveArticle.self).filter("saveDate == '\(todayDateString)'")
                 handleHideSkeleton()

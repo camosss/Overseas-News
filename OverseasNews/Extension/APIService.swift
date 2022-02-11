@@ -66,7 +66,6 @@ class APIService {
             case .failure(let error):
                 print(error)
             }
-
         }
     }
     
@@ -77,7 +76,7 @@ class APIService {
             case .success(let value):
                 let json = JSON(value)
                 var tempArticle: [ArticleModel] = []
-                
+
                 for idx in 0..<json["value"].count {
                     let title = "\(json["value"][idx]["name"])"
                     let description = "\(json["value"][idx]["description"])"

@@ -18,11 +18,9 @@ extension Bundle {
             return value
         }
     }
-    
-    static let trendingHeaders: HTTPHeaders = ["x-rapidapi-host": "contextualwebsearch-websearch-v1.p.rapidapi.com",
+    // HTTP 헤더 이슈 - HTTP에서 디폴드로 전달되는 헤더가 변경이 되었는디 accept-language를 지정해주고 오류 해결
+    static let trendingHeaders: HTTPHeaders = ["x-rapidapi-key": Bundle.main.ApiKey]
+    static let categoryHeaders: HTTPHeaders = ["accept-language": "en-US",
                                                "x-rapidapi-key": Bundle.main.ApiKey]
-    static let categoryHeaders: HTTPHeaders = ["x-rapidapi-host": "bing-news-search1.p.rapidapi.com",
-                                               "x-rapidapi-key": Bundle.main.ApiKey]
-        static let searchHeaders: HTTPHeaders = ["x-rapidapi-host": "free-news.p.rapidapi.com",
-                                             "x-rapidapi-key": Bundle.main.ApiKey]
+    static let searchHeaders: HTTPHeaders = ["x-rapidapi-key": Bundle.main.ApiKey]
 }
