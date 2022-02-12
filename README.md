@@ -459,8 +459,7 @@ dateLabel.text = row?.**datePublished.toString(dateValue: row?.datePublished** ?
 > [v1.0.1](https://www.notion.so/v1-0-1-2285257857644e7b8916099eb816309a)
 
 - Date값 Format 오류 수정
-- 21/12/04 **제출**
-- 21/12/08 **심사 통과**
+- 21/12/08 업데이트 완료
 
 <br>
 
@@ -468,8 +467,7 @@ dateLabel.text = row?.**datePublished.toString(dateValue: row?.datePublished** ?
 
 - Firebase [Analytics, Crashlytics] 적용
 - 코드 리펙토링 (API 호출 메서드, Custom View)
-- 22/01/10 **제출**
-- 22/01/10 **심사 통과**
+- 21/01/10 업데이트 완료
 
 
 <br>
@@ -479,5 +477,5 @@ dateLabel.text = row?.**datePublished.toString(dateValue: row?.datePublished** ?
 - [IAMPopup](https://github.com/camosss/IAMPopup) 라이브러리 적용으로 SlideView 코드 리펙토링
 - Category [Entertainment, Sports] - HTTP Headers 이슈
     - HTTP에서 디폴드로 전달되는 헤더가 변경이 되었는데, `accept-language`를 지정해주고 오류 해결
-
+- 21/02/12 업데이트 완료
 
