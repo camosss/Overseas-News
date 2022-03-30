@@ -4,48 +4,42 @@
 
 # 영자 신문을 앱으로 간편하게, 해외뉴우스<img src = "https://user-images.githubusercontent.com/93528918/149170874-1428e755-5919-4f06-a153-631c55d4e09e.png" width = 80  align = right> 
 
-
-<br>
-
-
-```sh
-구성: iOS 1명
-```
-
-
-<br>
-
-![Badge](https://img.shields.io/badge/Xcode-13.0-blue) 
-![Badge](https://img.shields.io/badge/iOS-13.0-green)
-![Badge](https://img.shields.io/badge/Swift-5-orange)
-
-![Badge](https://img.shields.io/badge/Realm-10.19.0-red)
-![Badge](https://img.shields.io/badge/Alamofire-5.4.4-red)
-![Badge](https://img.shields.io/badge/SwiftyJSON-5.0.0-important)
-![Badge](https://img.shields.io/badge/Kingfisher-7.1.2-yellowgreen)
-
-![Badge](https://img.shields.io/badge/SnapKit-5.0.1-blue)
-![Badge](https://img.shields.io/badge/Pageboy-3.6.2-success)
-![Badge](https://img.shields.io/badge/Tabman-2.11.1-blueviolet)
-![Badge](https://img.shields.io/badge/Toast-5.0.1-yellow)
-![Badge](https://img.shields.io/badge/SkeletonView-1.26.0-ff69b4)
-![Badge](https://img.shields.io/badge/CHTCollectionViewWaterfallLayout-0.9.19-lightgrey)
-![Badge](https://img.shields.io/badge/IAMPopup-0.2.0-blueviolet)
-
-
-
-<br>
-
-
+- [프로젝트 세부 내용 보러가기](https://www.notion.so/912caceec73d480982e656c018594c7d)
 
 <a href="https://apps.apple.com/kr/app/%ED%95%B4%EC%99%B8%EB%89%B4%EC%9A%B0%EC%8A%A4/id1596846397
 "><img src="https://www.atrinh.com/list/images/download.svg"></a>
 
 
+<br>
+
+## Skill
+
+- Swift
+- MVVM
+- Firebase
+- Localization
+- AutoLayout, StoryBoard, Code Base UI
+
+<br>
+
+## Library
+
+- [Realm](https://cocoapods.org/pods/Realm)
+- [Alamofire](https://github.com/Alamofire/Alamofire)
+- [SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON)
+- [Kingfisher](https://github.com/onevcat/Kingfisher)
+- [SnapKit](https://github.com/SnapKit/SnapKit)
+- [Tabman](https://github.com/uias/Tabman)
+- [Toast](https://github.com/scalessec/Toast-Swift)
+- [SkeletonView](https://github.com/Juanpe/SkeletonView)
+- [CHTCollectionViewWaterfallLayout](https://github.com/chiahsien/CHTCollectionViewWaterfallLayout)
+- [IAMPopup](https://github.com/camosss/IAMPopup)
+
+
 
 <br />
 
-## 🗞 기간별 일정
+## 기간별 일정
 2021.11.16 ~ 21.11.27 (2주)
 
 <br />
@@ -77,7 +71,7 @@
 <br />
 <br />
 
-## 🗞 View 구성 및 소개
+## View 구성 및 소개
 
 ### 해외 뉴스로 세상을 바라보는 시야를 넓히고, 영어 공부까지 !
 
@@ -157,7 +151,7 @@
 
 
 
-## 🗞 버전
+## 버전
 
 > [v1.0.1](https://www.notion.so/v1-0-1-2285257857644e7b8916099eb816309a)
 
@@ -182,3 +176,7 @@
     - HTTP에서 디폴드로 전달되는 헤더가 변경이 되었는데, `accept-language`를 지정해주고 오류 해결
 - 21/02/12 업데이트 완료
 
+
+<br />
+<br />
+<br />
